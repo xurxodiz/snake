@@ -10,12 +10,14 @@ var dr = 10;
 // 1: up
 // 2: right
 // 3: down
-var direction = 0;
+var direction;
 
 var snake;
-var size = 0;
+var size;
 
 var food;
+
+var id;
 
 function init() {
   ctx = $('#canvas')[0].getContext("2d");
@@ -25,8 +27,10 @@ function init() {
   createsnake();
   newfood();
 
-  intervalId = setInterval(step, 100);
-  return intervalId;
+  direction = 0;
+  size = 1;
+
+  id = setInterval(step, 100);
 }
 
 function onKeyDown(evt) {
@@ -130,6 +134,12 @@ function movesnake() {
 
   return true;
 
+}
+
+function die() {
+  if (id) {
+    clearInterval(id);
+  }
 }
 
 function circle(x,y,r) {
