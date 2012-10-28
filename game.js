@@ -1,21 +1,24 @@
 var dead;
+var id;
 
 function gamerun() {
-  init();
+  if (id) {
+    clearInterval(id);
+  }
+  id = init();
   dead = false;
 }
 
 function step(){
-  if (!dead) {
-    update();
-    draw();
-  }
+  update();
+  draw();
 }
 
 function update() {
   dead = !movesnake();
   if (dead) {
     alert("you are dead. size: " + size);
+    clearInterval(id);
   }
 }
 
