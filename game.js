@@ -1,7 +1,8 @@
-var dead = false;
+var dead;
 
 function gamerun() {
   init();
+  dead = false;
 }
 
 function step(){
