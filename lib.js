@@ -55,7 +55,7 @@ function createsnake() {
 
 function collision(n) {
   // are we out of the playground?
-  if (n.x < 0 || n.x > WIDTH || n.y < 0 || n.y > HEIGHT) {
+  if (n.x < 0 || n.x > WIDTH - 1 || n.y < 0 || n.y > HEIGHT - 1) {
     return true;
   }
 
