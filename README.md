@@ -8,8 +8,6 @@ Cloned from https://github.com/jrgdiz/snake : A simple clone of the snake game, 
 
 # Run
 
-## Linux & Mac
-
 ```bash
 > npm start
 > open webbrowser on http://127.0.0.1:3000
