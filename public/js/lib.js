@@ -20,9 +20,10 @@ var food;
 var id;
 
 function init() {
-  ctx = $('#canvas')[0].getContext("2d");
-  WIDTH = $("#canvas").width();
-  HEIGHT = $("#canvas").height();
+  var canvas = document.getElementById('canvas');
+  ctx = canvas.getContext("2d");
+  WIDTH = canvas.clientWidth;
+  HEIGHT = canvas.clientHeight;
 
   createsnake();
   newfood();
@@ -43,11 +44,8 @@ function onKeyDown(evt) {
   }
 }
 
-if ($.browser.mozilla) {
-    $(document).keypress(onKeyDown);
-} else {
-    $(document).keydown(onKeyDown);
-}
+document.onkeypress = onKeyDown;
+document.onkeydown = onKeyDown;
 
 function createsnake() {
   snake = Array();
