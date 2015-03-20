@@ -1,0 +1,23 @@
+{
+  "name": "snake",
+  "version": "0.0.1",
+  "description": "A multi player snake!",
+  "main": "game.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Froggies/snake.git"
+  },
+  "keywords": [
+    "snake",
+    "javascript"
+  ],
+  "author": "Froggies",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Froggies/snake/issues"
+  },
+  "homepage": "https://github.com/Froggies/snake"
+}
