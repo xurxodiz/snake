@@ -19,7 +19,7 @@ var food;
 
 var id;
 
-function init() {
+exports.init = function init(game) {
   var canvas = document.getElementById('canvas');
   ctx = canvas.getContext("2d");
   WIDTH = canvas.clientWidth;
@@ -31,11 +31,11 @@ function init() {
   direction = 0;
   size = 1;
 
-  id = setInterval(step, 100);
+  id = setInterval(game.step.bind(game), 100);
 }
 
 function onKeyDown(evt) {
-  newdir = evt.keyCode - 37;
+  var newdir = evt.keyCode - 37;
 
   // only lateral turns are allowed
   // (that is, no u-turns)
@@ -88,9 +88,9 @@ function meal(n) {
   return (n.x == food.x && n.y == food.y);
 }
 
-function movesnake() {
+exports.movesnake = function movesnake() {
 
-  h = snake[0]; // peek head
+  var h = snake[0]; // peek head
 
   // create new head relative to current head
   var n = Array();
@@ -134,7 +134,7 @@ function movesnake() {
 
 }
 
-function die() {
+exports.die = function die() {
   if (id) {
     clearInterval(id);
   }
@@ -154,20 +154,20 @@ function rect(x,y,w,h) {
   ctx.fill();
 }
 
-function screenclear() {
+exports.screenclear = function screenclear() {
   ctx.fillStyle = "#000000";
   ctx.clearRect(0, 0, WIDTH, HEIGHT);
   rect(0,0,WIDTH,HEIGHT);
 }
 
-function drawsnake() {
+exports.drawsnake = function drawsnake() {
   ctx.fillStyle = "#FFFFFF";
   snake.forEach(function(p) {
     rect(p.x, p.y, dx, dy);
   })
 }
 
-function drawfood() {
+exports.drawfood = function drawfood() {
   ctx.fillStyle = "#FF0000";
   circle(food.x+food.r, food.y+food.r, food.r);
 }

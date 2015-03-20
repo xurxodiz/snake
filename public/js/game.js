@@ -1,21 +1,26 @@
-function gamerun() {
-  init();
-}
+import lib from './lib';
 
-function step(){
-  update();
-  draw();
-}
+export class Game {
 
-function update() {
-  if (!movesnake()) {
-    alert("you are dead. size: " + size);
-    die();
-  }
-}
+    gamerun() {
+        lib.init(this);
+    }
 
-function draw() {
-  screenclear();
-  drawsnake();
-  drawfood();
-}
+    step() {
+        this.update();
+        this.draw();
+    }
+
+    update() {
+        if (!lib.movesnake()) {
+            alert("you are dead. size: " + lib.size);
+            lib.die();
+        }
+    }
+
+    draw() {
+        lib.screenclear();
+        lib.drawsnake();
+        lib.drawfood();
+    }
+};
