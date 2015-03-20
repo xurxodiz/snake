@@ -1,0 +1,1 @@
+npm run dev_js & npm run dev_css & node index.js
