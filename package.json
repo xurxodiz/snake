@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "bash -c \"npm run dev_js & npm run dev_css & node index.js\"",
-    "dev_css": "stylus -c --include-css -m -w public/css/main.styl -o public/build/bundle.css",
+    "dev_css": "stylus -c --include-css -m -w public/css/main.styl -o public/build/bundle.css --use nib",
     "dev_js": "watchify public/js/app.js -d -v -t babelify -o public/build/bundle.js",
     "test": "echo \"Tester c'est douter !\" && exit 1"
   },
@@ -30,6 +30,7 @@
   "devDependencies": {
     "babelify": "^5.0.4",
     "browserify": "^9.0.3",
+    "nib": "^1.1.0",
     "stylus": "^0.50.0",
     "watchify": "^2.4.0"
   }
