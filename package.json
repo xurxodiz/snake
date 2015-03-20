@@ -4,8 +4,9 @@
   "description": "A multi player snake!",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js & npm run dev",
+    "dev": "watchify public/js/app.js -d -v -t babelify -o public/build/bundle.js",
+    "test": "echo \"Tester c'est douter !\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -24,5 +25,10 @@
   "dependencies": {
     "mime": "^1.3.4",
     "socket.io": "^1.3.5"
+  },
+  "devDependencies": {
+    "babelify": "^5.0.4",
+    "browserify": "^9.0.3",
+    "watchify": "^2.4.0"
   }
 }
