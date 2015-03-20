@@ -2,9 +2,9 @@ var ctx;
 var WIDTH;
 var HEIGHT;
 
-var dx = 20;
-var dy = 20;
-var dr = 10;
+var dx = 10;
+var dy = 10;
+var dr = 5;
 
 // 0: left
 // 1: up
@@ -31,10 +31,10 @@ exports.init = function init(game) {
   direction = 0;
   size = 1;
 
-  id = setInterval(game.step.bind(game), 100);
-}
+  id = setInterval(game.step.bind(game), 75);
+};
 
-function onKeyDown(evt) {
+exports.onKeyDown = function onKeyDown(evt) {
   var newdir = evt.keyCode - 37;
 
   // only lateral turns are allowed
@@ -42,16 +42,14 @@ function onKeyDown(evt) {
   if (newdir != direction && newdir != direction+2 && newdir != direction-2) {
     direction = newdir;
   }
-}
-
-document.onkeypress = onKeyDown;
-document.onkeydown = onKeyDown;
+};
 
 function createsnake() {
-  snake = Array();
-  var head = Array();
-  head.x = WIDTH/2;
-  head.y = HEIGHT/2;
+  snake = [];
+  var head = {
+    x: WIDTH / 2,
+    y: HEIGHT / 2
+  };
   snake.push(head);
 }
 
@@ -77,10 +75,11 @@ function newfood() {
   var randomx = Math.floor(Math.random()*wcells);
   var randomy = Math.floor(Math.random()*hcells);
 
-  food = Array();
-  food.x = randomx * dx;
-  food.y = randomy * dy;
-  food.r = dr;
+  food = {
+    x: randomx * dx,
+    y: randomy * dy,
+    r: dr
+  };
   size = size+1;
 }
 
@@ -89,11 +88,10 @@ function meal(n) {
 }
 
 exports.movesnake = function movesnake() {
-
   var h = snake[0]; // peek head
 
   // create new head relative to current head
-  var n = Array();
+  var n = {};
   switch (direction) {
     case 0: // left
       n.x = h.x - dx;
@@ -132,13 +130,14 @@ exports.movesnake = function movesnake() {
 
   return true;
 
-}
+};
 
 exports.die = function die() {
   if (id) {
     clearInterval(id);
   }
-}
+    return size;
+};
 
 function circle(x,y,r) {
   ctx.beginPath();
@@ -158,16 +157,16 @@ exports.screenclear = function screenclear() {
   ctx.fillStyle = "#000000";
   ctx.clearRect(0, 0, WIDTH, HEIGHT);
   rect(0,0,WIDTH,HEIGHT);
-}
+};
 
 exports.drawsnake = function drawsnake() {
   ctx.fillStyle = "#FFFFFF";
   snake.forEach(function(p) {
     rect(p.x, p.y, dx, dy);
   })
-}
+};
 
 exports.drawfood = function drawfood() {
   ctx.fillStyle = "#FF0000";
   circle(food.x+food.r, food.y+food.r, food.r);
-}
+};

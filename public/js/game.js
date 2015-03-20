@@ -13,8 +13,8 @@ export class Game {
 
     update() {
         if (!lib.movesnake()) {
-            alert("you are dead. size: " + lib.size);
-            lib.die();
+            var size = lib.die();
+            alert("you are dead. size: " + size);
         }
     }
 
