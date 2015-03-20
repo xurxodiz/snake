@@ -8,6 +8,8 @@ Cloned from https://github.com/jrgdiz/snake : A simple clone of the snake game, 
 
 # Run
 
+## Linux & Mac
+
 ```bash
 > npm start
 > open webbrowser on http://127.0.0.1:3000
@@ -15,6 +17,10 @@ Cloned from https://github.com/jrgdiz/snake : A simple clone of the snake game, 
 
 # Architecture
 
-* public : displayed by web browser
+* public/ : displayed by web browser
+    * build/ : generated stuff for browser, don't forget to delete useless files some times !
+    * css/ : all stylesheet needs, simple css files (with .css extension) or stylus files (with .styl extension)
+    * js/ : all javascript files in ES6 (thanks to browserify and babelify plugins) format
+    * images/ : you know what it is!
 * index.js : entry point of the server
 * constants.js : constants to configure the server
