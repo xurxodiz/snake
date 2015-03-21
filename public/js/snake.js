@@ -14,7 +14,11 @@ export class Snake {
         this.dy = 10;
         this.direction = 0;
         this.isMovable = true;
-        let initPosition = {x: Math.floor(Math.random() * gameBoard.width), y: Math.floor(Math.random() * gameBoard.height)};
+        let x = Math.floor(Math.random() * gameBoard.width);
+        x = Math.floor((x+5)/10)*10;
+        let y = Math.floor(Math.random() * gameBoard.height);
+        y = Math.floor((y+5)/10)*10;
+        let initPosition = {x, y};
         this.positions = [];
         for(let i=0; i<snakeInitSize; i++) {
             this.positions.push(initPosition);

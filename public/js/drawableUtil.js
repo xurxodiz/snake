@@ -19,8 +19,8 @@ export class DrawableUtil {
         var gradient=this.ctx.createLinearGradient(x+5,y,x+5,y+10);
         gradient.addColorStop(0,"transparent");
         gradient.addColorStop(0.3,"transparent");
-        gradient.addColorStop(0.4,"#9bdcd8");
-        gradient.addColorStop(0.6,"#9bdcd8");
+        gradient.addColorStop(0.4,color);//"#9bdcd8");
+        gradient.addColorStop(0.6,color);//"#9bdcd8");
         gradient.addColorStop(0.7,"transparent");
         gradient.addColorStop(1,"transparent");
         this.ctx.fillStyle = gradient;

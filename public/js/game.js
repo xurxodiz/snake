@@ -16,8 +16,9 @@ export class Game {
 
 
         for(var controller in controllers) {
-            for(let i=0; i<controllers[controller]; i++) {
-                let snakeView = new SnakeView({snakeInitSize}, this.gameBoardView.entity, drawableUtil);
+            for(let i=0; i<controllers[controller].nb; i++) {
+                let color = controllers[controller].color;
+                let snakeView = new SnakeView({snakeInitSize, color}, this.gameBoardView.entity, drawableUtil);
                 this.gameBoardView.addDrawableEntity(snakeView);
                 if (controller === 'KeyboardController') {
                     new KeyboardController(snakeView.entity);

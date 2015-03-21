@@ -25,7 +25,7 @@ export class IAController {
                     nextDirection = 1;
                 } else if(e.x === this.snake.x && (!this.checkDirection(2) || !this.checkDirection(0))) {//TODO : not working, food are probably behind me but i can't return me
                     nextDirection = 1;
-                } else if(e.x !== this.snake.x && (!this.checkDirection(3) || !this.checkDirection(1))) {//TODO : not working, food are probably behind me but i can't return me
+                } else if(e.y === this.snake.y && (!this.checkDirection(3) || !this.checkDirection(1))) {//TODO : not working, food are probably behind me but i can't return me
                     nextDirection = 0;
                 } else if(this.snake.x === 0 || this.snake.x === this.gamaBoard.width) {
                     nextDirection = 1;
