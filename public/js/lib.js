@@ -1,3 +1,5 @@
+import {Snake} from './snake';
+
 var ctx;
 var WIDTH;
 var HEIGHT;
@@ -45,27 +47,7 @@ exports.onKeyDown = function onKeyDown(evt) {
 };
 
 function createsnake() {
-  snake = [];
-  var head = {
-    x: WIDTH / 2,
-    y: HEIGHT / 2
-  };
-  snake.push(head);
-}
-
-function collision(n) {
-  // are we out of the playground?
-  if (n.x < 0 || n.x > WIDTH - 1 || n.y < 0 || n.y > HEIGHT - 1) {
-    return true;
-  }
-
-  // are we eating ourselves?
-  for (var i = 0; i < snake.length; i++) {
-    if (snake[i].x == n.x && snake[i].y == n.y) {
-      return true;
-    }
-  }
-  return false;
+    snake = new Snake({width: WIDTH, height: HEIGHT, newfood: newfood});
 }
 
 function newfood() {
@@ -83,59 +65,14 @@ function newfood() {
   size = size+1;
 }
 
-function meal(n) {
-  return (n.x == food.x && n.y == food.y);
-}
-
 exports.movesnake = function movesnake() {
-  var h = snake[0]; // peek head
-
-  // create new head relative to current head
-  var n = {};
-  switch (direction) {
-    case 0: // left
-      n.x = h.x - dx;
-      n.y = h.y;
-      break;
-    case 1: // up
-      n.x = h.x;
-      n.y = h.y - dy;
-      break;
-    case 2: // right
-      n.x = h.x + dx;
-      n.y = h.y;
-      break;
-    case 3: // down
-      n.x = h.x;
-      n.y = h.y + dy;
-      break;
-  }
-
-  // if out of box or collision with ourselves, we die
-  if (collision(n)) {
-    return false;
-  }
-
-  snake.unshift(n);
-
-  // if there's food there
-  if (meal(n)) {
-    newfood(); // we eat it and another shows up
-    
-  } else {
-    snake.pop();
-    // we only remove the tail if there wasn't food
-    // if there was food, the snake grew
-  }
-
-  return true;
-
+    return snake.move(direction, food);
 };
 
 exports.die = function die() {
-  if (id) {
-    clearInterval(id);
-  }
+    if (id) {
+        clearInterval(id);
+    }
     return size;
 };
 
@@ -161,7 +98,7 @@ exports.screenclear = function screenclear() {
 
 exports.drawsnake = function drawsnake() {
   ctx.fillStyle = "#FFFFFF";
-  snake.forEach(function(p) {
+  snake.positions.forEach(function(p) {
     rect(p.x, p.y, dx, dy);
   })
 };
