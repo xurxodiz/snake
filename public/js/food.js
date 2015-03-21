@@ -11,6 +11,7 @@ export class Food {
         this.dx = 10;
         this.dy = 10;
         this.dr = 5;
+        this.isMovable = false;
         this.game = game;
 
         this.move();

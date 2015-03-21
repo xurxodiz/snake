@@ -4,6 +4,5 @@
 import {Game} from './game';
 
 setTimeout(function() {
-    new Game({nbFood: 100, controller: 'KeyboardController', snakeInitSize: 50}).run();
-    //new Game({nbFood: 5, controller: 'IAController', snakeInitSize: 5}).run();
+    new Game({nbFood: 1, controllers: {'KeyboardController': 0, 'IAController': 1}, snakeInitSize: 5}).run();
 }, 3000);
