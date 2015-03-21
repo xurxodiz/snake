@@ -1,9 +1,23 @@
-import lib from './lib';
+import {DrawableUtil} from './drawableUtil';
+import {GameBoardView} from './gameBoardView';
+import {SnakeView} from './snakeView';
+import {FoodView} from './foodView';
+import {KeyboardController} from './keyboardController';
 
 export class Game {
+    constructor() {
+        var canvas = document.getElementById('canvas');
+        var drawableUtil = new DrawableUtil(canvas.getContext("2d"));
+        this.gameBoardView = new GameBoardView(canvas.clientWidth, canvas.clientHeight, drawableUtil);
+
+        var snakeView = new SnakeView(this.gameBoardView.entity, drawableUtil);
+        this.snake = snakeView.entity;
+        new KeyboardController(this.snake);
+        this.gameBoardView.addDrawableEntity(snakeView);
+        this.gameBoardView.addDrawableEntity(new FoodView(this.gameBoardView.entity, drawableUtil));
+    }
 
     run() {
-        lib.init();
         var loop = () => {
             window.requestAnimationFrame(() => {
                 this.draw();
@@ -11,20 +25,20 @@ export class Game {
             });
         };
         loop();
-        this.id = setInterval(this.step.bind(this), 75);
+        this.intervalId = setInterval(this.step.bind(this), 60);
     }
 
     step() {
-        lib.move();
-        if (lib.checkCollision()) {
-            if (this.id) {
-                clearInterval(this.id);
+        this.snake.move();
+        if (this.gameBoardView.entity.checkCollision()) {
+            if (this.intervalId) {
+                clearInterval(this.intervalId);
             }
-            console.log("you are dead. size: " + lib.getScore());
+            console.log("you are dead. size: " + this.snake.positions.length);
         }
     }
 
     draw() {
-        lib.draw();
+        this.gameBoardView.draw();
     }
 };

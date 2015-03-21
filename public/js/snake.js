@@ -11,6 +11,7 @@ export class Snake {
 
         this.dx = 10;
         this.dy = 10;
+        this.direction = 0;
         this.positions = [{x: game.width / 2, y: game.height / 2}];
     }
 
@@ -18,12 +19,12 @@ export class Snake {
         this.needGrowth = true;
     }
 
-    move(direction) {
+    move() {
         var {x, y} = this.positions[0]; // peek head
 
         // create new head relative to current head
         var n = {x: -1, y: -1};
-        switch (direction) {
+        switch (this.direction) {
             case 0: // left
                 n.x = x - this.dx;
                 n.y = y;
@@ -60,8 +61,14 @@ export class Snake {
             }
         } else {
             var {x, y} = this.positions[0];
-            var inside = x >= otherEntity.x && x <= otherEntity.x + otherEntity.width &&
-                    y >= otherEntity.y && y <= otherEntity.y + otherEntity.height;
+            var inside = false;
+            if(options.strict === false) {
+                inside = x >= otherEntity.x && x <= otherEntity.x + otherEntity.width &&
+                y >= otherEntity.y && y <= otherEntity.y + otherEntity.height;
+            } else {
+                inside = x > otherEntity.x && x < otherEntity.x + otherEntity.width &&
+                y > otherEntity.y && y < otherEntity.y + otherEntity.height;
+            }
             if(options.outside === true) {
                 return !inside;
             }
