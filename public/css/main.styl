@@ -1,5 +1,60 @@
 @import 'nib'
 global-reset()
 
+@import font
+
+mainColor = #9bdcd8
+
 body
-  background-color red
+	background-color #000
+	color #fff
+	font-family sans-serif
+
+.maxWidth
+	width 90%
+	max-width 600px
+	margin 0 auto
+
+.header
+	padding 20px 0 10px
+	
+.logo
+	font-family loaded
+	color mainColor
+	text-align left
+	font-size 1.4em
+	display inline-block
+	text-decoration none
+	opacity 0.5
+	transition all 200ms
+	&:hover
+		opacity 1
+		text-shadow 0 0 20px mainColor
+.menu
+	float right
+	display inline-block
+
+.menuItem
+	display inline-block
+	& a
+		color mainColor
+		text-decoration none
+		font-size 1.4em
+		opacity 0.5
+		transition all 200ms
+		&:hover
+			opacity 1
+			text-shadow 0 0 20px mainColor
+		
+.grid
+	border 1px solid rgba(mainColor,0.5)
+	//box-shadow 0 0 10px mainColor
+	margin 0 auto
+	display block
+
+.rules
+	text-align justify
+	padding 10px 0 0
+	font-size 0.8em
+	line-height 1.5em
+	opacity 0.8

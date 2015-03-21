@@ -7,10 +7,16 @@
                 <noscript>Your browser does not support JavaScript.</noscript>
                 <link rel="stylesheet" type="text/css" href="build/bundle.css" />
 	</head>
-	<body style="text-align:center">
-                <div>Logo</div>
-                <canvas id="canvas" width="400" height="400" style="background-color:black">Your navigator don't support canvas ! WTF ?</canvas>
-                <p>Click the black square to begin. Use arrow keys to move.</p>
-                <p>Try to eat as many food pellets as possible without hitting the square walls or yourself.</p>
+	<body>
+                <header class="maxWidth header">
+                        <a href="index.html" class="logo">TRAKE</a>
+                        <ul class="menu">
+                                <li class="menuItem"><a href="" class="icon-speech-bubble" onclick="alert('TOLOLOLOLO');"></a></li>
+                        </ul>
+                </header>
+                <canvas id="canvas" class="grid" width="600" height="600">Your navigator don't support canvas ! WTF ?</canvas>
+                <div class="maxWidth rules">
+                        The game begin after 3 sec. Use arrow keys to move.Try to eat as many food pellets as possible without hitting the square walls or yourself.
+                </div>
 	</body>
 </html>
