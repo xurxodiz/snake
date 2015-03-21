@@ -1,8 +1,8 @@
 /**
  * Created by manland on 21/03/15.
  */
-export class DrawableSnake {
-    constructor(drawableUtil, snake) {
+export class SnakeView {
+    constructor(snake, drawableUtil) {
         this.drawableUtil = drawableUtil;
         this.snake = snake;
     }

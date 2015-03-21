@@ -1,13 +1,11 @@
 import {Snake} from './snake';
-import {DrawableSnake} from './drawableSnake';
+import {SnakeView} from './snakeView';
 import {DrawableUtil} from './drawableUtil';
+import {Food} from './food';
+import {FoodView} from './foodView';
 
 var WIDTH;
 var HEIGHT;
-
-var dx = 10;
-var dy = 10;
-var dr = 5;
 
 // 0: left
 // 1: up
@@ -15,10 +13,8 @@ var dr = 5;
 // 3: down
 var direction;
 
-var snake, drawableSnake;
-var size;
-
-var food;
+var snake, snakeView;
+var food, foodView;
 
 var id;
 
@@ -33,7 +29,6 @@ exports.init = function init(game) {
   newfood();
 
   direction = 0;
-  size = 1;
 
   id = setInterval(game.step.bind(game), 75);
 };
@@ -50,22 +45,12 @@ exports.onKeyDown = function onKeyDown(evt) {
 
 function createsnake() {
     snake = new Snake({width: WIDTH, height: HEIGHT, newfood: newfood});
-    drawableSnake = new DrawableSnake(drawableUtil, snake);
+    snakeView = new SnakeView(snake, drawableUtil);
 }
 
 function newfood() {
-  var wcells = WIDTH/dx;
-  var hcells = HEIGHT/dy;
-
-  var randomx = Math.floor(Math.random()*wcells);
-  var randomy = Math.floor(Math.random()*hcells);
-
-  food = {
-    x: randomx * dx,
-    y: randomy * dy,
-    r: dr
-  };
-  size = size+1;
+    food = new Food({width: WIDTH, height: HEIGHT});
+    foodView = new FoodView(food, drawableUtil);
 }
 
 exports.movesnake = function movesnake() {
@@ -76,7 +61,7 @@ exports.die = function die() {
     if (id) {
         clearInterval(id);
     }
-    return size;
+    return snake.positions.length;//nb food eaten
 };
 
 exports.screenclear = function screenclear() {
@@ -84,9 +69,9 @@ exports.screenclear = function screenclear() {
 };
 
 exports.drawsnake = function drawsnake() {
-    drawableSnake.draw();
+    snakeView.draw();
 };
 
 exports.drawfood = function drawfood() {
-    drawableUtil.circle("#FF0000", food.x+food.r, food.y+food.r, food.r);
+    foodView.draw();
 };
