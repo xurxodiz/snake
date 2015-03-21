@@ -1,36 +1,24 @@
 /**
  * Created by manland on 21/03/15.
  */
+
+import ENTITIES from './entityCst';
+
 export class Snake {
 
     constructor(game) {
+        this.type = ENTITIES.SNAKE;
+
         this.dx = 10;
         this.dy = 10;
-        this.game = game;
-        this.positions = [{x: this.game.width / 2, y: this.game.height / 2}];
+        this.positions = [{x: game.width / 2, y: game.height / 2}];
     }
 
-    isInCollisionWith(position) {
-        var {x, y} = position;
-        // are we out of the playground?
-        if (x < 0 || x > this.game.width - 1 || y < 0 || y > this.game.height - 1) {
-            return true;
-        }
-        // are we eating ourselves?
-        for (var i = 0; i < this.positions.length; i++) {
-            if (this.positions[i].x == x && this.positions[i].y == y) {
-                return true;
-            }
-        }
-        return false;
+    growth() {
+        this.needGrowth = true;
     }
 
-    meal(position, food) {
-        var {x, y} = position;
-        return (x == food.x && y == food.y);
-    }
-
-    move(direction, food) {
+    move(direction) {
         var {x, y} = this.positions[0]; // peek head
 
         // create new head relative to current head
@@ -54,23 +42,33 @@ export class Snake {
                 break;
         }
 
-        // if out of box or collision with ourselves, we die
-        if (this.isInCollisionWith(n)) {
-            return false;
-        }
-
         this.positions.unshift(n);
-
-        // if there's food there
-        if (this.meal(n, food)) {
-            this.game.newfood(); // we eat it and another shows up
+        if(this.needGrowth === true) {
+            this.needGrowth = false;
         } else {
             this.positions.pop();
-            // we only remove the tail if there wasn't food
-            // if there was food, the snake grew
+        }
+    }
+
+    checkCollision(otherEntity, options) {
+        if(otherEntity === this) {// are we eating ourselves?
+            var {x, y} = this.positions[0]; // peek head
+            for (var i = 1; i < this.positions.length; i++) {
+                if (this.positions[i].x == x && this.positions[i].y == y) {
+                    return true;
+                }
+            }
+        } else {
+            var {x, y} = this.positions[0];
+            var inside = x >= otherEntity.x && x <= otherEntity.x + otherEntity.width &&
+                    y >= otherEntity.y && y <= otherEntity.y + otherEntity.height;
+            if(options.outside === true) {
+                return !inside;
+            }
+            return inside;
         }
 
-        return true;
+        return false;
     }
 
 }

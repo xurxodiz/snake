@@ -1,13 +1,16 @@
 /**
  * Created by manland on 21/03/15.
  */
+
+import {Food} from './food';
+
 export class FoodView {
-    constructor(food, drawableUtil) {
-        this.food = food;
+    constructor(game, drawableUtil) {
+        this.entity = new Food(game);
         this.drawableUtil = drawableUtil;
     }
 
     draw() {
-        this.drawableUtil.circle("#FF0000", this.food.x+this.food.r, this.food.y+this.food.r, this.food.r);
+        this.drawableUtil.circle("#FF0000", this.entity.x+this.entity.r, this.entity.y+this.entity.r, this.entity.r);
     }
 }

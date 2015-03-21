@@ -8,5 +8,5 @@ document.onkeypress = lib.onKeyDown;
 document.onkeydown = lib.onKeyDown;
 
 setTimeout(function() {
-    new Game().gamerun();
+    new Game().run();
 }, 3000);

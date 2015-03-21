@@ -1,11 +1,7 @@
-import {Snake} from './snake';
-import {SnakeView} from './snakeView';
 import {DrawableUtil} from './drawableUtil';
-import {Food} from './food';
+import {SnakeView} from './snakeView';
 import {FoodView} from './foodView';
-
-var WIDTH;
-var HEIGHT;
+import {GameBoardView} from './gameBoardView';
 
 // 0: left
 // 1: up
@@ -13,24 +9,20 @@ var HEIGHT;
 // 3: down
 var direction;
 
-var snake, snakeView;
-var food, foodView;
+var gameBoard, gameBoardView;
+var snake;
 
-var id;
+exports.init = function init() {
+    var canvas = document.getElementById('canvas');
+    var drawableUtil = new DrawableUtil(canvas.getContext("2d"));
+    gameBoardView = new GameBoardView(canvas.clientWidth, canvas.clientHeight, drawableUtil);
 
-var drawableUtil;
+    var snakeView = new SnakeView(gameBoardView.entity, drawableUtil);
+    snake = snakeView.entity;
+    gameBoardView.addDrawableEntity(snakeView);
+    gameBoardView.addDrawableEntity(new FoodView(gameBoardView.entity, drawableUtil));
 
-exports.init = function init(game) {
-    drawableUtil = new DrawableUtil(document.getElementById('canvas').getContext("2d"));
-  WIDTH = canvas.clientWidth;
-  HEIGHT = canvas.clientHeight;
-
-  createsnake();
-  newfood();
-
-  direction = 0;
-
-  id = setInterval(game.step.bind(game), 75);
+    direction = 0;
 };
 
 exports.onKeyDown = function onKeyDown(evt) {
@@ -43,35 +35,19 @@ exports.onKeyDown = function onKeyDown(evt) {
   }
 };
 
-function createsnake() {
-    snake = new Snake({width: WIDTH, height: HEIGHT, newfood: newfood});
-    snakeView = new SnakeView(snake, drawableUtil);
-}
-
-function newfood() {
-    food = new Food({width: WIDTH, height: HEIGHT});
-    foodView = new FoodView(food, drawableUtil);
-}
-
-exports.movesnake = function movesnake() {
-    return snake.move(direction, food);
+exports.move = function move() {
+    return snake.move(direction);
 };
 
-exports.die = function die() {
-    if (id) {
-        clearInterval(id);
-    }
+exports.checkCollision = function checkCollision() {
+    var res = gameBoardView.entity.checkCollision();
+    return res;
+};
+
+exports.getScore = function getScore() {
     return snake.positions.length;//nb food eaten
 };
 
-exports.screenclear = function screenclear() {
-    drawableUtil.rect("#000000", 0, 0, WIDTH, HEIGHT);
-};
-
-exports.drawsnake = function drawsnake() {
-    snakeView.draw();
-};
-
-exports.drawfood = function drawfood() {
-    foodView.draw();
+exports.draw = function draw() {
+    gameBoardView.draw();
 };

@@ -1,16 +1,19 @@
 /**
  * Created by manland on 21/03/15.
  */
+
+import {Snake} from './snake';
+
 export class SnakeView {
-    constructor(snake, drawableUtil) {
+    constructor(game, drawableUtil) {
+        this.entity = new Snake(game);
         this.drawableUtil = drawableUtil;
-        this.snake = snake;
     }
 
     draw() {
-        this.snake.positions.forEach((position) => {
+        this.entity.positions.forEach((position) => {
             var {x, y} = position;
-            this.drawableUtil.rect("#FFFFFF", x, y, this.snake.dx, this.snake.dy);
+            this.drawableUtil.rect("#FFFFFF", x, y, this.entity.dx, this.entity.dy);
         });
     }
 }
