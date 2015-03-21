@@ -6,17 +6,28 @@ import {KeyboardController} from './keyboardController';
 import {IAController} from './iAController';
 
 export class Game {
-    constructor() {
+    constructor(options) {
+        var {nbFood, controller, snakeInitSize} = options;
+
         var canvas = document.getElementById('canvas');
         var drawableUtil = new DrawableUtil(canvas.getContext("2d"));
         this.gameBoardView = new GameBoardView(canvas.clientWidth, canvas.clientHeight, drawableUtil);
 
-        var snakeView = new SnakeView(this.gameBoardView.entity, drawableUtil);
+        var snakeView = new SnakeView({snakeInitSize}, this.gameBoardView.entity, drawableUtil);
         this.snake = snakeView.entity;
-        //new KeyboardController(this.snake);
-        new IAController(this.snake, this.gameBoardView.entity);
         this.gameBoardView.addDrawableEntity(snakeView);
-        this.gameBoardView.addDrawableEntity(new FoodView(this.gameBoardView.entity, drawableUtil));
+
+        if(controller === 'KeyboardController') {
+            new KeyboardController(this.snake);
+        } else if(controller === 'IAController') {
+            new IAController(this.snake, this.gameBoardView.entity);
+        } else {
+            throw new Error('Unknown controller', controller);
+        }
+
+        for(let i=0; i<nbFood; i++) {
+            this.gameBoardView.addDrawableEntity(new FoodView(this.gameBoardView.entity, drawableUtil));
+        }
     }
 
     run() {

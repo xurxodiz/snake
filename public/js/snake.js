@@ -6,13 +6,18 @@ import ENTITIES from './entityCst';
 
 export class Snake {
 
-    constructor(game) {
+    constructor(options, gameBoard) {
         this.type = ENTITIES.SNAKE;
+        var {snakeInitSize} = options;
 
         this.dx = 10;
         this.dy = 10;
         this.direction = 0;
-        this.positions = [{x: game.width / 2, y: game.height / 2}];
+        let initPosition = {x: gameBoard.width / 2, y: gameBoard.height / 2};
+        this.positions = [];
+        for(let i=0; i<snakeInitSize; i++) {
+            this.positions.push(initPosition);
+        }
         //by convenience x, y of snake are his head !
         this.x = this.positions[0].x;
         this.y = this.positions[0].y;

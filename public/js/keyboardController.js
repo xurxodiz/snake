@@ -17,4 +17,7 @@ export class KeyboardController {
             this.snake.direction = newdir;
         }
     };
-}
+};
+
+const KEYBOARD_CONTROLLER_NAME = 'KeyboardController';
+export default KEYBOARD_CONTROLLER_NAME;

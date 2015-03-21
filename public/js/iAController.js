@@ -41,4 +41,7 @@ export class IAController {
     checkDirection(newdir) {
         return newdir != this.snake.direction+2 && newdir != this.snake.direction-2;
     }
-}
+};
+
+const IA_CONTROLLER_NAME = 'IAController';
+export default IA_CONTROLLER_NAME;

@@ -5,8 +5,8 @@
 import {Snake} from './snake';
 
 export class SnakeView {
-    constructor(game, drawableUtil) {
-        this.entity = new Snake(game);
+    constructor(options, game, drawableUtil) {
+        this.entity = new Snake(options, game);
         this.drawableUtil = drawableUtil;
     }
 
