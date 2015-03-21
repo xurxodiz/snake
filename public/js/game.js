@@ -14,7 +14,8 @@ export class Game {
     update() {
         if (!lib.movesnake()) {
             var size = lib.die();
-            alert("you are dead. size: " + size);
+            //alert("you are dead. size: " + size);
+            console.log("you are dead. size: " + size);
         }
     }
 
