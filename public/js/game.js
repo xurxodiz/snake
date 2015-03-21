@@ -3,6 +3,7 @@ import {GameBoardView} from './gameBoardView';
 import {SnakeView} from './snakeView';
 import {FoodView} from './foodView';
 import {KeyboardController} from './keyboardController';
+import {IAController} from './iAController';
 
 export class Game {
     constructor() {
@@ -12,7 +13,8 @@ export class Game {
 
         var snakeView = new SnakeView(this.gameBoardView.entity, drawableUtil);
         this.snake = snakeView.entity;
-        new KeyboardController(this.snake);
+        //new KeyboardController(this.snake);
+        new IAController(this.snake, this.gameBoardView.entity);
         this.gameBoardView.addDrawableEntity(snakeView);
         this.gameBoardView.addDrawableEntity(new FoodView(this.gameBoardView.entity, drawableUtil));
     }

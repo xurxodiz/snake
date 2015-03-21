@@ -22,11 +22,13 @@ export class GameBoard {
         for(var e of this.entities) {
             var collision = e.checkCollision(this, {outside: true, strict: true});
             if(collision && e.type === ENTITIES.SNAKE) {//collision between game and snake
+                console.warn('collision with game');
                 return e;
             }
             for(var e2 of this.entities) {
                 var collision = e.checkCollision(e2, {outside: false, strict: false});
                 if (collision && e.type === ENTITIES.SNAKE && e2.type === ENTITIES.SNAKE) {//collision between snake and snake (himself possible)
+                    console.warn('collision with himself');
                     return e;
                 } else if(collision && e.type === ENTITIES.SNAKE && e2.type === ENTITIES.FOOD) {//collision between snake and food
                     e.growth();

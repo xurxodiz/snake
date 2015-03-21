@@ -13,6 +13,9 @@ export class Snake {
         this.dy = 10;
         this.direction = 0;
         this.positions = [{x: game.width / 2, y: game.height / 2}];
+        //by convenience x, y of snake are his head !
+        this.x = this.positions[0].x;
+        this.y = this.positions[0].y;
     }
 
     growth() {
@@ -26,24 +29,30 @@ export class Snake {
         var n = {x: -1, y: -1};
         switch (this.direction) {
             case 0: // left
+                console.log('go left');
                 n.x = x - this.dx;
                 n.y = y;
                 break;
             case 1: // up
+                console.log('go up');
                 n.x = x;
                 n.y = y - this.dy;
                 break;
             case 2: // right
+                console.log('go right');
                 n.x = x + this.dx;
                 n.y = y;
                 break;
             case 3: // down
+                console.log('go down');
                 n.x = x;
                 n.y = y + this.dy;
                 break;
         }
 
         this.positions.unshift(n);
+        this.x = this.positions[0].x;
+        this.y = this.positions[0].y;
         if(this.needGrowth === true) {
             this.needGrowth = false;
         } else {
@@ -56,6 +65,9 @@ export class Snake {
             var {x, y} = this.positions[0]; // peek head
             for (var i = 1; i < this.positions.length; i++) {
                 if (this.positions[i].x == x && this.positions[i].y == y) {
+                    console.log('square 0 and ', i, 'are same!');
+                    console.log('square 0 :', this.positions[0]);
+                    console.log('square ' + i + ' :', this.positions[i]);
                     return true;
                 }
             }
