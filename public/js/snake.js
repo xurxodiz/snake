@@ -1,13 +1,11 @@
 /**
  * Created by manland on 21/03/15.
  */
-
-var dx = 10;
-var dy = 10;
-
 export class Snake {
 
     constructor(game) {
+        this.dx = 10;
+        this.dy = 10;
         this.game = game;
         this.positions = [{x: this.game.width / 2, y: this.game.height / 2}];
     }
@@ -39,20 +37,20 @@ export class Snake {
         var n = {x: -1, y: -1};
         switch (direction) {
             case 0: // left
-                n.x = x - dx;
+                n.x = x - this.dx;
                 n.y = y;
                 break;
             case 1: // up
                 n.x = x;
-                n.y = y - dy;
+                n.y = y - this.dy;
                 break;
             case 2: // right
-                n.x = x + dx;
+                n.x = x + this.dx;
                 n.y = y;
                 break;
             case 3: // down
                 n.x = x;
-                n.y = y + dy;
+                n.y = y + this.dy;
                 break;
         }
 

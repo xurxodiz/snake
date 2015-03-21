@@ -1,6 +1,7 @@
 import {Snake} from './snake';
+import {DrawableSnake} from './drawableSnake';
+import {DrawableUtil} from './drawableUtil';
 
-var ctx;
 var WIDTH;
 var HEIGHT;
 
@@ -14,16 +15,17 @@ var dr = 5;
 // 3: down
 var direction;
 
-var snake;
+var snake, drawableSnake;
 var size;
 
 var food;
 
 var id;
 
+var drawableUtil;
+
 exports.init = function init(game) {
-  var canvas = document.getElementById('canvas');
-  ctx = canvas.getContext("2d");
+    drawableUtil = new DrawableUtil(document.getElementById('canvas').getContext("2d"));
   WIDTH = canvas.clientWidth;
   HEIGHT = canvas.clientHeight;
 
@@ -48,6 +50,7 @@ exports.onKeyDown = function onKeyDown(evt) {
 
 function createsnake() {
     snake = new Snake({width: WIDTH, height: HEIGHT, newfood: newfood});
+    drawableSnake = new DrawableSnake(drawableUtil, snake);
 }
 
 function newfood() {
@@ -76,34 +79,14 @@ exports.die = function die() {
     return size;
 };
 
-function circle(x,y,r) {
-  ctx.beginPath();
-  ctx.arc(x, y, r, 0, Math.PI*2, true);
-  ctx.closePath();
-  ctx.fill();
-}
-
-function rect(x,y,w,h) {
-  ctx.beginPath();
-  ctx.rect(x,y,w,h);
-  ctx.closePath();
-  ctx.fill();
-}
-
 exports.screenclear = function screenclear() {
-  ctx.fillStyle = "#000000";
-  ctx.clearRect(0, 0, WIDTH, HEIGHT);
-  rect(0,0,WIDTH,HEIGHT);
+    drawableUtil.rect("#000000", 0, 0, WIDTH, HEIGHT);
 };
 
 exports.drawsnake = function drawsnake() {
-  ctx.fillStyle = "#FFFFFF";
-  snake.positions.forEach(function(p) {
-    rect(p.x, p.y, dx, dy);
-  })
+    drawableSnake.draw();
 };
 
 exports.drawfood = function drawfood() {
-  ctx.fillStyle = "#FF0000";
-  circle(food.x+food.r, food.y+food.r, food.r);
+    drawableUtil.circle("#FF0000", food.x+food.r, food.y+food.r, food.r);
 };

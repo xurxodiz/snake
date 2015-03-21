@@ -4,14 +4,16 @@ export class Game {
 
     gamerun() {
         lib.init(this);
+        var loop = () => {
+            window.requestAnimationFrame(() => {
+                this.draw();
+                loop();
+            });
+        };
+        loop();
     }
 
     step() {
-        this.update();
-        this.draw();
-    }
-
-    update() {
         if (!lib.movesnake()) {
             var size = lib.die();
             //alert("you are dead. size: " + size);
