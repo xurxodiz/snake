@@ -36,13 +36,6 @@ export class Game {
     }
 
     run() {
-        var loop = () => {
-            window.requestAnimationFrame(() => {
-                this.draw();
-                loop();
-            });
-        };
-        loop();
         this.intervalId = setInterval(this.step.bind(this), 60);
     }
 
@@ -57,6 +50,12 @@ export class Game {
     }
 
     draw() {
-        this.gameBoardView.draw();
+        let loop = () => {
+            window.requestAnimationFrame(() => {
+                this.gameBoardView.draw();
+                loop();
+            });
+        };
+        loop();
     }
 };

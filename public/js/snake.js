@@ -18,7 +18,7 @@ export class Snake {
         x = Math.floor((x+5)/10)*10;
         let y = Math.floor(Math.random() * gameBoard.height);
         y = Math.floor((y+5)/10)*10;
-        let initPosition = {x, y};
+        let initPosition = {x, y, direction: this.direction};
         this.positions = [];
         for(let i=0; i<snakeInitSize; i++) {
             this.positions.push(initPosition);
@@ -36,7 +36,7 @@ export class Snake {
         var {x, y} = this.positions[0]; // peek head
 
         // create new head relative to current head
-        var n = {x: -1, y: -1};
+        var n = {x: -1, y: -1, direction: this.direction};
         switch (this.direction) {
             case 0: // left
                 n.x = x - this.dx;

@@ -3,6 +3,18 @@
  */
 import {Game} from './game';
 
-setTimeout(function() {
-    new Game({nbFood: 1, controllers: {'KeyboardController': {nb: 1, color: '#ff0000'}, 'IAController': {nb: 1, color: '#00ff00'}}, snakeInitSize: 5}).run();
-}, 3000);
+window.onload = function() {
+    let game = new Game({
+        nbFood: 3,
+        controllers: {
+            'KeyboardController': {nb: 1, color: '#ff0000'},
+            'IAController': {nb: 2, color: '#00ff00'}
+        },
+        snakeInitSize: 50
+    });
+    game.draw();
+
+    setTimeout(function () {
+        game.run();
+    }, 3000);
+};
