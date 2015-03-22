@@ -8,7 +8,7 @@ window.onload = function() {
         nbFood: 3,
         controllers: {
             'KeyboardController': {nb: 1, color: '#ff0000'},
-            'IAController': {nb: 2, color: '#00ff00'}
+            'IAController': {nb: 0, color: '#00ff00'}
         },
         snakeInitSize: 50
     });

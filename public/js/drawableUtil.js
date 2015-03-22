@@ -39,10 +39,10 @@ export class DrawableUtil {
     tail(color, x, y, width, height, angle) {
         this.ctx.save();
         let gradient;
-        if(angle === 0 || angle === 2) {
-            gradient = this.ctx.createLinearGradient(x + 5, y, x + 5, y + 10);
-        } else {
-            gradient = this.ctx.createLinearGradient(x, y + 5, x + 10, y + 5);
+        if(angle === 0 || angle === 2) {//left or right
+            gradient = this.ctx.createLinearGradient(x, y, x, y + 10);
+        } else {//up or down
+            gradient = this.ctx.createLinearGradient(x, y, x + 10, y);
         }
         gradient.addColorStop(0, "transparent");
         gradient.addColorStop(0.3, "transparent");

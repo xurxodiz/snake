@@ -68,15 +68,17 @@ export class Snake {
 
     checkCollision(otherEntity, options) {
         if(otherEntity === this) {// are we eating ourselves?
-            var {x, y} = this.positions[0]; // peek head
-            for (var i = 1; i < this.positions.length; i++) {
+            let {x, y} = this.positions[0]; // peek head
+            for (let i = 1; i < this.positions.length; i++) {
                 if (this.positions[i].x == x && this.positions[i].y == y) {
                     return true;
                 }
             }
         } else {
-            var {x, y} = this.positions[0];
-            var inside = false;
+            let {x, y} = this.positions[0];
+            x = x + 1;
+            y = y + 1;
+            let inside = false;
             if(options.strict === false) {
                 inside = x >= otherEntity.x && x <= otherEntity.x + otherEntity.width &&
                 y >= otherEntity.y && y <= otherEntity.y + otherEntity.height;

@@ -13,8 +13,6 @@ export class Game {
         var drawableUtil = new DrawableUtil(canvas.getContext("2d"));
         this.gameBoardView = new GameBoardView(canvas.clientWidth, canvas.clientHeight, drawableUtil);
 
-
-
         for(var controller in controllers) {
             for(let i=0; i<controllers[controller].nb; i++) {
                 let color = controllers[controller].color;
