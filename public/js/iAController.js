@@ -27,9 +27,9 @@ export class IAController {
                     nextDirection = 1;
                 } else if(e.y === this.snake.y && (!this.checkDirection(3) || !this.checkDirection(1))) {//TODO : not working, food are probably behind me but i can't return me
                     nextDirection = 0;
-                } else if(this.snake.x === 0 || this.snake.x === this.gamaBoard.width) {
+                } else if(this.snake.x === 0 || this.snake.x === this.gameBoard.width) {
                     nextDirection = 1;
-                } else if(this.snake.y === 0 || this.snake.y === this.gamaBoard.height) {
+                } else if(this.snake.y === 0 || this.snake.y === this.gameBoard.height) {
                     nextDirection = 0;
                 }
                 this.snake.direction = nextDirection;

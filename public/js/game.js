@@ -4,6 +4,7 @@ import {SnakeView} from './snakeView';
 import {FoodView} from './foodView';
 import {KeyboardController} from './keyboardController';
 import {IAController} from './iAController';
+import {RemoteNetworkController} from './remoteNetworkController';
 
 export class Game {
     constructor(options) {
@@ -13,17 +14,17 @@ export class Game {
         var drawableUtil = new DrawableUtil(canvas.getContext("2d"));
         this.gameBoardView = new GameBoardView(canvas.clientWidth, canvas.clientHeight, drawableUtil);
 
-        for(let {type, nb, color} of controllers) {
-            for(let i=0; i<nb; i++) {
-                let snakeView = new SnakeView({snakeInitSize, color}, this.gameBoardView.entity, drawableUtil);
-                this.gameBoardView.addDrawableEntity(snakeView);
-                if (type === 'KeyboardController') {
-                    new KeyboardController(snakeView.entity);
-                } else if (type === 'IAController') {
-                    new IAController(snakeView.entity, this.gameBoardView.entity);
-                } else {
-                    throw new Error('Unknown controller', type);
-                }
+        for(let {type, color, id, initPosition} of controllers) {
+            let snakeView = new SnakeView({id, snakeInitSize, initPosition, color}, this.gameBoardView.entity, drawableUtil);
+            this.gameBoardView.addDrawableEntity(snakeView);
+            if (type === 'KeyboardController') {
+                new KeyboardController(snakeView.entity);
+            } else if (type === 'IAController') {
+                new IAController(snakeView.entity, this.gameBoardView.entity);
+            } else if(type === 'RemoteNetworkController') {
+                new RemoteNetworkController(snakeView.entity, id);
+            } else {
+                throw new Error('Unknown controller', type);
             }
         }
 

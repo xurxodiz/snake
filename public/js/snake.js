@@ -8,20 +8,27 @@ export class Snake {
 
     constructor(options, gameBoard) {
         this.type = ENTITIES.SNAKE;
-        var {snakeInitSize} = options;
+        var {id, snakeInitSize, initPosition, color} = options;
 
+        this.id = id;
         this.dx = 10;
         this.dy = 10;
         this.direction = 0;
+        this.color = color;
         this.isMovable = true;
-        let x = Math.floor(Math.random() * gameBoard.width);
-        x = Math.floor((x+5)/10)*10;
-        let y = Math.floor(Math.random() * gameBoard.height);
-        y = Math.floor((y+5)/10)*10;
-        let initPosition = {x, y, direction: this.direction};
+        let myInitPosition;
+        if(initPosition === undefined) {
+            let x = Math.floor(Math.random() * gameBoard.width);
+            x = Math.floor((x + 5) / 10) * 10;
+            let y = Math.floor(Math.random() * gameBoard.height);
+            y = Math.floor((y + 5) / 10) * 10;
+            myInitPosition = {x, y, direction: this.direction};
+        } else {
+            myInitPosition = initPosition;
+        }
         this.positions = [];
         for(let i=0; i<snakeInitSize; i++) {
-            this.positions.push(initPosition);
+            this.positions.push(myInitPosition);
         }
         //by convenience x, y of snake are his head !
         this.x = this.positions[0].x;

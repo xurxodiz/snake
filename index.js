@@ -29,10 +29,26 @@ function handler (req, res) {
     });
 }
 
+var roomInfos;
+
 io.on('connection', function (socket) {
-    socket.emit('news', { hello: 'world' });
-    socket.on('my other event', function (data) {
-        console.log(data);
+    socket.on('newRoom', function (data) {
+        console.log('NEW ROOM');
+        roomInfos = data;
+    });
+    socket.on('enterInRoom', function () {
+        setTimeout(function() {
+            socket.emit('joinRoom', roomInfos);
+            console.log('JOIN ROOM');
+            setTimeout(function() {
+                console.log('START');
+                socket.emit('start');
+                socket.broadcast.emit('start');
+            }, 3000);
+        }, 10);
+    });
+    socket.on('changeDirection', function (data) {
+        socket.broadcast.emit('changedDirection', data);
     });
 });
 
