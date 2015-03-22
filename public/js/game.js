@@ -55,4 +55,20 @@ export class Game {
         };
         loop();
     }
+
+    dj() {
+        var music = document.getElementById('musicplease')
+        var musicSwitch = document.getElementById('musicSwitch')
+        music.play();
+
+        musicSwitch.addEventListener('click', function() {
+            if (musicSwitch.classList.contains('icon-volume')) { 
+                music.pause();
+            }else{
+                music.play();
+            }
+            musicSwitch.classList.toggle('icon-volume');
+            musicSwitch.classList.toggle('icon-mute');
+        }, false);
+    }
 };

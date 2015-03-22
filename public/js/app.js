@@ -16,6 +16,7 @@ window.onload = function() {
         snakeInitSize: 5
     });
     game.draw();
+    game.dj();
 
     setTimeout(function () {
         game.run();
