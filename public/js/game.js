@@ -13,17 +13,16 @@ export class Game {
         var drawableUtil = new DrawableUtil(canvas.getContext("2d"));
         this.gameBoardView = new GameBoardView(canvas.clientWidth, canvas.clientHeight, drawableUtil);
 
-        for(var controller in controllers) {
-            for(let i=0; i<controllers[controller].nb; i++) {
-                let color = controllers[controller].color;
+        for(let {type, nb, color} of controllers) {
+            for(let i=0; i<nb; i++) {
                 let snakeView = new SnakeView({snakeInitSize, color}, this.gameBoardView.entity, drawableUtil);
                 this.gameBoardView.addDrawableEntity(snakeView);
-                if (controller === 'KeyboardController') {
+                if (type === 'KeyboardController') {
                     new KeyboardController(snakeView.entity);
-                } else if (controller === 'IAController') {
+                } else if (type === 'IAController') {
                     new IAController(snakeView.entity, this.gameBoardView.entity);
                 } else {
-                    throw new Error('Unknown controller', controller);
+                    throw new Error('Unknown controller', type);
                 }
             }
         }

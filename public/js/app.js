@@ -5,12 +5,15 @@ import {Game} from './game';
 
 window.onload = function() {
     let game = new Game({
-        nbFood: 3,
-        controllers: {
-            'KeyboardController': {nb: 1, color: '#ff0000'},
-            'IAController': {nb: 0, color: '#00ff00'}
-        },
-        snakeInitSize: 50
+        nbFood: 1,
+        controllers: [
+            {type: 'KeyboardController', nb: 0, color: '#ff0000'},
+            {type: 'IAController', nb: 1, color: '#00ff00'},
+            {type: 'IAController', nb: 1, color: '#00ffff'},
+            {type: 'IAController', nb: 1, color: '#0000ff'},
+            {type: 'IAController', nb: 1, color: '#ff00ff'}
+        ],
+        snakeInitSize: 5
     });
     game.draw();
 
