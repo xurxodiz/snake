@@ -6,8 +6,8 @@ import {GameBoard} from './gameBoard';
 import {FoodView} from './foodView';
 
 export class GameBoardView {
-    constructor(width, height, drawableUtil) {
-        this.entity = new GameBoard(width, height);
+    constructor(width, height, callbacks, drawableUtil) {
+        this.entity = new GameBoard(width, height, callbacks);
         this.drawableUtil = drawableUtil;
         this.drawableEntities = [];
     }

@@ -5,7 +5,7 @@
 import ENTITIES from './entityCst';
 
 export class Food {
-    constructor(game) {
+    constructor(game, optPosition) {
         this.type = ENTITIES.FOOD;
 
         this.dx = 10;
@@ -14,7 +14,12 @@ export class Food {
         this.isMovable = false;
         this.game = game;
 
-        this.move();
+        if(!optPosition) {
+            this.move();
+        } else {
+            this.x = optPosition.x;
+            this.y = optPosition.y;
+        }
 
         this.r = this.dr;
         this.width = this.height = this.dr;

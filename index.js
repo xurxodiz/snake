@@ -44,6 +44,11 @@ io.on('connection', function (socket) {
                 console.log('START');
                 socket.emit('start');
                 socket.broadcast.emit('start');
+                setTimeout(function() {
+                    var position = {x: 10, y: 10};
+                    socket.emit('addFood', position);
+                    socket.broadcast.emit('addFood', position);
+                }, 200);
             }, 3000);
         }, 10);
     });
@@ -55,6 +60,11 @@ io.on('connection', function (socket) {
     });
     socket.on('finish', function(data) {
         socket.broadcast.emit('finish', data);
+    });
+    socket.on('foodEaten', function() {
+        var position = {x: 150, y: 150};
+        socket.emit('addFood', position);
+        socket.broadcast.emit('addFood', position);
     });
 });
 

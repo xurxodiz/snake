@@ -8,15 +8,18 @@ import {RemoteNetworkController} from './remoteNetworkController';
 
 export class Game {
     constructor(options) {
-        let {nbFood, controllers, snakeInitSize} = options;
+        let nbFood = options.nbFood;
+        let controllers = options.controllers;
+        let snakeInitSize = options.snakeInitSize;
+        let callbacks = options.callbacks;
         this.isFinish = false;
 
         var canvas = document.getElementById('canvas');
-        var drawableUtil = new DrawableUtil(canvas.getContext("2d"));
-        this.gameBoardView = new GameBoardView(canvas.clientWidth, canvas.clientHeight, drawableUtil);
+        this.drawableUtil = new DrawableUtil(canvas.getContext("2d"));
+        this.gameBoardView = new GameBoardView(canvas.clientWidth, canvas.clientHeight, callbacks, this.drawableUtil);
 
         for(let {type, color, id, initPosition} of controllers) {
-            let snakeView = new SnakeView({id, snakeInitSize, initPosition, color}, this.gameBoardView.entity, drawableUtil);
+            let snakeView = new SnakeView({id, snakeInitSize, initPosition, color}, this.gameBoardView.entity, this.drawableUtil);
             this.gameBoardView.addDrawableEntity(snakeView);
             if (type === 'KeyboardController') {
                 new KeyboardController(snakeView.entity);
@@ -30,7 +33,7 @@ export class Game {
         }
 
         for(let i=0; i<nbFood; i++) {
-            this.gameBoardView.addDrawableEntity(new FoodView(this.gameBoardView.entity, drawableUtil));
+            this.gameBoardView.addDrawableEntity(new FoodView(this.gameBoardView.entity, this.drawableUtil));
         }
     }
 
@@ -41,7 +44,7 @@ export class Game {
     step() {
         this.gameBoardView.entity.move();
         let atLeastOneDead = this.gameBoardView.entity.checkCollision();
-        if (this.isFinish || (atLeastOneDead && this.gameBoardView.entity.nbMovableEntitiesInGame() === 1)) {
+        if (this.isFinish || (atLeastOneDead && this.gameBoardView.entity.nbMovableEntitiesInGame() <= 1)) {
             if (this.intervalId) {
                 clearInterval(this.intervalId);
             }
@@ -58,6 +61,10 @@ export class Game {
             });
         };
         loop();
+    }
+
+    addFood(position) {
+        this.gameBoardView.addDrawableEntity(new FoodView(this.gameBoardView.entity, this.drawableUtil, position));
     }
 
     dj() {

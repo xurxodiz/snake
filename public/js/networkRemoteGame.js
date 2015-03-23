@@ -11,18 +11,23 @@ export class NetworkRemoteGame {
         let game;
         socket.emit('enterInRoom');
         socket.on('joinRoom', function (gameOptions) {
-            console.log('joinRoom remote', gameOptions);
+            gameOptions.callbacks = {
+                foodEatenCallback: function() {
+                    socket.emit('foodEaten');
+                }
+            };
             game = new Game(gameOptions);
             game.draw();
         });
 
         socket.on('start', () => {
-            console.log('start remote');
             game.run();
         });
-
         socket.on('finish', () => {
             game.isFinish = true;
+        });
+        socket.on('addFood', (position) => {
+            game.addFood(position);
         });
     }
 }

@@ -5,8 +5,9 @@
 import ENTITIES from './entityCst';
 
 export class GameBoard {
-    constructor(width, height) {
+    constructor(width, height, callbacks) {
         this.type = ENTITIES.GAME_BOARD;
+        this.foodEatenCallback = callbacks.foodEatenCallback;
 
         this.x = this.y = 0;
         this.score = 0;
@@ -29,6 +30,7 @@ export class GameBoard {
 
     checkCollision() {
         let atLeastOneDead = false;
+        let toDelete = [];
         for(let e of this.entities) {
             if(e.isLocal === true && !e.isDead) {
                 let collision = e.checkCollision(this, {outside: true, strict: true});
@@ -46,15 +48,21 @@ export class GameBoard {
                     } else if (collision && e.type === ENTITIES.SNAKE && e2.type === ENTITIES.FOOD) {//collision between snake and food
                         this.score = this.score + 1;
                         e.growth();
-                        e2.move();
+                        this.foodEatenCallback(e2);
+                        toDelete.push(e2);
+
                     } else if (collision && e.type === ENTITIES.FOOD && e2.type === ENTITIES.SNAKE) {//collision between food and snake
                         this.score = this.score + 1;
-                        e.move();
+                        this.foodEatenCallback(e);
+                        toDelete.push(e);
                         e2.growth();
                     }
                 }
             }
         }
+        toDelete.forEach((e) => {
+            //TODO : this.entities.remove(e);
+        });
         return atLeastOneDead;
     }
 

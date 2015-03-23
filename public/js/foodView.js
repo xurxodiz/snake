@@ -5,8 +5,8 @@
 import {Food} from './food';
 
 export class FoodView {
-    constructor(game, drawableUtil) {
-        this.entity = new Food(game);
+    constructor(game, drawableUtil, optPosition) {
+        this.entity = new Food(game, optPosition);
         this.drawableUtil = drawableUtil;
     }
 

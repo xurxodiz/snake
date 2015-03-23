@@ -10,7 +10,7 @@ export class NetworkLocalGame {
         let socket = io();
         socket.on('connect', () => {
             let gameOptions = {
-                nbFood: 1,
+                nbFood: 0,
                 snakeInitSize: 50,
                 controllers: [
                     {type: 'KeyboardController', color: '#ff0000', id: 1},
@@ -18,13 +18,18 @@ export class NetworkLocalGame {
                     {type: 'IAController', color: '#00ffff', id: 3},
                     //{type: 'IAController', color: '#0000ff', id: 4},
                     //{type: 'IAController', color: '#ff00ff', id: 5}
-                ]
+                ],
+                callbacks: {
+                    foodEatenCallback: function () {
+                        socket.emit('foodEaten');
+                    }
+                }
             };
             this.game = new Game(gameOptions);
             this.game.draw();
             let toSendGameOptions = {
-                nbFood: 1,
-                snakeInitSize: 50,
+                nbFood: gameOptions.nbFood,
+                snakeInitSize: gameOptions.snakeInitSize,
                 controllers: []
             };
             this.game.gameBoardView.entity.movableEntities.forEach((e) => {
@@ -52,8 +57,13 @@ export class NetworkLocalGame {
             }, 50);
         });
         socket.on('start', () => {
-            console.log('start local');
             this.game.run();
+        });
+        socket.on('finish', () => {
+            this.game.isFinish = true;
+        });
+        socket.on('addFood', (position) => {
+            this.game.addFood(position);
         });
     }
 }
