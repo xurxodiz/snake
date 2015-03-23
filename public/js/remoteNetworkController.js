@@ -12,6 +12,8 @@ export class RemoteNetworkController {
         socket.on('changedDirection', (data) => {
             if(data.id === snake.id) {
                 snake.direction = data.direction;
+                snake.positions[0].x = data.x;
+                snake.positions[0].y = data.y;
             }
         });
     }

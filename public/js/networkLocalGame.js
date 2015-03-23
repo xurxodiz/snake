@@ -24,7 +24,7 @@ export class NetworkLocalGame {
             this.game.draw();
             let toSendGameOptions = {
                 nbFood: 1,
-                snakeInitSize: 5,
+                snakeInitSize: 50,
                 controllers: []
             };
             this.game.gameBoardView.entity.movableEntities.forEach((e) => {
@@ -33,7 +33,7 @@ export class NetworkLocalGame {
             socket.emit('newRoom', toSendGameOptions);
             setInterval(() => {
                 this.game.gameBoardView.entity.movableEntities.forEach((e) => {
-                    socket.emit('changeDirection', {id: e.id, direction: e.direction});
+                    socket.emit('changeDirection', {id: e.id, direction: e.direction, x: e.x, y: e.y});
                 });
             }, 10);
         });
