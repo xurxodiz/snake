@@ -36,23 +36,65 @@ export class DrawableUtil {
         this.ctx.fill();
     }
 
-    tail(color, x, y, width, height, angle) {
-        this.ctx.save();
-        let gradient;
-        if(angle === 0 || angle === 2) {//left or right
-            gradient = this.ctx.createLinearGradient(x, y, x, y + 10);
+    tail(color, x, y, width, height, direction) {
+        this.ctx.beginPath();
+        if(direction === 0 || direction === 2) {//left or right
+            this.ctx.moveTo(x, y+(height/2));
+            this.ctx.lineTo(x+width, y+(height/2));
         } else {//up or down
-            gradient = this.ctx.createLinearGradient(x, y, x + 10, y);
+            this.ctx.moveTo(x+(width/2), y);
+            this.ctx.lineTo(x+(width/2), y+height);
         }
-        gradient.addColorStop(0, "transparent");
-        gradient.addColorStop(0.3, "transparent");
-        gradient.addColorStop(0.4, color);//"#9bdcd8");
-        gradient.addColorStop(0.6, color);//"#9bdcd8");
-        gradient.addColorStop(0.7, "transparent");
-        gradient.addColorStop(1, "transparent");
-        this.ctx.fillStyle = gradient;
-        this.ctx.fillRect(x, y, width, height);
-        this.ctx.restore();
+        this.ctx.lineWidth = 2;
+        this.ctx.strokeStyle = color;
+        this.ctx.stroke();
+    }
+
+    /*
+    0 left
+    1 up
+    2 right
+    3 down
+    */
+    
+    tailcurved(color, x, y, width, height, directionfrom, directionto) {
+        this.ctx.beginPath();
+        if(directionfrom === 0) { // FROM left
+            if (directionto === 1) {
+                this.ctx.moveTo(x+width, y+(height/2));
+                this.ctx.lineTo(x+(width/2), y);
+            }else{
+                this.ctx.moveTo(x+width, y+(height/2));
+                this.ctx.lineTo(x+(width/2), y+height);
+            }
+        } else if(directionfrom === 2) { // FROM right
+            if (directionto === 1) {
+                this.ctx.moveTo(x, y+(height/2));
+                this.ctx.lineTo(x+(width/2), y);
+            }else{
+                this.ctx.moveTo(x, y+(height/2));
+                this.ctx.lineTo(x+(width/2), y+height);
+            }
+        } else if(directionfrom === 1) { // FROM up
+            if (directionto === 0) {
+                this.ctx.moveTo(x+(width/2), y+height);
+                this.ctx.lineTo(x, y+(height/2));
+            }else{
+                this.ctx.moveTo(x+(width/2), y+height);
+                this.ctx.lineTo(x+width, y+(height/2));
+            }
+        } else if(directionfrom === 3) { // FROM down
+            if (directionto === 0) {
+                this.ctx.moveTo(x+(width/2), y);
+                this.ctx.lineTo(x, y+(height/2));
+            }else{
+                this.ctx.moveTo(x+(width/2), y);
+                this.ctx.lineTo(x+width, y+(height/2));
+            }
+        }
+        this.ctx.lineWidth = 2;
+        this.ctx.strokeStyle = color;
+        this.ctx.stroke();
     }
 
     circle(color, x, y, radius) {
@@ -63,12 +105,6 @@ export class DrawableUtil {
         this.ctx.fill();
     }
 
-    /*
-    0 left
-    1 up
-    2 right
-    3 bottom
-    */
     bike(x, y, angle) {
         let img = new Image();
         img.src = '../images/trake_bike.png';

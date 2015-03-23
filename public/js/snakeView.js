@@ -12,10 +12,20 @@ export class SnakeView {
     }
 
     draw() {
-        this.entity.positions.forEach((position) => {
+        
+        let position;
+        for (let i = 0; i < this.entity.positions.length; i++) {
+            position = this.entity.positions[i];
             let {x, y, direction} = position;
-            this.drawableUtil.tail(this.options.color, x, y, this.entity.dx, this.entity.dy, direction);
-        });
+            if(this.entity.positions[i-1]){
+                if (direction === this.entity.positions[i-1].direction) {
+                    this.drawableUtil.tail(this.options.color, x, y, this.entity.dx, this.entity.dy, direction);
+                }else{
+                    this.drawableUtil.tailcurved(this.options.color, x, y, this.entity.dx, this.entity.dy, direction, this.entity.positions[i-1].direction);
+                }
+            }
+        };
+
         let {x, y} = this.entity.positions[0];
         this.drawableUtil.bike(x, y, this.entity.direction);
     }

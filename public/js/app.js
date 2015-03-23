@@ -24,7 +24,7 @@ window.onload = function() {
             ]
         });
         game.draw();
-        game.dj();
+        //game.dj();
 
         setTimeout(function () {
             game.run();
