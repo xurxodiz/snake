@@ -20,5 +20,9 @@ export class NetworkRemoteGame {
             console.log('start remote');
             game.run();
         });
+
+        socket.on('finish', () => {
+            game.isFinish = true;
+        });
     }
 }

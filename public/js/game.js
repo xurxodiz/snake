@@ -8,7 +8,8 @@ import {RemoteNetworkController} from './remoteNetworkController';
 
 export class Game {
     constructor(options) {
-        var {nbFood, controllers, snakeInitSize} = options;
+        let {nbFood, controllers, snakeInitSize} = options;
+        this.isFinish = false;
 
         var canvas = document.getElementById('canvas');
         var drawableUtil = new DrawableUtil(canvas.getContext("2d"));
@@ -40,16 +41,17 @@ export class Game {
     step() {
         this.gameBoardView.entity.move();
         let atLeastOneDead = this.gameBoardView.entity.checkCollision();
-        if (atLeastOneDead && this.gameBoardView.entity.nbMovableEntitiesInGame() === 1) {
+        if (this.isFinish || (atLeastOneDead && this.gameBoardView.entity.nbMovableEntitiesInGame() === 1)) {
             if (this.intervalId) {
                 clearInterval(this.intervalId);
             }
+            this.isFinish = true;
             console.log("You WIN ! size: " + this.gameBoardView.entity.score);
         }
     }
 
     draw() {
-        let loop = () => {
+        var loop = () => {
             window.requestAnimationFrame(() => {
                 this.gameBoardView.draw();
                 loop();

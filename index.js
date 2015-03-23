@@ -53,6 +53,9 @@ io.on('connection', function (socket) {
     socket.on('dead', function(data) {
         socket.broadcast.emit('dead', data);
     });
+    socket.on('finish', function(data) {
+        socket.broadcast.emit('finish', data);
+    });
 });
 
 console.log('open webbrowser on http://127.0.0.1:' + constants.port);

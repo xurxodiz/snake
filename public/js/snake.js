@@ -79,6 +79,8 @@ export class Snake {
             } else {
                 this.positions.pop();
             }
+        } else if(this.positions.length > 1) {//keep head (aka 0) to draw bike
+            this.positions.pop();
         }
     }
 
