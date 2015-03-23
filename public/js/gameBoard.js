@@ -28,28 +28,43 @@ export class GameBoard {
     }
 
     checkCollision() {
-        for(var e of this.entities) {
-            var collision = e.checkCollision(this, {outside: true, strict: true});
-            if(collision && e.type === ENTITIES.SNAKE) {//collision between game and snake
-                console.warn('collision with game');
-                return e;
-            }
-            for(var e2 of this.entities) {
-                var collision = e.checkCollision(e2, {outside: false, strict: false});
-                if (collision && e.type === ENTITIES.SNAKE && e2.type === ENTITIES.SNAKE) {//collision between snake and snake (himself possible)
-                    console.warn('collision with himself');
-                    return e;
-                } else if(collision && e.type === ENTITIES.SNAKE && e2.type === ENTITIES.FOOD) {//collision between snake and food
-                    this.score = this.score + 1;
-                    e.growth();
-                    e2.move();
-                } else if(collision && e.type === ENTITIES.FOOD && e2.type === ENTITIES.SNAKE) {//collision between food and snake
-                    this.score = this.score + 1;
-                    e.move();
-                    e2.growth();
+        let atLeastOneDead = false;
+        for(let e of this.entities) {
+            if(e.isLocal === true && !e.isDead) {
+                let collision = e.checkCollision(this, {outside: true, strict: true});
+                if (collision && e.type === ENTITIES.SNAKE) {//collision between game and snake
+                    console.warn('collision with game');
+                    e.dead();
+                    atLeastOneDead = true;
+                }
+                for (let e2 of this.entities) {
+                    let collision = e.checkCollision(e2, {outside: false, strict: false});
+                    if (collision && e.type === ENTITIES.SNAKE && e2.type === ENTITIES.SNAKE) {//collision between snake and snake (himself possible)
+                        console.warn('collision with himself');
+                        e.dead();
+                        atLeastOneDead = true;
+                    } else if (collision && e.type === ENTITIES.SNAKE && e2.type === ENTITIES.FOOD) {//collision between snake and food
+                        this.score = this.score + 1;
+                        e.growth();
+                        e2.move();
+                    } else if (collision && e.type === ENTITIES.FOOD && e2.type === ENTITIES.SNAKE) {//collision between food and snake
+                        this.score = this.score + 1;
+                        e.move();
+                        e2.growth();
+                    }
                 }
             }
         }
-        return false;
+        return atLeastOneDead;
+    }
+
+    nbMovableEntitiesInGame() {
+        let nb = 0;
+        for(let e of this.movableEntities) {
+            if(!e.isDead) {
+                nb++;
+            }
+        }
+        return nb;
     }
 }

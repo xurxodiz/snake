@@ -13,8 +13,8 @@ export class NetworkLocalGame {
                 nbFood: 1,
                 snakeInitSize: 50,
                 controllers: [
-                    {type: 'KeyboardController', color: '#ff0000', id: 1}
-                    //{type: 'IAController', color: '#00ff00', id: 2},
+                    {type: 'KeyboardController', color: '#ff0000', id: 1},
+                    {type: 'IAController', color: '#00ff00', id: 2}
                     //{type: 'IAController', color: '#00ffff', id: 3},
                     //{type: 'IAController', color: '#0000ff', id: 4},
                     //{type: 'IAController', color: '#ff00ff', id: 5}
@@ -28,14 +28,23 @@ export class NetworkLocalGame {
                 controllers: []
             };
             this.game.gameBoardView.entity.movableEntities.forEach((e) => {
-                toSendGameOptions.controllers.push({type: 'RemoteNetworkController', color: e.color, id: e.id, initPosition: {x: e.x, y: e.y, direction: e.direction}});
+                toSendGameOptions.controllers.push({
+                    id: e.id,
+                    type: 'RemoteNetworkController',
+                    color: e.color,
+                    initPosition: {x: e.x, y: e.y, direction: e.direction}
+                });
             });
             socket.emit('newRoom', toSendGameOptions);
             setInterval(() => {
                 this.game.gameBoardView.entity.movableEntities.forEach((e) => {
-                    socket.emit('changeDirection', {id: e.id, direction: e.direction, x: e.x, y: e.y});
+                    if(e.isDead) {
+                        socket.emit('dead', {id: e.id});
+                    } else {
+                        socket.emit('changeDirection', {id: e.id, direction: e.direction, x: e.x, y: e.y});
+                    }
                 });
-            }, 10);
+            }, 50);
         });
         socket.on('start', () => {
             console.log('start local');

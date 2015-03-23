@@ -39,11 +39,12 @@ export class Game {
 
     step() {
         this.gameBoardView.entity.move();
-        if (this.gameBoardView.entity.checkCollision()) {
+        let atLeastOneDead = this.gameBoardView.entity.checkCollision();
+        if (atLeastOneDead && this.gameBoardView.entity.nbMovableEntitiesInGame() === 1) {
             if (this.intervalId) {
                 clearInterval(this.intervalId);
             }
-            console.log("you are dead. size: " + this.gameBoardView.entity.score);
+            console.log("You WIN ! size: " + this.gameBoardView.entity.score);
         }
     }
 

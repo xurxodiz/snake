@@ -50,6 +50,9 @@ io.on('connection', function (socket) {
     socket.on('changeDirection', function (data) {
         socket.broadcast.emit('changedDirection', data);
     });
+    socket.on('dead', function(data) {
+        socket.broadcast.emit('dead', data);
+    });
 });
 
 console.log('open webbrowser on http://127.0.0.1:' + constants.port);

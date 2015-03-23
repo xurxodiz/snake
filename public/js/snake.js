@@ -16,14 +16,17 @@ export class Snake {
         this.direction = 0;
         this.color = color;
         this.isMovable = true;
+        this.isDead = false;
         let myInitPosition;
         if(initPosition === undefined) {
+            this.isLocal = true;
             let x = Math.floor(Math.random() * gameBoard.width);
             x = Math.floor((x + 5) / 10) * 10;
             let y = Math.floor(Math.random() * gameBoard.height);
             y = Math.floor((y + 5) / 10) * 10;
             myInitPosition = {x, y, direction: this.direction};
         } else {
+            this.isLocal = false;
             myInitPosition = initPosition;
         }
         this.positions = [];
@@ -39,37 +42,43 @@ export class Snake {
         this.needGrowth = true;
     }
 
+    dead() {
+        this.isDead = true;
+    }
+
     move() {
-        var {x, y} = this.positions[0]; // peek head
+        if(!this.isDead) {
+            var {x, y} = this.positions[0]; // peek head
 
-        // create new head relative to current head
-        var n = {x: -1, y: -1, direction: this.direction};
-        switch (this.direction) {
-            case 0: // left
-                n.x = x - this.dx;
-                n.y = y;
-                break;
-            case 1: // up
-                n.x = x;
-                n.y = y - this.dy;
-                break;
-            case 2: // right
-                n.x = x + this.dx;
-                n.y = y;
-                break;
-            case 3: // down
-                n.x = x;
-                n.y = y + this.dy;
-                break;
-        }
+            // create new head relative to current head
+            var n = {x: -1, y: -1, direction: this.direction};
+            switch (this.direction) {
+                case 0: // left
+                    n.x = x - this.dx;
+                    n.y = y;
+                    break;
+                case 1: // up
+                    n.x = x;
+                    n.y = y - this.dy;
+                    break;
+                case 2: // right
+                    n.x = x + this.dx;
+                    n.y = y;
+                    break;
+                case 3: // down
+                    n.x = x;
+                    n.y = y + this.dy;
+                    break;
+            }
 
-        this.positions.unshift(n);
-        this.x = this.positions[0].x;
-        this.y = this.positions[0].y;
-        if(this.needGrowth === true) {
-            this.needGrowth = false;
-        } else {
-            this.positions.pop();
+            this.positions.unshift(n);
+            this.x = this.positions[0].x;
+            this.y = this.positions[0].y;
+            if (this.needGrowth === true) {
+                this.needGrowth = false;
+            } else {
+                this.positions.pop();
+            }
         }
     }
 

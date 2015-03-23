@@ -16,6 +16,11 @@ export class RemoteNetworkController {
                 snake.positions[0].y = data.y;
             }
         });
+        socket.on('dead', (data) => {
+            if (data.id === snake.id) {
+                snake.dead();
+            }
+        });
     }
 
 }
