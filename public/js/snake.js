@@ -90,6 +90,13 @@ export class Snake {
                     return true;
                 }
             }
+        } else if(otherEntity.type === ENTITIES.SNAKE) {// are we eating other snake?
+            let {x, y} = this.positions[0]; // peek head
+            for (let i = 0; i < otherEntity.positions.length; i++) {
+                if (otherEntity.positions[i].x == x && otherEntity.positions[i].y == y) {
+                    return true;
+                }
+            }
         } else {
             let {x, y} = this.positions[0];
             x = x + 1;
