@@ -1,11 +1,13 @@
 /**
  * Created by manland on 20/03/15.
  */
+import {Dj} from './dj';
 import {Game} from './game';
 import {NetworkLocalGame} from './networkLocalGame';
 import {NetworkRemoteGame} from './networkRemoteGame';
 
 window.onload = function() {
+    new Dj();
     let hash = window.location.hash.substring(1);
     if(hash === 'local') {
         new NetworkLocalGame();
@@ -29,7 +31,6 @@ window.onload = function() {
             }
         });
         game.draw();
-        //game.dj();
 
         setTimeout(function () {
             game.run();
