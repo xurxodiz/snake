@@ -2,11 +2,11 @@
  * Created by manland on 21/03/15.
  */
 
-import ENTITIES from './entityCst';
+import * as CONSTANTS from './entityCst';
 
 export class GameBoard {
     constructor(width, height, callbacks) {
-        this.type = ENTITIES.GAME_BOARD;
+        this.type = CONSTANTS.ENTITIES.GAME_BOARD;
         this.foodEatenCallback = callbacks.foodEatenCallback;
 
         this.x = this.y = 0;
@@ -34,24 +34,24 @@ export class GameBoard {
         for(let e of this.entities) {
             if(e.isLocal === true && !e.isDead) {
                 let collision = e.checkCollision(this, {outside: true, strict: true});
-                if (collision && e.type === ENTITIES.SNAKE) {//collision between game and snake
+                if (collision && e.type === CONSTANTS.ENTITIES.SNAKE) {//collision between game and snake
                     console.warn('collision with game');
                     e.dead();
                     atLeastOneDead = true;
                 }
                 for (let e2 of this.entities) {
-                    let collision = e.checkCollision(e2, {outside: false, strict: false});
-                    if (collision && e.type === ENTITIES.SNAKE && e2.type === ENTITIES.SNAKE) {//collision between snake and snake (himself possible)
+                    collision = e.checkCollision(e2, {outside: false, strict: false});
+                    if (collision && e.type === CONSTANTS.ENTITIES.SNAKE && e2.type === CONSTANTS.ENTITIES.SNAKE) {//collision between snake and snake (himself possible)
                         console.warn('collision with himself');
                         e.dead();
                         atLeastOneDead = true;
-                    } else if (collision && e.type === ENTITIES.SNAKE && e2.type === ENTITIES.FOOD) {//collision between snake and food
+                    } else if (collision && e.type === CONSTANTS.ENTITIES.SNAKE && e2.type === CONSTANTS.ENTITIES.FOOD) {//collision between snake and food
                         this.score = this.score + 1;
                         e.growth();
                         this.foodEatenCallback(e2);
                         toDelete.push(e2);
 
-                    } else if (collision && e.type === ENTITIES.FOOD && e2.type === ENTITIES.SNAKE) {//collision between food and snake
+                    } else if (collision && e.type === CONSTANTS.ENTITIES.FOOD && e2.type === CONSTANTS.ENTITIES.SNAKE) {//collision between food and snake
                         this.score = this.score + 1;
                         this.foodEatenCallback(e);
                         toDelete.push(e);
@@ -74,5 +74,10 @@ export class GameBoard {
             }
         }
         return nb;
+    }
+
+    draw(drawableUtil) {
+        drawableUtil.rect("#000000", 0, 0, this.width, this.height);
+        this.entities.forEach((e) => e.draw(drawableUtil));
     }
 }

@@ -2,12 +2,12 @@
  * Created by manland on 21/03/15.
  */
 
-import ENTITIES from './entityCst';
+import * as CONSTANTS from './entityCst';
 
 export class Snake {
 
     constructor(options, gameBoard) {
-        this.type = ENTITIES.SNAKE;
+        this.type = CONSTANTS.ENTITIES.SNAKE;
         var {id, snakeInitSize, initPosition, color} = options;
 
         this.id = id;
@@ -92,7 +92,7 @@ export class Snake {
                     return true;
                 }
             }
-        } else if(otherEntity.type === ENTITIES.SNAKE) {// are we eating other snake?
+        } else if(otherEntity.type === CONSTANTS.ENTITIES.SNAKE) {// are we eating other snake?
             let {x, y} = this.positions[0]; // peek head
             for (let i = 0; i < otherEntity.positions.length; i++) {
                 if (otherEntity.positions[i].x == x && otherEntity.positions[i].y == y) {
@@ -118,6 +118,24 @@ export class Snake {
         }
 
         return false;
+    }
+
+    draw(drawableUtil) {
+        let position;
+        for (let i = 0; i < this.positions.length; i++) {
+            position = this.positions[i];
+            let {x, y, direction} = position;
+            if(this.positions[i-1]){
+                if (direction === this.positions[i-1].direction) {
+                    drawableUtil.tail(this.color, x, y, this.dx, this.dy, direction);
+                }else{
+                    drawableUtil.tailcurved(this.color, x, y, this.dx, this.dy, direction, this.positions[i-1].direction);
+                }
+            }
+        };
+
+        let {x, y} = this.positions[0];
+        drawableUtil.bike(x, y, this.direction);
     }
 
 }

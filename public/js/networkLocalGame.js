@@ -32,7 +32,7 @@ export class NetworkLocalGame {
                 snakeInitSize: gameOptions.snakeInitSize,
                 controllers: []
             };
-            this.game.gameBoardView.entity.movableEntities.forEach((e) => {
+            this.game.gameBoard.movableEntities.forEach((e) => {
                 toSendGameOptions.controllers.push({
                     id: e.id,
                     type: 'RemoteNetworkController',
@@ -46,7 +46,7 @@ export class NetworkLocalGame {
                     clearInterval(intervalId);
                     socket.emit('finish');
                 } else {
-                    this.game.gameBoardView.entity.movableEntities.forEach((e) => {
+                    this.game.gameBoard.movableEntities.forEach((e) => {
                         if (e.isDead) {
                             socket.emit('dead', {id: e.id});
                         } else {

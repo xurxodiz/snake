@@ -2,7 +2,7 @@
  * Created by manland on 21/03/15.
  */
 
-import ENTITIES from './entityCst';
+import * as CONSTANTS from '../entities/entityCst';
 
 export class IAController {
     constructor(snake, gameBoard) {
@@ -13,7 +13,7 @@ export class IAController {
 
     move() {
         for(var e of this.gameBoard.entities) {
-            if(e.type === ENTITIES.FOOD) {
+            if(e.type === CONSTANTS.ENTITIES.FOOD) {
                 var nextDirection = this.snake.direction;
                 if(e.x > this.snake.x && this.checkDirection(2)) {
                     nextDirection = 2;
@@ -42,6 +42,3 @@ export class IAController {
         return newdir != this.snake.direction+2 && newdir != this.snake.direction-2;
     }
 };
-
-const IA_CONTROLLER_NAME = 'IAController';
-export default IA_CONTROLLER_NAME;

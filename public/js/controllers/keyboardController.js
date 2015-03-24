@@ -13,11 +13,8 @@ export class KeyboardController {
 
         // only lateral turns are allowed
         // (that is, no u-turns)
-        if (newdir != this.snake.direction && newdir != this.snake.direction+2 && newdir != this.snake.direction-2) {
+        if (newdir != this.snake.direction && newdir != this.snake.direction + 2 && newdir != this.snake.direction - 2) {
             this.snake.direction = newdir;
         }
     };
 };
-
-const KEYBOARD_CONTROLLER_NAME = 'KeyboardController';
-export default KEYBOARD_CONTROLLER_NAME;

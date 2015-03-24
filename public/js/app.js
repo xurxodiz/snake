@@ -13,11 +13,11 @@ window.onload = function() {
         new NetworkRemoteGame();
     } else {
         let game = new Game({
-            nbFood: 10,
-            snakeInitSize: 5,
+            nbFood: 1,
+            snakeInitSize: 20,
             controllers: [
                 {type: 'KeyboardController', color: '#ff0000', id: 1},
-                //{type: 'IAController', color: '#00ff00', id: 2},
+                {type: 'IAController', color: '#00ff00', id: 2}
                 //{type: 'IAController', color: '#00ffff', id: 3}
                 //{type: 'IAController', color: '#0000ff', id: 4},
                 //{type: 'IAController', color: '#ff00ff', id: 5}

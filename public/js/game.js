@@ -1,10 +1,10 @@
 import {DrawableUtil} from './drawableUtil';
-import {GameBoardView} from './gameBoardView';
-import {SnakeView} from './snakeView';
-import {FoodView} from './foodView';
-import {KeyboardController} from './keyboardController';
-import {IAController} from './iAController';
-import {RemoteNetworkController} from './remoteNetworkController';
+import {GameBoard} from './entities/gameBoard';
+import {Snake} from './entities/snake';
+import {Food} from './entities/food';
+import {KeyboardController} from './controllers/keyboardController';
+import {IAController} from './controllers/iAController';
+import {RemoteNetworkController} from './controllers/remoteNetworkController';
 
 export class Game {
     constructor(options) {
@@ -12,28 +12,29 @@ export class Game {
         let controllers = options.controllers;
         let snakeInitSize = options.snakeInitSize;
         let callbacks = options.callbacks;
+
         this.isFinish = false;
 
         var canvas = document.getElementById('canvas');
         this.drawableUtil = new DrawableUtil(canvas.getContext("2d"));
-        this.gameBoardView = new GameBoardView(canvas.clientWidth, canvas.clientHeight, callbacks, this.drawableUtil);
+        this.gameBoard = new GameBoard(canvas.clientWidth, canvas.clientHeight, callbacks);
 
         for(let {type, color, id, initPosition} of controllers) {
-            let snakeView = new SnakeView({id, snakeInitSize, initPosition, color}, this.gameBoardView.entity, this.drawableUtil);
-            this.gameBoardView.addDrawableEntity(snakeView);
+            let snake = new Snake({id, snakeInitSize, initPosition, color}, this.gameBoard);
+            this.gameBoard.addEntity(snake);
             if (type === 'KeyboardController') {
-                new KeyboardController(snakeView.entity);
+                new KeyboardController(snake);
             } else if (type === 'IAController') {
-                new IAController(snakeView.entity, this.gameBoardView.entity);
+                new IAController(snake, this.gameBoard);
             } else if(type === 'RemoteNetworkController') {
-                new RemoteNetworkController(snakeView.entity, id);
+                new RemoteNetworkController(snake);
             } else {
                 throw new Error('Unknown controller', type);
             }
         }
 
         for(let i=0; i<nbFood; i++) {
-            this.gameBoardView.addDrawableEntity(new FoodView(this.gameBoardView.entity, this.drawableUtil));
+            this.gameBoard.addEntity(new Food(this.gameBoard));
         }
     }
 
@@ -42,21 +43,21 @@ export class Game {
     }
 
     step() {
-        this.gameBoardView.entity.move();
-        let atLeastOneDead = this.gameBoardView.entity.checkCollision();
-        if (this.isFinish || (atLeastOneDead && this.gameBoardView.entity.nbMovableEntitiesInGame() <= 1)) {
+        this.gameBoard.move();
+        let atLeastOneDead = this.gameBoard.checkCollision();
+        if (this.isFinish || (atLeastOneDead && this.gameBoard.nbMovableEntitiesInGame() <= 1)) {
             if (this.intervalId) {
                 clearInterval(this.intervalId);
             }
             this.isFinish = true;
-            console.log("You WIN ! size: " + this.gameBoardView.entity.score);
+            console.log("You WIN ! size: " + this.gameBoard.score);
         }
     }
 
     draw() {
         var loop = () => {
             window.requestAnimationFrame(() => {
-                this.gameBoardView.draw();
+                this.gameBoard.draw(this.drawableUtil);
                 loop();
             });
         };
@@ -64,7 +65,7 @@ export class Game {
     }
 
     addFood(position) {
-        this.gameBoardView.addDrawableEntity(new FoodView(this.gameBoardView.entity, this.drawableUtil, position));
+        this.gameBoard.addEntity(new Food(this.gameBoard, position));
     }
 
     dj() {

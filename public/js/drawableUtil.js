@@ -21,7 +21,7 @@ var angleToDegrees = function(angle) {
             degrees = 0;
     }
     return degrees;
-}
+};
 
 export class DrawableUtil {
     constructor(ctx) {
