@@ -4,9 +4,10 @@
   "description": "A multi player snake!",
   "main": "index.js",
   "scripts": {
-    "start": "bash -c \"npm run dev_js & npm run dev_css & node index.js\"",
+    "start": "bash -c \"npm run dev_game_js & npm run dev_app_js & npm run dev_css & node index.js\"",
     "dev_css": "stylus -c --include-css -m -w public/css/main.styl -o public/build/bundle.css --use nib",
-    "dev_js": "watchify public/js/app.js -d -v -t babelify -o public/build/bundle.js",
+    "dev_game_js": "watchify public/js/game/main.js -d -v -t babelify -o public/build/game.js",
+    "dev_app_js": "watchify public/js/app/main.js -d -v -t babelify -o public/build/app.js",
     "test": "echo \"Tester c'est douter !\" && exit 1"
   },
   "repository": {

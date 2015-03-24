@@ -29,9 +29,18 @@ function handler (req, res) {
     });
 }
 
+var rooms = [{name: 'test', nbPlayers: 2, nbPlayersInGame: 0}, {name: 'other', nbPlayers: 5, nbPlayersInGame: 0}];
 var roomInfos;
 
 io.on('connection', function (socket) {
+    socket.on('getRooms', function() {
+        socket.emit('rooms', rooms);
+    });
+    socket.on('addRoom', function (data) {
+        rooms.push(data);
+        socket.emit('rooms', rooms);
+        socket.broadcast.emit('rooms', rooms);
+    });
     socket.on('newRoom', function (data) {
         console.log('NEW ROOM');
         roomInfos = data;
