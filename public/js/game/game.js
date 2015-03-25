@@ -14,6 +14,7 @@ export class Game {
         let callbacks = options.callbacks;
 
         this.isFinish = false;
+        this.controllers = [];
 
         var canvas = document.getElementById('canvas');
         this.drawableUtil = new DrawableUtil(canvas.getContext("2d"));
@@ -23,11 +24,14 @@ export class Game {
             let snake = new Snake({id, snakeInitSize, initPosition, color}, this.gameBoard);
             this.gameBoard.addEntity(snake);
             if (type === 'KeyboardController') {
-                new KeyboardController(snake);
+                snake.isLocal = true;
+                this.controllers.push(new KeyboardController(snake));
             } else if (type === 'IAController') {
-                new IAController(snake, this.gameBoard);
+                snake.isLocal = true;
+                this.controllers.push(new IAController(snake, this.gameBoard));
             } else if(type === 'RemoteNetworkController') {
-                new RemoteNetworkController(snake);
+                snake.isLocal = false;
+                this.controllers.push(new RemoteNetworkController(snake));
             } else {
                 throw new Error('Unknown controller', type);
             }
@@ -39,7 +43,9 @@ export class Game {
     }
 
     run() {
-        this.intervalId = setInterval(this.step.bind(this), 60);
+        if(this.intervalId === undefined) {
+            this.intervalId = setInterval(this.step.bind(this), 60);
+        }
     }
 
     step() {
@@ -48,6 +54,7 @@ export class Game {
         if (this.isFinish || (atLeastOneDead && this.gameBoard.nbMovableEntitiesInGame() <= 1)) {
             if (this.intervalId) {
                 clearInterval(this.intervalId);
+                this.intervalId = undefined;
             }
             this.isFinish = true;
             console.log("You WIN ! size: " + this.gameBoard.score);
@@ -68,4 +75,10 @@ export class Game {
         this.gameBoard.addEntity(new Food(this.gameBoard, position));
     }
 
-};
+    destroy() {
+        this.controllers.forEach((controller) => {
+            controller.destroy();
+        });
+    }
+
+}

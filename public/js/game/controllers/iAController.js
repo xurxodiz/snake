@@ -8,7 +8,7 @@ export class IAController {
     constructor(snake, gameBoard) {
         this.snake = snake;
         this.gameBoard = gameBoard;
-        setInterval(this.move.bind(this), 70);
+        this.interval = setInterval(this.move.bind(this), 70);
     }
 
     move() {
@@ -40,5 +40,11 @@ export class IAController {
 
     checkDirection(newdir) {
         return newdir != this.snake.direction+2 && newdir != this.snake.direction-2;
+    }
+
+    destroy() {
+        this.snake = undefined;
+        this.gameBoard = undefined;
+        clearInterval(this.interval);
     }
 };

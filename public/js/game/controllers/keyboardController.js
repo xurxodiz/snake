@@ -17,4 +17,10 @@ export class KeyboardController {
             this.snake.direction = newdir;
         }
     };
+
+    destroy() {
+        document.onkeypress = undefined;
+        document.onkeydown = undefined;
+        this.snake = undefined;
+    }
 };

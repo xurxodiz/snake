@@ -8,19 +8,31 @@ export class RemoteNetworkController {
 
     constructor(snake) {
         console.log('NEW REMOTE NETWORK CONTROLLER');
-        let socket = io();
-        socket.on('changedDirection', (data) => {
-            if(data.id === snake.id) {
-                snake.direction = data.direction;
-                snake.positions[0].x = data.x;
-                snake.positions[0].y = data.y;
-            }
-        });
-        socket.on('dead', (data) => {
-            if (data.id === snake.id) {
-                snake.dead();
-            }
-        });
+        this.snake = snake;
+        this.socket = io();
+        this.socket.on('changedDirection', this.handleChangedDirection.bind(this));
+        this.socket.on('dead', this.handleDead.bind(this));
+    }
+
+    handleChangedDirection(data) {
+        if(data.id === this.snake.id) {
+            this.snake.direction = data.direction;
+            this.snake.positions[0].x = data.x;
+            this.snake.positions[0].y = data.y;
+        }
+    }
+
+    handleDead(data) {
+        if (data.id === this.snake.id) {
+            this.snake.dead();
+        }
+    }
+
+    destroy() {
+        this.socket.removeListener('changedDirection', this.handleChangedDirection);
+        this.socket.removeListener('dead', this.handleDead);
+        this.socket = undefined;
+        this.snake = undefined;
     }
 
 }

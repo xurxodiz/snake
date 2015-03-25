@@ -25,6 +25,13 @@ export class Food {
         this.width = this.height = this.radius;
     }
 
+    destroy() {
+        if(this.game !== undefined) {//already deleted
+            this.game.entities.splice(this.game.entities.indexOf(this), 1);
+            this.game = undefined;
+        }
+    }
+
     move() {
         var wcells = this.game.width / this.dx;
         var hcells = this.game.height / this.dy;

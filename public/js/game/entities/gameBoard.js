@@ -32,7 +32,7 @@ export class GameBoard {
         let atLeastOneDead = false;
         let toDelete = [];
         for(let e of this.entities) {
-            if(e.isLocal === true && !e.isDead) {
+            if(!e.isDead) {
                 let collision = e.checkCollision(this, {outside: true, strict: true});
                 if (collision && e.type === CONSTANTS.ENTITIES.SNAKE) {//collision between game and snake
                     console.warn('collision with game');
@@ -61,7 +61,7 @@ export class GameBoard {
             }
         }
         toDelete.forEach((e) => {
-            //TODO : this.entities.remove(e);
+            e.destroy();
         });
         return atLeastOneDead;
     }
@@ -69,7 +69,7 @@ export class GameBoard {
     nbMovableEntitiesInGame() {
         let nb = 0;
         for(let e of this.movableEntities) {
-            if(!e.isDead) {
+            if(!e.isDead && e.isLocal === true) {
                 nb++;
             }
         }
