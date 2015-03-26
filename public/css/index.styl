@@ -1,13 +1,15 @@
-
+.maxWidth.maxWidth-home
+	max-width 350px
+	
 .headerHome
-	padding 20px 0 10px
-	border-bottom 3px solid mainColorDark
+	padding 20px 0 20px
+	text-align center
 	
 .logohome
 	font-family loaded
 	color mainColor
 	text-align left
-	font-size 4em
+	font-size 6em
 	display inline-block
 	text-decoration none
 	opacity 0.5
@@ -16,17 +18,27 @@
 		opacity 1
 		text-shadow 0 0 20px mainColor
 		
-.section
-	padding 0 0 20px
-	display inline-block
-	vertical-align top
-	width 49%
-	
 .section-title
 	font-family loaded
-	padding 5px 0 20px
+	padding 5px 0
 	color mainColorDark
-	text-align right
+	
+.section-title-right
+	font-family loaded
+	padding 5px 0
+	color mainColorDark
+	float right
+
+/*///////////////////////////*/
+
+
+.section-me
+	border 1px solid mainColor
+	box-shadow 0 0 100px rgba(mainColor, 0.3)
+	margin 0 0 20px
+	padding 20px
+	text-align center
+
 
 /*///////////////////////////*/
 
@@ -46,6 +58,7 @@
 	
 	
 .room-playerNb
+	font-family loaded
 	color mainColor
 	float right
 		
@@ -55,24 +68,39 @@
 		content '/'
 
 /*///////////////////////////*/
-
-.addRoom
-	margin 20px 0 0
-	padding 10px
-	background-color mainColorDark
-	border-radius 2px
-	text-align right
-	&-name
-		float left
+.section-addRomm
+	padding 20px 0 0
+	
+.addRoom{
+ 	display flex;
+	border-radius 2px;
+	text-align left;
+	}
 		
 	input
-		padding 5px
+		padding 10px
 		border-radius 2px
-		border none
+		border 1px solid #000
+		outline none
+		&:focus
+			border-color mainColor
+			box-shadow 0 0 10px mainColor
+		+ input
+			margin 0 0 0 5px
+			
 		
 	input[type='submit']
-		background-color #000
-		color mainColorDark
+		font-weight bold
+		font-size 0.8em
+		background-color mainColorDark
+		color #000
 		cursor pointer
+		border-color mainColorDark
+		transition all 200ms
 		&:hover
-			color mainColor
+			border-color mainColor
+			background-color mainColor
+			box-shadow 0 0 10px mainColor
+			
+	.addRoom-name
+		flex: 1;
