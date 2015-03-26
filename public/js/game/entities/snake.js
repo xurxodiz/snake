@@ -141,7 +141,7 @@ export class Snake {
         };
 
         let {x, y} = this.positions[0];
-        drawableUtil.bike(x, y, this.direction);
+        drawableUtil.bike(this.color, x, y, this.direction);
     }
 
 }
