@@ -1,24 +1,30 @@
 <!doctype html>
 <html lang="fr">
-	<head>
-                <meta charset="utf-8">
-                <title>Trake</title>
-                <script type="text/javascript" src="build/app.js" async></script>
-                <link rel="stylesheet" type="text/css" href="build/bundle.css" />
-	</head>
-	<body>
-                <header class="maxWidth header">
-                        <a href="index.html" class="logo">TRAKE</a>
-                </header>
-                <noscript>Your browser does not support JavaScript.</noscript>
-                <div class="maxWidth rules">
-                        <a href="game.html">Play</a>
-                </div>
-                <ul id="js-rooms-container"></ul>
-                <form id="js-add-room-form">
-                    <input id="js-add-room-name" type="text" placeholder="Room name" />
-                    <input id="js-add-room-nb-players" type="number" min="1" max="10" value="2" />
-                    <input type="submit" />
+    <head>
+        <meta charset="utf-8">
+        <title>Trake</title>
+        <script type="text/javascript" src="build/app.js" async></script>
+        <link rel="stylesheet" type="text/css" href="build/bundle.css" />
+    </head>
+    <body>
+        <header class="maxWidth headerHome">
+            <a href="index.html" class="logohome">TRAKE</a>
+        </header>
+        <noscript>Your browser does not support JavaScript.</noscript>
+        <div class="maxWidth">
+            <section class="section">
+                <div class="section-title">My Player</div>
+                Mon Perso (Nom, couleur)
+            </section>
+            <section class="section">
+                <div class="section-title">Rooms</div>
+                <ul id="js-rooms-container" class="roomList"></ul>
+                <form id="js-add-room-form" class="addRoom">
+                    <input id="js-add-room-name" class="addRoom-name" type="text" placeholder="New Room" required />
+                    <input id="js-add-room-nb-players" class="addRoom-players" type="number" min="1" max="10" value="2" />
+                    <input type="submit" value="Add" />
                 </form>
-	</body>
+            </section>
+        </div>
+    </body>
 </html>

@@ -14,7 +14,22 @@ export class Rooms {
                     let li = document.createElement('li');
                     let linkRoom = document.createElement('a');
                     linkRoom.setAttribute('href', '/game.html#' + room.name);
-                    linkRoom.innerText = room.name + ' (' + room.nbPlayersInGame + '/' + room.nbPlayers + ' players)';
+
+                    let roomName = document.createElement('span');
+                    roomName.setAttribute('class', 'room-name');
+                    roomName.innerText = room.name;
+
+                    let roomPlayerNb = document.createElement('span');
+                    roomPlayerNb.setAttribute('class', 'room-playerNb');
+                    roomPlayerNb.innerText = room.nbPlayersInGame;
+
+                    let roomPlayerTotal = document.createElement('span');
+                    roomPlayerTotal.setAttribute('class', 'room-playerTotal');
+                    roomPlayerTotal.innerText = room.nbPlayers;
+
+                    linkRoom.appendChild(roomName);
+                    roomPlayerNb.appendChild(roomPlayerTotal);
+                    linkRoom.appendChild(roomPlayerNb);
                     li.appendChild(linkRoom);
                     htmlContainer.appendChild(li);
                 });

@@ -1,0 +1,78 @@
+
+.headerHome
+	padding 20px 0 10px
+	border-bottom 3px solid mainColorDark
+	
+.logohome
+	font-family loaded
+	color mainColor
+	text-align left
+	font-size 4em
+	display inline-block
+	text-decoration none
+	opacity 0.5
+	transition all 200ms
+	&:hover
+		opacity 1
+		text-shadow 0 0 20px mainColor
+		
+.section
+	padding 0 0 20px
+	display inline-block
+	vertical-align top
+	width 49%
+	
+.section-title
+	font-family loaded
+	padding 5px 0 20px
+	color mainColorDark
+	text-align right
+
+/*///////////////////////////*/
+
+.roomList
+	border 1px solid mainColorDark
+	li + li
+		border-top 1px solid mainColorDark
+	a
+		display block
+		padding 10px
+		text-decoration none
+		&:hover
+			box-shadow 0 0 50px rgba(mainColor, 0.3) inset
+		
+.room-name
+	color mainColor
+	
+	
+.room-playerNb
+	color mainColor
+	float right
+		
+.room-playerTotal
+	color mainColorDark
+	&::before
+		content '/'
+
+/*///////////////////////////*/
+
+.addRoom
+	margin 20px 0 0
+	padding 10px
+	background-color mainColorDark
+	border-radius 2px
+	text-align right
+	&-name
+		float left
+		
+	input
+		padding 5px
+		border-radius 2px
+		border none
+		
+	input[type='submit']
+		background-color #000
+		color mainColorDark
+		cursor pointer
+		&:hover
+			color mainColor
