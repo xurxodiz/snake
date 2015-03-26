@@ -115,7 +115,7 @@ io.on('connection', function (socket) {
                         newControllers.push(controller);
                     } else if (newPlayerAffected === false) {
                         newPlayerAffected = true;
-                        controller.type = 'RemoteNetworkController';//'KeyboardController';
+                        controller.type = 'KeyboardController';
                         newControllers.push(controller);
                     } else {
                         controller.type = 'RemoteNetworkController';

@@ -68,6 +68,8 @@ export class NetworkRemoteGame {
             gameOptions.controllers.forEach((controller) => {
                 if(controller.id === this.myId) {
                     controller.type = 'KeyboardController';
+                } else if(controller.type === 'KeyboardController') {
+                    controller.type = 'RemoteNetworkController';
                 }
             });
             gameOptions.callbacks = {

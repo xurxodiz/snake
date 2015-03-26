@@ -15,8 +15,14 @@ export class Snake {
         this.dy = 10;
         this.direction = 0;
         this.color = color;
+        this.snakeInitSize = snakeInitSize;
         this.isMovable = true;
         this.isDead = false;
+
+        this.changeInitPosition(initPosition, gameBoard);
+    }
+
+    changeInitPosition(initPosition, gameBoard) {
         let myInitPosition;
         if(initPosition === undefined) {
             this.isLocal = true;
@@ -30,7 +36,7 @@ export class Snake {
             myInitPosition = initPosition;
         }
         this.positions = [];
-        for(let i=0; i<snakeInitSize; i++) {
+        for(let i=0; i<this.snakeInitSize; i++) {
             this.positions.push(myInitPosition);
         }
         //by convenience x, y of snake are his head !

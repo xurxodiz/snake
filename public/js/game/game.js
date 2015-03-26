@@ -13,6 +13,7 @@ export class Game {
         let snakeInitSize = options.snakeInitSize;
         let callbacks = options.callbacks;
 
+        this.isStarted = false;
         this.isFinish = false;
         this.controllers = [];
 
@@ -31,7 +32,7 @@ export class Game {
                 this.controllers.push(new IAController(snake, this.gameBoard));
             } else if(type === 'RemoteNetworkController') {
                 snake.isLocal = false;
-                this.controllers.push(new RemoteNetworkController(snake));
+                this.controllers.push(new RemoteNetworkController(snake, this));
             } else {
                 throw new Error('Unknown controller', type);
             }
@@ -43,6 +44,7 @@ export class Game {
     }
 
     run() {
+        this.isStarted = true;
         if(this.intervalId === undefined) {
             this.intervalId = setInterval(this.step.bind(this), 60);
         }
@@ -55,6 +57,7 @@ export class Game {
             if (this.intervalId) {
                 clearInterval(this.intervalId);
                 this.intervalId = undefined;
+                this.isStarted = false;
             }
             this.isFinish = true;
             console.log("You WIN ! size: " + this.gameBoard.score);
@@ -65,7 +68,9 @@ export class Game {
         var loop = () => {
             window.requestAnimationFrame(() => {
                 this.gameBoard.draw(this.drawableUtil);
-                loop();
+                if(this.isFinish === false) {
+                    loop();
+                }
             });
         };
         loop();
