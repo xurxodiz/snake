@@ -41,6 +41,13 @@ Room.prototype.addPlayer = function(player) {
     }
 };
 
+Room.prototype.deletePlayer = function(player) {
+    var indexPlayer = this.players.indexOf(player);
+    if(indexPlayer > -1) {
+        this.players.splice(indexPlayer, 1);
+    }
+};
+
 Room.prototype.toPlayers = function() {
     this.players.forEach(function(player) {
         var gameConfig = {nbFood: 0, snakeInitSize: 10, controllers: []};

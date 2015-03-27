@@ -32,14 +32,17 @@ var Player = require('./server/player');
 
 io.on('connection', function (socket) {
     console.log('connection');
+
     socket.on('getRooms', function () {
         socket.emit('rooms', roomManager.toDistant());
     });
+
     socket.on('addRoom', function (data) {
         roomManager.addRoom(new Room(data, io.to(data.name)));
         io.emit();//what the fuck ?? Need it, else io doesn't flush next request !?
         io.emit('rooms', roomManager.toDistant());
     });
+
     socket.on('joinRoom', function (roomName, player) {
         var room = roomManager.findRoomByName(roomName);
         if(!room) {
@@ -52,7 +55,13 @@ io.on('connection', function (socket) {
             return;
         }
 
-        room.addPlayer(new Player(player, socket));
+        var player = new Player(player, socket);
+        room.addPlayer(player);
+        if(socket.trakeRoom && socket.trakePlayer) {
+            socket.trakeRoom.deletePlayer(socket.trakePlayer);
+        }
+        socket.trakePlayer = player;
+        socket.trakeRoom = room;
 
         io.emit('rooms', roomManager.toDistant());
 
@@ -72,8 +81,17 @@ io.on('connection', function (socket) {
             room.addFood();
         });
     });
+
     socket.on('disconnect', function () {
-        console.log('disconnect');
-        io.emit('user disconnected');
+        io.emit('userDisconnected');
+
+        //TODO : check after that !
+        if(socket.trakeRoom && socket.trakePlayer) {
+            socket.leave(socket.trakeRoom.name);
+            socket.trakeRoom.deletePlayer(socket.trakePlayer);
+            io.emit('rooms', roomManager.toDistant());
+        }
+        socket.trakePlayer = undefined;
+        socket.trakeRoom = undefined;
     });
 });
