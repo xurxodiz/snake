@@ -29,13 +29,14 @@ function Room(properties, socket) {
 
 Room.prototype.addPlayer = function(player) {
     player.socket.join(this.name);
-    this.players.push(player);
     player.id = this.players.length;
     this.emit('newPlayer', player.toDistant());
     if(this.isStarted === false) {
+        this.players.push(player);
         this.start();
     } else {
         this.toWatcher(player);
+        this.players.push(player);
     }
 };
 
@@ -43,18 +44,22 @@ Room.prototype.toPlayers = function() {
     this.players.forEach(function(player) {
         var gameConfig = {nbFood: 0, snakeInitSize: 10, controllers: []};
         this.players.forEach(function(p, index) {
-           var distantPlayer = p.toDistant();
-           if(p === player) {
-               distantPlayer.type = 'KeyboardController';
-               gameConfig.controllers.push(distantPlayer);
-           } else {
-               distantPlayer.type = 'RemoteNetworkController';
-               gameConfig.controllers.push(distantPlayer);
-           }
+            var distantPlayer = p.toDistant();
+            if(p === player) {
+                distantPlayer.type = 'KeyboardController';
+                gameConfig.controllers.push(distantPlayer);
+            } else {
+                distantPlayer.type = 'RemoteNetworkController';
+                gameConfig.controllers.push(distantPlayer);
+            }
             if(index === 0) {
                 var nbIaNeeded = this.nbPlayers - this.players.length;
                 for(var i=0; i<nbIaNeeded; i++) {
-                    gameConfig.controllers.push({id: i+1000, type: 'IAController', color: '#ff0000'});
+                    if(p === player) {
+                        gameConfig.controllers.push({id: i + 1000, type: 'IAController', color: '#ff0000'});
+                    } else {
+                        gameConfig.controllers.push({id: i + 1000, type: 'RemoteNetworkController', color: '#ff0000'});
+                    }
                 }
             }
         }.bind(this));
@@ -71,9 +76,10 @@ Room.prototype.toWatcher = function(watcher) {
     }.bind(this));
     var nbIaNeeded = this.nbPlayers - this.players.length;
     for(var i=0; i<nbIaNeeded; i++) {
-        gameConfig.controllers.push({id: i+1000, type: 'IAController', color: '#ff0000'});
+        gameConfig.controllers.push({id: i+1000, type: 'RemoteNetworkController', color: '#ff0000'});
     }
     watcher.emit('roomGame', gameConfig);
+    watcher.emit('start');
 };
 
 Room.prototype.isFull = function() {

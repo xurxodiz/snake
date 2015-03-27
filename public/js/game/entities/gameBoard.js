@@ -32,7 +32,7 @@ export class GameBoard {
         let atLeastOneDead = false;
         let toDelete = [];
         for(let e of this.entities) {
-            if(!e.isDead) {
+            if(!e.isDead && e.isLocal) {
                 let collision = e.checkCollision(this, {outside: true, strict: true});
                 if (collision && e.type === CONSTANTS.ENTITIES.SNAKE) {//collision between game and snake
                     console.warn('collision with game');

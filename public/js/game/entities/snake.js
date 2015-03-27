@@ -25,14 +25,12 @@ export class Snake {
     changeInitPosition(initPosition, gameBoard) {
         let myInitPosition;
         if(initPosition === undefined) {
-            this.isLocal = true;
             let x = Math.floor(Math.random() * gameBoard.width);
             x = Math.floor((x + 5) / 10) * 10;
             let y = Math.floor(Math.random() * gameBoard.height);
             y = Math.floor((y + 5) / 10) * 10;
             myInitPosition = {x, y, direction: this.direction};
         } else {
-            this.isLocal = false;
             myInitPosition = initPosition;
         }
         this.positions = [];

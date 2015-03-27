@@ -7,7 +7,6 @@ import {connect as io} from 'socket.io-client';
 export class Rooms {
     constructor(htmlContainer, socket) {
         socket.on('rooms', (rooms) => {
-            console.log(rooms);
             htmlContainer.innerHTML = '';
             rooms.forEach((room) => {
                 let li = document.createElement('li');
