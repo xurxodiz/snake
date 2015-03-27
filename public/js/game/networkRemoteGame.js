@@ -9,20 +9,26 @@ export class NetworkRemoteGame {
     constructor(roomName) {
         let game;
         let socket = io();
-        this.myId = -1;
+        let myId = -1;
+
+        if(localStorage.player === undefined) {
+            window.location = 'index.html';
+        }
 
         socket.on('connect', () => {
-            socket.emit('joinRoom', roomName);
+            socket.emit('joinRoom', roomName, JSON.parse(localStorage.player));
         });
 
         socket.on('roomNotFound', () => {
             window.alert('Room not exist !');
         });
 
-        socket.on('roomGame', (gameOptions) => {
+        var initGame = function(gameOptions) {
             gameOptions.controllers.forEach((controller) => {
-                if(controller.type === 'KeyboardController') {
-                    this.myId = controller.id;
+                if(controller.id === myId) {
+                    controller.type = 'KeyboardController';
+                } else if(controller.type === 'KeyboardController') {
+                    controller.type = 'RemoteNetworkController';
                 }
             });
             gameOptions.callbacks = {
@@ -30,7 +36,7 @@ export class NetworkRemoteGame {
                     socket.emit('foodEaten');
                 }
             };
-            console.log(gameOptions);
+
             game = new Game(gameOptions);
             game.draw();
 
@@ -48,6 +54,16 @@ export class NetworkRemoteGame {
                     });
                 }
             }, 50);
+        };
+
+        socket.on('roomGame', (gameOptions) => {
+            gameOptions.controllers.forEach((controller) => {
+                if(controller.type === 'KeyboardController') {
+                    myId = controller.id;
+                }
+            });
+            initGame(gameOptions);
+            console.log(gameOptions);
         });
 
         socket.on('newPlayer', () => {
@@ -65,35 +81,6 @@ export class NetworkRemoteGame {
         socket.on('restart', (gameOptions) => {
             console.log('restart', gameOptions);
             game.destroy();
-            gameOptions.controllers.forEach((controller) => {
-                if(controller.id === this.myId) {
-                    controller.type = 'KeyboardController';
-                } else if(controller.type === 'KeyboardController') {
-                    controller.type = 'RemoteNetworkController';
-                }
-            });
-            gameOptions.callbacks = {
-                foodEatenCallback: () => {
-                    socket.emit('foodEaten');
-                }
-            };
-            game = new Game(gameOptions);
-            game.draw();
-
-            var intervalId = setInterval(() => {
-                if(game.isFinish) {
-                    clearInterval(intervalId);
-                    socket.emit('finish');
-                } else {
-                    game.gameBoard.entities.forEach((e) => {
-                        if (e.isDead) {
-                            socket.emit('dead', {id: e.id});
-                        } else {
-                            socket.emit('changeDirection', {id: e.id, direction: e.direction, x: e.x, y: e.y});
-                        }
-                    });
-                }
-            }, 50);
         });
 
         socket.on('finish', () => {

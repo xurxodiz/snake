@@ -69,7 +69,7 @@ export class GameBoard {
     nbMovableEntitiesInGame() {
         let nb = 0;
         for(let e of this.movableEntities) {
-            if(!e.isDead && e.isLocal === true) {
+            if(!e.isDead) {
                 nb++;
             }
         }

@@ -15,7 +15,6 @@ export class AddRoom {
                 event.preventDefault();
                 event.stopPropagation();
                 event.stopImmediatePropagation();
-                let socket = io();
                 socket.emit('addRoom', {name: inputName.value, nbPlayers: parseInt(inputNbPlayers.value)});
                 inputName.value = '';
             });

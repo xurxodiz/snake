@@ -17,15 +17,15 @@ export class Rooms {
 
                     let roomName = document.createElement('span');
                     roomName.setAttribute('class', 'room-name');
-                    roomName.innerText = room.name;
+                    roomName.innerHTML = room.name;
 
                     let roomPlayerNb = document.createElement('span');
                     roomPlayerNb.setAttribute('class', 'room-playerNb');
-                    roomPlayerNb.innerText = room.nbPlayersInGame;
+                    roomPlayerNb.innerHTML = room.nbPlayersInGame;
 
                     let roomPlayerTotal = document.createElement('span');
                     roomPlayerTotal.setAttribute('class', 'room-playerTotal');
-                    roomPlayerTotal.innerText = room.nbPlayers;
+                    roomPlayerTotal.innerHTML = room.nbPlayers;
 
                     linkRoom.appendChild(roomName);
                     roomPlayerNb.appendChild(roomPlayerTotal);
