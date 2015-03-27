@@ -37,7 +37,8 @@ io.on('connection', function (socket) {
     });
     socket.on('addRoom', function (data) {
         roomManager.addRoom(new Room(data, io.to(data.name)));
-        io.sockets.emit('rooms', roomManager.toDistant());
+        io.emit();//what the fuck ?? Need it, else io doesn't flush next request !?
+        io.emit('rooms', roomManager.toDistant());
     });
     socket.on('joinRoom', function (roomName, player) {
         var room = roomManager.findRoomByName(roomName);
@@ -70,5 +71,9 @@ io.on('connection', function (socket) {
         socket.on('foodEaten', function() {
             room.addFood();
         });
+    });
+    socket.on('disconnect', function () {
+        console.log('disconnect');
+        io.emit('user disconnected');
     });
 });
