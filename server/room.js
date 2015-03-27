@@ -20,6 +20,7 @@ var randomFoodPosition = function randomFoodPosition() {
 function Room(properties, socket) {
     this.name = properties.name;
     this.nbPlayers = properties.nbPlayers;
+    this.infiniteWallSize = properties.infiniteWallSize;
     this.socket = socket;
     this.players = [];
     this.watchers = [];
@@ -123,7 +124,7 @@ Room.prototype.emit = function(event, data) {
 };
 
 Room.prototype.toDistant = function() {
-    return {name: this.name, nbPlayers: this.nbPlayers, nbPlayersInGame: this.players.length};
+    return {name: this.name, nbPlayers: this.nbPlayers, infiniteWallSize: this.infiniteWallSize, nbPlayersInGame: this.players.length};
 };
 
 module.exports = Room;

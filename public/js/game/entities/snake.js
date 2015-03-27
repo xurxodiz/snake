@@ -8,7 +8,7 @@ export class Snake {
 
     constructor(options, gameBoard) {
         this.type = CONSTANTS.ENTITIES.SNAKE;
-        var {id, snakeInitSize, initPosition, color} = options;
+        var {id, snakeInitSize, initPosition, color, isInfiniteWallSize} = options;
 
         this.id = id;
         this.dx = 10;
@@ -16,6 +16,7 @@ export class Snake {
         this.direction = 0;
         this.color = color;
         this.snakeInitSize = snakeInitSize;
+        this.isInfiniteWallSize = isInfiniteWallSize;
         this.isMovable = true;
         this.isDead = false;
 
@@ -80,31 +81,29 @@ export class Snake {
             this.y = this.positions[0].y;
             if (this.needGrowth === true) {
                 this.needGrowth = false;
-            } else {
+            } else if(this.isInfiniteWallSize === false) {
                 this.positions.pop();
             }
-        } else if(this.positions.length > 1) {//keep head (aka 0) to draw bike
+        } else if(this.positions.length > 1 && this.isInfiniteWallSize === false) {//keep head (aka 0) to draw bike
             this.positions.pop();
         }
     }
 
     checkCollision(otherEntity, options) {
+        let {x, y} = this.positions[0]; // peek head
         if(otherEntity === this) {// are we eating ourselves?
-            let {x, y} = this.positions[0]; // peek head
             for (let i = 1; i < this.positions.length; i++) {
                 if (this.positions[i].x == x && this.positions[i].y == y) {
                     return true;
                 }
             }
         } else if(otherEntity.type === CONSTANTS.ENTITIES.SNAKE) {// are we eating other snake?
-            let {x, y} = this.positions[0]; // peek head
             for (let i = 0; i < otherEntity.positions.length; i++) {
                 if (otherEntity.positions[i].x == x && otherEntity.positions[i].y == y) {
                     return true;
                 }
             }
         } else {
-            let {x, y} = this.positions[0];
             x = x + 1;
             y = y + 1;
             let inside = false;
@@ -136,10 +135,8 @@ export class Snake {
                     drawableUtil.tailcurved(this.color, x, y, this.dx, this.dy, direction, this.positions[i-1].direction);
                 }
             }
-        };
-
-        let {x, y} = this.positions[0];
-        drawableUtil.bike(this.color, x, y, this.direction);
+        }
+        drawableUtil.bike(this.color, this.positions[0].x, this.positions[0].y, this.direction);
     }
 
 }

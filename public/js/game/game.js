@@ -11,6 +11,7 @@ export class Game {
         let nbFood = options.nbFood;
         let controllers = options.controllers;
         let snakeInitSize = options.snakeInitSize;
+        let isInfiniteWallSize = options.infiniteWallSize;
         let callbacks = options.callbacks;
 
         this.isStarted = false;
@@ -22,7 +23,7 @@ export class Game {
         this.gameBoard = new GameBoard(canvas.clientWidth, canvas.clientHeight, callbacks);
 
         for(let {type, color, id, initPosition} of controllers) {
-            let snake = new Snake({id, snakeInitSize, initPosition, color}, this.gameBoard);
+            let snake = new Snake({id, snakeInitSize, initPosition, color, isInfiniteWallSize}, this.gameBoard);
             this.gameBoard.addEntity(snake);
             if (type === 'KeyboardController') {
                 snake.isLocal = true;
