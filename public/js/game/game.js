@@ -77,8 +77,8 @@ export class Game {
         loop();
     }
 
-    addFood(position) {
-        this.gameBoard.addEntity(new Food(this.gameBoard, position));
+    addFood(optProperties) {
+        this.gameBoard.addEntity(new Food(this.gameBoard, optProperties));
     }
 
     destroy() {

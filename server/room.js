@@ -24,6 +24,7 @@ function Room(properties, socket) {
     this.socket = socket;
     this.players = [];
     this.watchers = [];
+    this.foods = [];
     this.isStarted = false;
     this.restartInProgress = false;
 }
@@ -31,7 +32,12 @@ function Room(properties, socket) {
 Room.prototype.addPlayer = function(player) {
     player.socket.join(this.name);
     player.id = this.players.length;
-    this.emit('newPlayer', player.toDistant());
+    var players = [];
+    this.players.forEach(function(player) {
+        players.push(player.toDistant());
+    });
+    players.push(player.toDistant());
+    player.emit('allPlayers', players);
     if(this.isStarted === false) {
         this.players.push(player);
         this.start();
@@ -39,6 +45,7 @@ Room.prototype.addPlayer = function(player) {
         this.toWatcher(player);
         this.players.push(player);
     }
+    this.emit('newPlayer', player.toDistant());
 };
 
 Room.prototype.deletePlayer = function(player) {
@@ -87,6 +94,7 @@ Room.prototype.toWatcher = function(watcher) {
         gameConfig.controllers.push({id: i+1000, type: 'RemoteNetworkController', color: '#ff0000'});
     }
     watcher.emit('roomGame', gameConfig);
+    //TODO : start only if setTimeout of game.start() has not begun
     watcher.emit('start');
 };
 
@@ -116,8 +124,37 @@ Room.prototype.restart = function() {
     }
 };
 
+Room.prototype.foodEaten = function(foodId, playerId) {
+    this.foods.forEach(function(food, index) {
+        if (food.id === foodId) {
+            this.foods.splice(index, 1);
+            this.players.forEach(function (player) {
+                if (player.id === playerId) {
+                    player.score += 1;
+                    this.emit('scoreOf', player.toDistant());
+                }
+            }.bind(this));
+        }
+    }.bind(this));
+    this.addFood();
+};
+
 Room.prototype.addFood = function() {
-    this.emit('addFood', randomFoodPosition());
+    var food = {id: this.foods.length, position: randomFoodPosition()};
+    this.foods.push(food);
+    this.emit('addFood', food);
+};
+
+Room.prototype.playerDead = function(playerId, optAgainstPlayerId) {
+    this.players.forEach(function(player) {
+        if(player.id === playerId) {
+            player.score -= 10;
+            this.emit('scoreOf', player.toDistant());
+        } else if(optAgainstPlayerId !== undefined && player.id === optAgainstPlayerId) {
+            player.score += 10;
+            this.emit('scoreOf', player.toDistant());
+        }
+    }.bind(this));
 };
 
 Room.prototype.finish = function(data) {

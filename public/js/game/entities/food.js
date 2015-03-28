@@ -5,7 +5,7 @@
 import * as CONSTANTS from './entityCst';
 
 export class Food {
-    constructor(game, optPosition) {
+    constructor(game, optProperties) {
         this.type = CONSTANTS.ENTITIES.FOOD;
 
         this.dx = CONSTANTS.CONFIG.FOOD.dx;
@@ -15,11 +15,12 @@ export class Food {
         this.isMovable = false;
         this.game = game;
 
-        if(!optPosition) {
+        if(!optProperties || !optProperties.position) {
             this.move();
         } else {
-            this.x = optPosition.x;
-            this.y = optPosition.y;
+            this.id = optProperties.id;
+            this.x = optProperties.position.x;
+            this.y = optProperties.position.y;
         }
 
         this.width = this.height = this.radius;

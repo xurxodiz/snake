@@ -8,6 +8,7 @@ export class GameBoard {
     constructor(width, height, callbacks) {
         this.type = CONSTANTS.ENTITIES.GAME_BOARD;
         this.foodEatenCallback = callbacks.foodEatenCallback;
+        this.snakeDeadCallback = callbacks.snakeDeadCallback;
 
         this.x = this.y = 0;
         this.score = 0;
@@ -37,6 +38,7 @@ export class GameBoard {
                 if (collision && e.type === CONSTANTS.ENTITIES.SNAKE) {//collision between game and snake
                     console.warn('collision with game');
                     e.dead();
+                    this.snakeDeadCallback(e);
                     atLeastOneDead = true;
                 }
                 for (let e2 of this.entities) {
@@ -44,16 +46,17 @@ export class GameBoard {
                     if (collision && e.type === CONSTANTS.ENTITIES.SNAKE && e2.type === CONSTANTS.ENTITIES.SNAKE) {//collision between snake and snake (himself possible)
                         console.warn('collision with himself');
                         e.dead();
+                        this.snakeDeadCallback(e);
                         atLeastOneDead = true;
                     } else if (collision && e.type === CONSTANTS.ENTITIES.SNAKE && e2.type === CONSTANTS.ENTITIES.FOOD) {//collision between snake and food
                         this.score = this.score + 1;
                         e.growth();
-                        this.foodEatenCallback(e2);
+                        this.foodEatenCallback(e2, e);
                         toDelete.push(e2);
 
                     } else if (collision && e.type === CONSTANTS.ENTITIES.FOOD && e2.type === CONSTANTS.ENTITIES.SNAKE) {//collision between food and snake
                         this.score = this.score + 1;
-                        this.foodEatenCallback(e);
+                        this.foodEatenCallback(e, e2);
                         toDelete.push(e);
                         e2.growth();
                     }

@@ -3,6 +3,7 @@
  */
 
 import {Game} from './game';
+import {ScoreView} from './scoreView';
 import {connect as io} from 'socket.io-client';
 
 export class NetworkRemoteGame {
@@ -14,6 +15,8 @@ export class NetworkRemoteGame {
         if(localStorage.player === undefined) {
             window.location = 'index.html';
         }
+
+        new ScoreView(socket);
 
         socket.on('connect', () => {
             socket.emit('joinRoom', roomName, JSON.parse(localStorage.player));
@@ -32,8 +35,11 @@ export class NetworkRemoteGame {
                 }
             });
             gameOptions.callbacks = {
-                foodEatenCallback: () => {
-                    socket.emit('foodEaten');
+                foodEatenCallback: (food, snake) => {
+                    socket.emit('foodEaten', food.id, snake.id);
+                },
+                snakeDeadCallback: (snake, optAgainstSnake) => {
+                    socket.emit('dead', snake.id, optAgainstSnake !== undefined ? optAgainstSnake.id : undefined);
                 }
             };
 
@@ -46,9 +52,7 @@ export class NetworkRemoteGame {
                     socket.emit('finish');
                 } else {
                     game.gameBoard.entities.forEach((e) => {
-                        if (e.isDead) {
-                            socket.emit('dead', {id: e.id});
-                        } else {
+                        if (!e.isDead) {
                             socket.emit('changeDirection', {id: e.id, direction: e.direction, x: e.x, y: e.y});
                         }
                     });
@@ -87,8 +91,8 @@ export class NetworkRemoteGame {
             game.isFinish = true;
         });
 
-        socket.on('addFood', (position) => {
-            game.addFood(position);
+        socket.on('addFood', (food) => {
+            game.addFood(food);
         });
     }
 }

@@ -23,6 +23,9 @@ window.onload = function() {
             callbacks: {
                 foodEatenCallback: function () {
                     game.gameBoard.addEntity(new Food(game.gameBoard));
+                },
+                snakeDeadCallback: function() {
+                    //TODO : what to do ?
                 }
             }
         });

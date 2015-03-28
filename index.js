@@ -69,24 +69,22 @@ io.on('connection', function (socket) {
             room.emit('changedDirection', data);
         });
 
-        socket.on('dead', function(data) {
-            room.emit('dead', data);
+        socket.on('dead', function(playerId, optAgainstPlayerId) {
+            room.playerDead(playerId, optAgainstPlayerId);
         });
 
         socket.on('finish', function(data) {
             room.finish(data);
         });
 
-        socket.on('foodEaten', function() {
-            room.addFood();
+        socket.on('foodEaten', function(foodId, playerId) {
+            room.foodEaten(foodId, playerId);
         });
     });
 
     socket.on('disconnect', function () {
-        io.emit('userDisconnected');
-
-        //TODO : check after that !
         if(socket.trakeRoom && socket.trakePlayer) {
+            socket.trakeRoom.emit('userDisconnected', {id: socket.trakePlayer.id});
             socket.leave(socket.trakeRoom.name);
             socket.trakeRoom.deletePlayer(socket.trakePlayer);
             io.emit('rooms', roomManager.toDistant());
