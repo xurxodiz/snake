@@ -35,6 +35,20 @@ export class DrawableUtil {
         this.ctx.closePath();
         this.ctx.fill();
     }
+    grid(x, y, width, height) {
+
+        let pattern = new Image();
+        pattern.src = '../images/trake_gridbg.png';
+
+        this.ctx.fillStyle = this.ctx.createPattern(pattern, "repeat");
+        this.ctx.fillRect(0, 0, 300, 300);
+
+        //this.ctx.fillStyle = color;
+        this.ctx.beginPath();
+        this.ctx.rect(x, y, width, height);
+        this.ctx.closePath();
+        this.ctx.fill();
+    }
 
     tail(color, x, y, width, height, direction) {
         this.ctx.beginPath();

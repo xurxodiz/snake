@@ -80,7 +80,7 @@ export class GameBoard {
     }
 
     draw(drawableUtil) {
-        drawableUtil.rect("#000000", 0, 0, this.width, this.height);
+        drawableUtil.grid(0, 0, this.width, this.height);
         this.entities.forEach((e) => e.draw(drawableUtil));
     }
 }
