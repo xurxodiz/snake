@@ -1,6 +1,7 @@
 /**
  * Created by manland on 27/03/15.
  */
+
 export class PlayerConfig {
     constructor() {
         let inputPseudo = document.getElementById('js-player-pseudo');
