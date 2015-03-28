@@ -31,14 +31,36 @@
 
 /*///////////////////////////*/
 
-
-.section-me
+.section-me{
 	border 1px solid mainColor
 	box-shadow 0 0 100px rgba(mainColor, 0.3)
 	margin 0 0 20px
 	padding 20px
 	text-align center
-
+ 	display flex
+ 	align-items center
+}
+#js-player-pseudo
+	border none
+	background-color #000
+	font-family loaded
+	color mainColor
+	font-size 1.2em
+	margin-right 20px
+	&:focus
+		box-shadow none
+#js-player-color
+	cursor pointer
+	padding 0
+	height 30px
+	width 30px
+	background #000
+	border none
+	-webkit-appearance: none;
+	&::-webkit-color-swatch-wrapper
+		padding: 0
+	&::-webkit-color-swatch
+		border: none
 
 /*///////////////////////////*/
 

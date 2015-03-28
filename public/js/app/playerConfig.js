@@ -16,7 +16,13 @@ export class PlayerConfig {
             localStorage.player = JSON.stringify({pseudo: inputPseudo.value, color: inputColor.value});
         }
 
-        form.addEventListener('submit', (event) => {
+        inputColor.addEventListener('change', (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            event.stopImmediatePropagation();
+            localStorage.player = JSON.stringify({pseudo: inputPseudo.value, color: inputColor.value});
+        });
+        inputPseudo.addEventListener('change', (event) => {
             event.preventDefault();
             event.stopPropagation();
             event.stopImmediatePropagation();
