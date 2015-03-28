@@ -84,9 +84,13 @@ io.on('connection', function (socket) {
 
     socket.on('disconnect', function () {
         if(socket.trakeRoom && socket.trakePlayer) {
-            socket.trakeRoom.emit('userDisconnected', {id: socket.trakePlayer.id});
             socket.leave(socket.trakeRoom.name);
             socket.trakeRoom.deletePlayer(socket.trakePlayer);
+            if(socket.trakeRoom.players.length === 0) {
+                roomManager.deleteRoom(socket.trakeRoom);
+            } else {
+                socket.trakeRoom.emit('userDisconnected', {id: socket.trakePlayer.id});
+            }
             io.emit('rooms', roomManager.toDistant());
         }
         socket.trakePlayer = undefined;

@@ -16,6 +16,7 @@ export class AddRoom {
                 nbPlayers: parseInt(inputNbPlayers.value),
                 infiniteWallSize: checkboxInfiniteWallSize.checked
             });
+            window.location = 'game.html#' + inputName.value;
             inputName.value = '';
         });
     }
