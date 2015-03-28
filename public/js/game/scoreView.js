@@ -9,7 +9,7 @@ export class ScoreView {
             scoreView.innerHTML = '';
             players.forEach((player) => {
                 var li = document.createElement('li');
-                li.innerHTML = player.pseudo + ' ( ' + player.score + ')';
+                li.innerHTML = player.pseudo + ' (' + player.score + ')';
                 li.style.color = player.color;
                 liByPlayerId[player.id] = li;
                 scoreView.appendChild(li);
@@ -17,17 +17,17 @@ export class ScoreView {
         });
         socket.on('newPlayer', function(player) {
             if(liByPlayerId[player.id] !== undefined) {
-                liByPlayerId[player.id].innerHTML = player.pseudo + ' ( ' + player.score + ')';
+                liByPlayerId[player.id].innerHTML = player.pseudo + ' (' + player.score + ')';
             } else {
                 var li = document.createElement('li');
-                li.innerHTML = player.pseudo + ' ( ' + player.score + ')';
+                li.innerHTML = player.pseudo + ' (' + player.score + ')';
                 li.style.color = player.color;
                 liByPlayerId[player.id] = li;
                 scoreView.appendChild(li);
             }
         });
         socket.on('scoreOf', function(player) {
-            liByPlayerId[player.id].innerHTML = player.pseudo + ' ( ' + player.score + ')';
+            liByPlayerId[player.id].innerHTML = player.pseudo + ' (' + player.score + ')';
         });
         socket.on('userDisconnected', function(player) {
             scoreView.removeChild(liByPlayerId[player.id]);

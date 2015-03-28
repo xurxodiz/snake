@@ -57,7 +57,7 @@ Room.prototype.deletePlayer = function(player) {
 
 Room.prototype.toPlayers = function() {
     this.players.forEach(function(player) {
-        var gameConfig = {nbFood: 0, snakeInitSize: 10, controllers: []};
+        var gameConfig = {nbFood: 0, snakeInitSize: 10, infiniteWallSize: this.infiniteWallSize, controllers: []};
         this.players.forEach(function(p, index) {
             var distantPlayer = p.toDistant();
             if(p === player) {
@@ -83,7 +83,7 @@ Room.prototype.toPlayers = function() {
 };
 
 Room.prototype.toWatcher = function(watcher) {
-    var gameConfig = {nbFood: 0, snakeInitSize: 10, controllers: []};
+    var gameConfig = {nbFood: 0, snakeInitSize: 10, infiniteWallSize: this.infiniteWallSize, controllers: []};
     this.players.forEach(function(p) {
         var distantPlayer = p.toDistant();
         distantPlayer.type = 'RemoteNetworkController';
