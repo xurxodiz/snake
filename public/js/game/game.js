@@ -5,6 +5,7 @@ import {Food} from './entities/food';
 import {KeyboardController} from './controllers/keyboardController';
 import {IAController} from './controllers/iAController';
 import {RemoteNetworkController} from './controllers/remoteNetworkController';
+import {CONFIG} from '../../../shared/entityCst';
 
 export class Game {
     constructor(options) {
@@ -19,8 +20,10 @@ export class Game {
         this.controllers = [];
 
         var canvas = document.getElementById('canvas');
+        canvas.setAttribute('width', CONFIG.GAME_BOARD.width);
+        canvas.setAttribute('height', CONFIG.GAME_BOARD.height);
         this.drawableUtil = new DrawableUtil(canvas.getContext("2d"));
-        this.gameBoard = new GameBoard(canvas.clientWidth, canvas.clientHeight, callbacks);
+        this.gameBoard = new GameBoard(callbacks);
 
         for(let {type, color, id, initPosition} of controllers) {
             let snake = new Snake({id, snakeInitSize, initPosition, color, isInfiniteWallSize}, this.gameBoard);
@@ -61,7 +64,6 @@ export class Game {
                 this.isStarted = false;
             }
             this.isFinish = true;
-            console.log("You WIN ! size: " + this.gameBoard.score);
         }
     }
 

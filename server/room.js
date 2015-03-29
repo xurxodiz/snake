@@ -2,11 +2,13 @@
  * Created by manland on 26/03/15.
  */
 
+var CONFIG = require('../shared/entityCst').CONFIG;
+
 var randomFoodPosition = function randomFoodPosition() {
-    var width = 600;
-    var height = 600;
-    var dx = 10;
-    var dy = 10;
+    var width = CONFIG.GAME_BOARD.width;
+    var height = CONFIG.GAME_BOARD.height;
+    var dx = CONFIG.FOOD.dx;
+    var dy = CONFIG.FOOD.dy;
 
     var wcells = width / dx;
     var hcells = height / dy;

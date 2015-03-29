@@ -2,15 +2,15 @@
  * Created by manland on 21/03/15.
  */
 
-import * as CONSTANTS from './entityCst';
+import {CONFIG, ENTITIES} from '../../../../shared/entityCst';
 
 export class Food {
     constructor(game, optProperties) {
-        this.type = CONSTANTS.ENTITIES.FOOD;
+        this.type = ENTITIES.FOOD;
 
-        this.dx = CONSTANTS.CONFIG.FOOD.dx;
-        this.dy = CONSTANTS.CONFIG.FOOD.dy;
-        this.radius = CONSTANTS.CONFIG.FOOD.radius;
+        this.dx = CONFIG.FOOD.dx;
+        this.dy = CONFIG.FOOD.dy;
+        this.radius = CONFIG.FOOD.radius;
 
         this.isMovable = false;
         this.game = game;

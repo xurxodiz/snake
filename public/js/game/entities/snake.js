@@ -2,17 +2,17 @@
  * Created by manland on 21/03/15.
  */
 
-import * as CONSTANTS from './entityCst';
+import {CONFIG, ENTITIES} from '../../../../shared/entityCst';
 
 export class Snake {
 
     constructor(options, gameBoard) {
-        this.type = CONSTANTS.ENTITIES.SNAKE;
+        this.type = ENTITIES.SNAKE;
         var {id, snakeInitSize, initPosition, color, isInfiniteWallSize} = options;
 
         this.id = id;
-        this.dx = 10;
-        this.dy = 10;
+        this.dx = CONFIG.SNAKE.dx;
+        this.dy = CONFIG.SNAKE.dy;
         this.direction = 0;
         this.color = color;
         this.snakeInitSize = snakeInitSize;
@@ -27,9 +27,9 @@ export class Snake {
         let myInitPosition;
         if(initPosition === undefined) {
             let x = Math.floor(Math.random() * gameBoard.width);
-            x = Math.floor((x + 5) / 10) * 10;
+            x = Math.floor((x + 5) / 10) * 10;//round to decade
             let y = Math.floor(Math.random() * gameBoard.height);
-            y = Math.floor((y + 5) / 10) * 10;
+            y = Math.floor((y + 5) / 10) * 10;//round to decade
             myInitPosition = {x, y, direction: this.direction};
         } else {
             myInitPosition = initPosition;
@@ -97,7 +97,7 @@ export class Snake {
                     return true;
                 }
             }
-        } else if(otherEntity.type === CONSTANTS.ENTITIES.SNAKE) {// are we eating other snake?
+        } else if(otherEntity.type === ENTITIES.SNAKE) {// are we eating other snake?
             for (let i = 0; i < otherEntity.positions.length; i++) {
                 if (otherEntity.positions[i].x == x && otherEntity.positions[i].y == y) {
                     return true;

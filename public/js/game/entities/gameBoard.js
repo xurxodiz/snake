@@ -2,18 +2,17 @@
  * Created by manland on 21/03/15.
  */
 
-import * as CONSTANTS from './entityCst';
+import {CONFIG, ENTITIES} from '../../../../shared/entityCst';
 
 export class GameBoard {
-    constructor(width, height, callbacks) {
-        this.type = CONSTANTS.ENTITIES.GAME_BOARD;
+    constructor(callbacks) {
+        this.type = ENTITIES.GAME_BOARD;
         this.foodEatenCallback = callbacks.foodEatenCallback;
         this.snakeDeadCallback = callbacks.snakeDeadCallback;
 
         this.x = this.y = 0;
-        this.score = 0;
-        this.width = width;
-        this.height = height;
+        this.width = CONFIG.GAME_BOARD.width;
+        this.height = CONFIG.GAME_BOARD.height;
         this.entities = [];
         this.movableEntities = [];
     }
@@ -35,7 +34,7 @@ export class GameBoard {
         for(let e of this.entities) {
             if(!e.isDead && e.isLocal) {
                 let collision = e.checkCollision(this, {outside: true, strict: true});
-                if (collision && e.type === CONSTANTS.ENTITIES.SNAKE) {//collision between game and snake
+                if (collision && e.type === ENTITIES.SNAKE) {//collision between game and snake
                     console.warn('collision with game');
                     e.dead();
                     this.snakeDeadCallback(e);
@@ -43,19 +42,17 @@ export class GameBoard {
                 }
                 for (let e2 of this.entities) {
                     collision = e.checkCollision(e2, {outside: false, strict: false});
-                    if (collision && e.type === CONSTANTS.ENTITIES.SNAKE && e2.type === CONSTANTS.ENTITIES.SNAKE) {//collision between snake and snake (himself possible)
+                    if (collision && e.type === ENTITIES.SNAKE && e2.type === ENTITIES.SNAKE) {//collision between snake and snake (himself possible)
                         console.warn('collision with himself');
                         e.dead();
                         this.snakeDeadCallback(e);
                         atLeastOneDead = true;
-                    } else if (collision && e.type === CONSTANTS.ENTITIES.SNAKE && e2.type === CONSTANTS.ENTITIES.FOOD) {//collision between snake and food
-                        this.score = this.score + 1;
+                    } else if (collision && e.type === ENTITIES.SNAKE && e2.type === ENTITIES.FOOD) {//collision between snake and food
                         e.growth();
                         this.foodEatenCallback(e2, e);
                         toDelete.push(e2);
 
-                    } else if (collision && e.type === CONSTANTS.ENTITIES.FOOD && e2.type === CONSTANTS.ENTITIES.SNAKE) {//collision between food and snake
-                        this.score = this.score + 1;
+                    } else if (collision && e.type === ENTITIES.FOOD && e2.type === ENTITIES.SNAKE) {//collision between food and snake
                         this.foodEatenCallback(e, e2);
                         toDelete.push(e);
                         e2.growth();

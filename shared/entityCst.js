@@ -1,15 +1,21 @@
 /**
  * Created by manland on 21/03/15.
  */
-export const ENTITIES = {
+module.exports.ENTITIES = {
     GAME_BOARD: 'gameBoard',
     SNAKE: 'snake',
     FOOD: 'food'
 };
 
-export const CONFIG = {
-    GAME_BOARD: {},
-    SNAKE: {},
+module.exports.CONFIG = {
+    GAME_BOARD: {
+        width: 800,
+        height: 400
+    },
+    SNAKE: {
+        dx: 10,
+        dy: 10
+    },
     FOOD: {
         dx: 10,
         dy: 10,
