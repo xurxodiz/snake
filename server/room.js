@@ -112,15 +112,21 @@ Room.prototype.restart = function() {
 };
 
 Room.prototype.foodEaten = function(foodId, playerId) {
+    var sended = false;
     this.foods.forEach(function(food, index) {
         if (food.id === foodId) {
             this.foods.splice(index, 1);
             this.players.forEach(function (player) {
                 if (player.id === playerId) {
                     player.score += 1;
+                    this.emit('foodEaten', foodId, playerId);
+                    sended = true;
                     this.emit('scoreOf', player.toDistant());
                 }
             }.bind(this));
+        }
+        if(sended === false) {
+            this.emit('foodEaten', foodId);
         }
     }.bind(this));
     this.addFood();

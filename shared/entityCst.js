@@ -9,7 +9,7 @@ module.exports.ENTITIES = {
 
 module.exports.CONFIG = {
     GAME_BOARD: {
-        width: 800,
+        width: 400,
         height: 400
     },
     SNAKE: {

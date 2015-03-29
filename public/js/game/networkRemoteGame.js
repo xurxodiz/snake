@@ -82,8 +82,7 @@ export class NetworkRemoteGame {
             game.run();
         });
 
-        socket.on('restart', (gameOptions) => {
-            console.log('restart', gameOptions);
+        socket.on('restart', () => {
             game.destroy();
         });
 

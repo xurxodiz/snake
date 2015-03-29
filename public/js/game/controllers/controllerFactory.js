@@ -8,7 +8,7 @@ import {IAController} from '../controllers/iAController';
 import {RemoteNetworkController} from '../controllers/remoteNetworkController';
 
 export class ControllerFactory {
-    build(type, id, snakeInitSize, initPosition, color, isInfiniteWallSize, gameBoard) {
+    build(game, type, id, snakeInitSize, initPosition, color, isInfiniteWallSize, gameBoard) {
         let snake = new Snake({id, snakeInitSize, initPosition, color, isInfiniteWallSize}, gameBoard);
         gameBoard.addEntity(snake);
         if (type === 'KeyboardController') {
@@ -19,7 +19,7 @@ export class ControllerFactory {
             return new IAController(snake, gameBoard);
         } else if(type === 'RemoteNetworkController') {
             snake.isLocal = false;
-            return new RemoteNetworkController(snake, this);
+            return new RemoteNetworkController(snake, game);
         } else {
             throw new Error('Unknown controller', type);
         }
