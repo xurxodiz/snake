@@ -3,6 +3,7 @@
  */
 
 import {CONFIG, ENTITIES} from '../../../../shared/entityCst';
+import {foodUtil} from '../../../../shared/gameUtil';
 
 export class Food {
     constructor(game, optProperties) {

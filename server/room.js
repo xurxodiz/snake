@@ -2,22 +2,7 @@
  * Created by manland on 26/03/15.
  */
 
-var CONFIG = require('../shared/entityCst').CONFIG;
-
-var randomFoodPosition = function randomFoodPosition() {
-    var width = CONFIG.GAME_BOARD.width;
-    var height = CONFIG.GAME_BOARD.height;
-    var dx = CONFIG.FOOD.dx;
-    var dy = CONFIG.FOOD.dy;
-
-    var wcells = width / dx;
-    var hcells = height / dy;
-
-    var randomx = Math.floor(Math.random() * wcells);
-    var randomy = Math.floor(Math.random() * hcells);
-
-    return {x: randomx * dx, y: randomy * dy};
-};
+var foodUtil = require('../shared/gameUtil').foodUtil;
 
 function Room(properties, socket) {
     this.name = properties.name;
@@ -142,7 +127,7 @@ Room.prototype.foodEaten = function(foodId, playerId) {
 };
 
 Room.prototype.addFood = function() {
-    var food = {id: this.foods.length, position: randomFoodPosition()};
+    var food = {id: this.foods.length, position: foodUtil.randomPosition()};
     this.foods.push(food);
     this.emit('addFood', food);
 };
