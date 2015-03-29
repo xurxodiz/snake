@@ -1,11 +1,8 @@
 import {DrawableUtil} from './drawableUtil';
 import {GameBoard} from './entities/gameBoard';
-import {Snake} from './entities/snake';
 import {Food} from './entities/food';
-import {KeyboardController} from './controllers/keyboardController';
-import {IAController} from './controllers/iAController';
-import {RemoteNetworkController} from './controllers/remoteNetworkController';
 import {CONFIG} from '../../../shared/entityCst';
+import {ControllerFactory} from './controllers/controllerFactory';
 
 export class Game {
     constructor(options) {
@@ -25,21 +22,9 @@ export class Game {
         this.drawableUtil = new DrawableUtil(canvas.getContext("2d"));
         this.gameBoard = new GameBoard(callbacks);
 
+        let factory = new ControllerFactory();
         for(let {type, color, id, initPosition} of controllers) {
-            let snake = new Snake({id, snakeInitSize, initPosition, color, isInfiniteWallSize}, this.gameBoard);
-            this.gameBoard.addEntity(snake);
-            if (type === 'KeyboardController') {
-                snake.isLocal = true;
-                this.controllers.push(new KeyboardController(snake));
-            } else if (type === 'IAController') {
-                snake.isLocal = true;
-                this.controllers.push(new IAController(snake, this.gameBoard));
-            } else if(type === 'RemoteNetworkController') {
-                snake.isLocal = false;
-                this.controllers.push(new RemoteNetworkController(snake, this));
-            } else {
-                throw new Error('Unknown controller', type);
-            }
+            this.controllers.push(factory.build(type, id, snakeInitSize, initPosition, color, isInfiniteWallSize, this.gameBoard));
         }
 
         for(let i=0; i<nbFood; i++) {
