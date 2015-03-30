@@ -34,8 +34,9 @@ export class RemoteNetworkController {
         }
     }
 
-    handleFoodEaten(foodId, snakeId) {
-        if (snakeId === this.snake.id) {
+    handleFoodEaten(data) {
+        let {foodId, playerId} = data;
+        if (playerId === this.snake.id) {
             this.snake.growth();
         }
         this.game.gameBoard.entities.forEach((e) => {

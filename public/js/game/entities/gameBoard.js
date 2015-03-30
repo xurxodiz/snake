@@ -45,7 +45,7 @@ export class GameBoard {
                     if (collision && e.type === ENTITIES.SNAKE && e2.type === ENTITIES.SNAKE) {//collision between snake and snake (himself possible)
                         console.warn('collision with himself');
                         e.dead();
-                        this.snakeDeadCallback(e);
+                        this.snakeDeadCallback(e, e2);
                         atLeastOneDead = true;
                     } else if (collision && e.type === ENTITIES.SNAKE && e2.type === ENTITIES.FOOD) {//collision between snake and food
                         e.growth();

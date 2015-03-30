@@ -4,6 +4,7 @@
 
 import {Game} from './game';
 import {ScoreView} from './scoreView';
+import {ConsoleView} from './consoleView';
 import {connect as io} from 'socket.io-client';
 
 export class NetworkRemoteGame {
@@ -17,6 +18,7 @@ export class NetworkRemoteGame {
         }
 
         new ScoreView(socket);
+        new ConsoleView(socket);
 
         socket.on('connect', () => {
             socket.emit('joinRoom', roomName, JSON.parse(localStorage.player));
@@ -57,7 +59,7 @@ export class NetworkRemoteGame {
                         }
                     });
                 }
-            }, 50);
+            }, 10);
         };
 
         socket.on('roomGame', (gameOptions) => {
