@@ -3,6 +3,7 @@
  */
 
 import {CONFIG, ENTITIES} from '../../../../shared/entityCst';
+import {snakeUtil} from '../../../../shared/gameUtil';
 
 export class Snake {
 
@@ -23,13 +24,10 @@ export class Snake {
         this.changeInitPosition(initPosition, gameBoard);
     }
 
-    changeInitPosition(initPosition, gameBoard) {
+    changeInitPosition(initPosition) {
         let myInitPosition;
         if(initPosition === undefined) {
-            let x = Math.floor(Math.random() * gameBoard.width);
-            x = Math.floor((x + 5) / 10) * 10;//round to decade
-            let y = Math.floor(Math.random() * gameBoard.height);
-            y = Math.floor((y + 5) / 10) * 10;//round to decade
+            let {x, y} = snakeUtil.randomPosition();
             myInitPosition = {x, y, direction: this.direction};
         } else {
             myInitPosition = initPosition;

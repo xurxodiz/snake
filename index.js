@@ -31,7 +31,6 @@ var Room = require('./server/room');
 var Player = require('./server/player');
 
 io.on('connection', function (socket) {
-    console.log('connection');
 
     socket.on('getRooms', function () {
         socket.emit('rooms', roomManager.toDistant());
@@ -43,7 +42,7 @@ io.on('connection', function (socket) {
         io.emit('rooms', roomManager.toDistant());
     });
 
-    socket.on('joinRoom', function (roomName, player) {
+    socket.on('joinRoom', function (roomName, playerConfig) {
         var room = roomManager.findRoomByName(roomName);
         if(!room) {
             socket.emit('roomNotFound');
@@ -55,7 +54,7 @@ io.on('connection', function (socket) {
             return;
         }
 
-        var player = new Player(player, socket);
+        var player = new Player(playerConfig, socket);
         room.addPlayer(player);
         if(socket.trakeRoom && socket.trakePlayer) {
             socket.trakeRoom.deletePlayer(socket.trakePlayer);

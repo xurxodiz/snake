@@ -28,8 +28,8 @@ export class RemoteNetworkController {
         }
     }
 
-    handleDead(data) {
-        if (data.id === this.snake.id) {
+    handleDead(playerId) {
+        if (playerId === this.snake.id) {
             this.snake.dead();
         }
     }

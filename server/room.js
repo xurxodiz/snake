@@ -81,8 +81,9 @@ Room.prototype.toWatcher = function(watcher) {
         gameConfig.controllers.push({id: i+1000, type: 'RemoteNetworkController', color: '#ff0000'});
     }
     watcher.emit('roomGame', gameConfig);
-    //TODO : start only if setTimeout of game.start() has not begun
-    watcher.emit('start');
+    if(this.isStarted === false) {
+        watcher.emit('start');
+    }
 };
 
 Room.prototype.isFull = function() {

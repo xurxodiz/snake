@@ -69,7 +69,6 @@ export class NetworkRemoteGame {
                 }
             });
             initGame(gameOptions);
-            console.log(gameOptions);
         });
 
         socket.on('newPlayer', () => {

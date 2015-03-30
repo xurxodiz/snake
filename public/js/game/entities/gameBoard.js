@@ -35,7 +35,6 @@ export class GameBoard {
             if(!e.isDead && e.isLocal) {
                 let collision = e.checkCollision(this, {outside: true, strict: true});
                 if (collision && e.type === ENTITIES.SNAKE) {//collision between game and snake
-                    console.warn('collision with game');
                     e.dead();
                     this.snakeDeadCallback(e);
                     atLeastOneDead = true;
@@ -43,7 +42,6 @@ export class GameBoard {
                 for (let e2 of this.entities) {
                     collision = e.checkCollision(e2, {outside: false, strict: false});
                     if (collision && e.type === ENTITIES.SNAKE && e2.type === ENTITIES.SNAKE) {//collision between snake and snake (himself possible)
-                        console.warn('collision with himself');
                         e.dead();
                         this.snakeDeadCallback(e, e2);
                         atLeastOneDead = true;
