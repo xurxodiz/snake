@@ -13,7 +13,7 @@
             </header>
             <noscript>Your browser does not support JavaScript.</noscript>
             <section class="section section-me">
-                <form id="js-player-form" class="addRoom">
+                <form id="js-player-form" class="">
                     <input id="js-player-pseudo" type="text" placeholder="Pseudo" value="Me" required />
                     <input id="js-player-color" type="color" placeholder="#0000FF" value="#0000FF" required />
                     <div id="js-player-color-picker"></div>
@@ -24,14 +24,18 @@
                 <div class="section-title">Rooms</div>
                 <ul id="js-rooms-container" class="roomList"></ul>
             </section>
-            <section class="section section-addRomm">
+            <section id="js-addroom" class="section section-addroom">
+                <div id="js-addroom-btn" class="btn icon-plus" ng-click="showme=true">Create a room</div>
+            </section>
+            <section id="js-addroomform" class="addroomform">
                 <div class="section-title">New Room</div>
-                <form id="js-add-room-form" class="addRoom">
-                    <input id="js-add-room-name" class="addRoom-name" type="text" placeholder="New Room" required />
-                    <input id="js-add-room-nb-players" class="addRoom-players" type="number" min="1" max="10" value="2" />
-                    Infinite wall
-                    <input id="js-add-room-infinite-wall" class="" type="checkbox" checked />
-                    <input type="submit" value="Add" />
+                <form id="js-addroomform-form" class="addroomform-form">
+                    <input id="js-addroomform-name" class="addroomform-name" type="text" placeholder="New Room" required />
+                    <input id="js-addroomform-nb-players" class="addroomform-players" type="number" min="1" max="10" value="2" />
+                    <label for="js-addroomform-infinite-wall">
+                        <input id="js-addroomform-infinite-wall" class="" type="checkbox" checked />Inf wall
+                    </label>
+                    <input class="btn" type="submit" value="Add" />
                 </form>
             </section>
         </div>

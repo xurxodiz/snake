@@ -30,6 +30,45 @@
 	float right
 
 /*///////////////////////////*/
+	
+form{
+ 	display flex;
+	border-radius 2px;
+	text-align left;
+	}
+		
+	input
+		padding 10px
+		border-radius 2px
+		border 1px solid #000
+		outline none
+		&:focus
+			border-color mainColor
+			box-shadow 0 0 10px mainColor
+		+ input
+			margin 0 0 0 5px
+	label
+		cursor pointer
+
+.btn
+	display inline-block
+	font-weight bold
+	padding 10px
+	font-size 0.8em
+	background-color mainColorDark
+	color #000
+	cursor pointer
+	border-radius 1px
+	border 0
+	transition all 200ms
+	&:hover,
+	&:focus
+		background-color mainColor
+		box-shadow 0 0 10px mainColor
+	&::before
+		margin-right 5px
+
+/*///////////////////////////*/
 
 .section-me{
 	border 1px solid mainColor
@@ -65,15 +104,16 @@
 /*///////////////////////////*/
 
 .roomList
-	border 1px solid mainColorDark
+	margin-bottom 20px
+	background-color rgba(mainColorDark,0.2)
 	li + li
-		border-top 1px solid mainColorDark
+		border-top 1px solid #000
 	a
 		display block
 		padding 10px
 		text-decoration none
 		&:hover
-			box-shadow 0 0 50px rgba(mainColor, 0.3) inset
+			box-shadow 0 0 50px rgba(mainColor, 0.3) inset, 0 0 0 1px mainColor inset
 		
 .room-name
 	color mainColor
@@ -89,40 +129,30 @@
 	&::before
 		content '/'
 
+.noroom
+	padding 20px
+	text-align center
+	color mainColorDark
+
+
 /*///////////////////////////*/
-.section-addRomm
-	padding 20px 0 0
+.section-addroom
+	padding 0 0 20px
+	text-align right
+	overflow hidden
+	transition all 200ms
+
+.addroomform
+	height 0
+	transition height 400ms
+	overflow hidden
 	
-.addRoom{
- 	display flex;
-	border-radius 2px;
-	text-align left;
-	}
-		
-	input
-		padding 10px
-		border-radius 2px
-		border 1px solid #000
-		outline none
-		&:focus
-			border-color mainColor
-			box-shadow 0 0 10px mainColor
-		+ input
-			margin 0 0 0 5px
-			
-		
-	input[type='submit']
-		font-weight bold
+.addroomform-form
+	background-color rgba(mainColorDark,0.2)
+	padding 10px
+	.addroomform-name
+		width 100px
+	label
 		font-size 0.8em
-		background-color mainColorDark
-		color #000
-		cursor pointer
-		border-color mainColorDark
-		transition all 200ms
-		&:hover
-			border-color mainColor
-			background-color mainColor
-			box-shadow 0 0 10px mainColor
-			
-	.addRoom-name
-		flex: 1;
+		flex 1
+		padding 10px 0
