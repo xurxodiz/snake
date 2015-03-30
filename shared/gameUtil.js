@@ -27,14 +27,14 @@ var randomSnakePosition = function() {
     var width = CONFIG.GAME_BOARD.width;
     var height = CONFIG.GAME_BOARD.height;
 
-    let x = Math.floor(Math.random() * width);
+    var x = Math.floor(Math.random() * width);
     x = Math.floor((x + 5) / 10) * 10;//round to decade
     if(x < 30) {
         x = 30
     } else if(x > width - 30) {
         x = width - 30;
     }
-    let y = Math.floor(Math.random() * height);
+    var y = Math.floor(Math.random() * height);
     y = Math.floor((y + 5) / 10) * 10;//round to decade
     if(y < 30) {
         y = 30;

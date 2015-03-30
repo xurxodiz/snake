@@ -8,6 +8,11 @@
     "dev_css": "stylus -c --include-css -m -w public/css/main.styl -o public/build/bundle.css --use nib",
     "dev_game_js": "watchify public/js/game/main.js -d -v -t babelify -o public/build/game.js",
     "dev_app_js": "watchify public/js/app/main.js -d -v -t babelify -o public/build/app.js",
+    "deploy": "npm run bin_css && npm run bin_game_js && npm run bin_app_js && npm run copy_files",
+    "bin_css": "stylus -c --include-css public/css/main.styl -o public/build/bundle.css --use nib",
+    "bin_game_js": "browserify public/js/game/main.js -t babelify -p [minifyify --no-map] > public/build/game.js",
+    "bin_app_js": "browserify public/js/app/main.js -t babelify -p [minifyify --no-map] > public/build/app.js",
+    "copy_files": "scp -r index.js constants.js package.json manland@ns3361665.ip-91-121-202.eu:/home/manland/projects/trake && scp -r shared/. manland@ns3361665.ip-91-121-202.eu:/home/manland/projects/trake/shared && scp -r server/. manland@ns3361665.ip-91-121-202.eu:/home/manland/projects/trake/server && scp -r public/. manland@ns3361665.ip-91-121-202.eu:/home/manland/projects/trake/public",
     "test": "echo \"Tester c'est douter !\" && exit 1"
   },
   "repository": {
@@ -31,6 +36,7 @@
   "devDependencies": {
     "babelify": "^5.0.4",
     "browserify": "^9.0.3",
+    "minifyify": "^6.4.0",
     "nib": "^1.1.0",
     "socket.io-client": "^1.3.5",
     "stylus": "^0.50.0",
