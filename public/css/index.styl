@@ -68,6 +68,7 @@ form{
 	&::before
 		margin-right 5px
 
+	
 /*///////////////////////////*/
 
 .section-me{
@@ -86,8 +87,10 @@ form{
 	color mainColor
 	font-size 1.2em
 	margin-right 20px
+	flex 1
 	&:focus
 		box-shadow none
+		
 #js-player-color
 	cursor pointer
 	padding 0
@@ -100,6 +103,24 @@ form{
 		padding: 0
 	&::-webkit-color-swatch
 		border: none
+
+.player-colorbike
+	position relative
+	width 10px
+	height 33px
+	background-image url("../images/trake_bike.png")
+	cursor pointer
+	
+.player-colorpicker
+	position absolute
+	top calc(100% + 20px)
+	background-color red
+	right -20px
+	height 20px
+	width 300px
+	display none
+	&.player-colorpicker-visible
+		display block
 
 /*///////////////////////////*/
 

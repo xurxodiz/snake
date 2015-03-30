@@ -30,5 +30,6 @@ export class AddRoom {
             window.location = 'game.html#' + inputName.value;
             inputName.value = '';
         });
+
     }
 }

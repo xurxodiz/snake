@@ -14,11 +14,11 @@ window.onload = function() {
             nbFood: 1,
             snakeInitSize: 20,
             controllers: [
-                {type: 'KeyboardController', color: '#ff0000', id: 1},
-                {type: 'IAController', color: '#00ff00', id: 2},
-                {type: 'IAController', color: '#00ffff', id: 3}
-                //{type: 'IAController', color: '#0000ff', id: 4},
-                //{type: 'IAController', color: '#ff00ff', id: 5}
+                {type: 'KeyboardController', color: '#9bdcd8', id: 1},
+                {type: 'IAController', color: '#fc780b', id: 2},
+                {type: 'IAController', color: '#fc780b', id: 3}
+                //{type: 'IAController', color: '#fc780b', id: 4},
+                //{type: 'IAController', color: '#fc780b', id: 5}
             ],
             callbacks: {
                 foodEatenCallback: function () {
