@@ -19,12 +19,7 @@ function Room(properties, socket) {
 Room.prototype.addPlayer = function(player) {
     player.socket.join(this.name);
     player.id = this.players.length;
-    var players = [];
-    this.players.forEach(function(player) {
-        players.push(player.toDistant());
-    });
-    players.push(player.toDistant());
-    player.emit('allPlayers', players);
+    this.emitAllPlayers(player/*player is also a socket*/, player);
     if(this.isStarted === false) {
         this.players.push(player);
         this.start();
@@ -33,6 +28,17 @@ Room.prototype.addPlayer = function(player) {
         this.players.push(player);
     }
     this.emit('newPlayer', player.toDistant());
+};
+
+Room.prototype.emitAllPlayers = function(socket, optNewPlayer) {
+    var players = [];
+    this.players.forEach(function(player) {
+        players.push(player.toDistant());
+    });
+    if(optNewPlayer !== undefined) {
+        players.push(optNewPlayer.toDistant());
+    }
+    socket.emit('allPlayers', players);
 };
 
 Room.prototype.deletePlayer = function(player) {
@@ -69,6 +75,10 @@ Room.prototype.toPlayers = function() {
     }.bind(this));
 };
 
+Room.prototype.toWatchers = function() {
+    this.watchers.forEach(this.toWatcher.bind(this));
+};
+
 Room.prototype.toWatcher = function(watcher) {
     var gameConfig = {nbFood: 0, snakeInitSize: 10, infiniteWallSize: this.infiniteWallSize, controllers: []};
     this.players.forEach(function(p) {
@@ -90,9 +100,24 @@ Room.prototype.isFull = function() {
     return this.players.length >= this.nbPlayers;
 };
 
+Room.prototype.addWatcher = function(socket) {
+    this.emitAllPlayers(socket);
+    this.toWatcher(socket);
+    socket.join(this.name);
+    this.watchers.push(socket);
+};
+
+Room.prototype.removeWatcher = function(socket) {
+    var index = this.watchers.indexOf(socket);
+    if(index > -1) {
+        this.watchers.splice(index, 1);
+    }
+};
+
 Room.prototype.start = function() {
     this.isStarted = true;
     this.toPlayers();
+    this.toWatchers();
     setTimeout(function () {
         this.emit('start');
         setTimeout(function () {

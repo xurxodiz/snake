@@ -50,6 +50,8 @@ io.on('connection', function (socket) {
         }
 
         if(room.isFull()) {
+            room.addWatcher(socket);
+            socket.trakeWatcherRoom = room;
             socket.emit('roomFull');
             return;
         }
@@ -92,7 +94,12 @@ io.on('connection', function (socket) {
             }
             io.emit('rooms', roomManager.toDistant());
         }
+        if(socket.trakeWatcherRoom) {
+            socket.trakeWatcherRoom.removeWatcher(socket);
+            socket.leave(socket.trakeWatcherRoom.name);
+        }
         socket.trakePlayer = undefined;
         socket.trakeRoom = undefined;
+        socket.trakeWatcherRoom = undefined;
     });
 });

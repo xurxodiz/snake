@@ -42,6 +42,9 @@ export class NetworkRemoteGame {
                 },
                 snakeDeadCallback: (snake, optAgainstSnake) => {
                     socket.emit('dead', snake.id, optAgainstSnake !== undefined ? optAgainstSnake.id : undefined);
+                },
+                snakeChangeDirectionCallback: (e) => {
+                    socket.emit('changeDirection', {id: e.id, direction: e.direction, x: e.x, y: e.y});
                 }
             };
 
@@ -53,13 +56,14 @@ export class NetworkRemoteGame {
                     clearInterval(intervalId);
                     socket.emit('finish');
                 } else {
-                    game.gameBoard.entities.forEach((e) => {
-                        if (!e.isDead) {
-                            socket.emit('changeDirection', {id: e.id, direction: e.direction, x: e.x, y: e.y});
-                        }
-                    });
                 }
-            }, 10);
+            }, 30);
+
+            game.gameBoard.entities.forEach((e) => {
+                if (e.isLocal) {
+                    socket.emit('changeDirection', {id: e.id, direction: e.direction, x: e.x, y: e.y});
+                }
+            });
         };
 
         socket.on('roomGame', (gameOptions) => {
@@ -76,10 +80,15 @@ export class NetworkRemoteGame {
         });
 
         socket.on('roomFull', () => {
-            window.alert('The room is full !');
+            console.warn('The room is full !');
         });
 
         socket.on('start', () => {
+            game.gameBoard.entities.forEach((e) => {
+                if (e.isLocal) {
+                    socket.emit('changeDirection', {id: e.id, direction: e.direction, x: e.x, y: e.y});
+                }
+            });
             game.run();
         });
 

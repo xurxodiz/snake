@@ -9,7 +9,7 @@ export class Snake {
 
     constructor(options, gameBoard) {
         this.type = ENTITIES.SNAKE;
-        var {id, snakeInitSize, initPosition, color, isInfiniteWallSize} = options;
+        var {id, snakeInitSize, initPosition, color, isInfiniteWallSize, snakeChangeDirectionCallback} = options;
 
         this.id = id;
         this.dx = CONFIG.SNAKE.dx;
@@ -18,6 +18,7 @@ export class Snake {
         this.color = color;
         this.snakeInitSize = snakeInitSize;
         this.isInfiniteWallSize = isInfiniteWallSize;
+        this.snakeChangeDirectionCallback = snakeChangeDirectionCallback;
         this.isMovable = true;
         this.isDead = false;
 
@@ -47,6 +48,13 @@ export class Snake {
 
     dead() {
         this.isDead = true;
+    }
+
+    changeDirection(newDirection) {
+        if(this.direction !== newDirection) {
+            this.direction = newDirection;
+            this.snakeChangeDirectionCallback(this);
+        }
     }
 
     move() {

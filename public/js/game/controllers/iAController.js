@@ -32,7 +32,7 @@ export class IAController {
                 } else if(this.snake.y === 0 || this.snake.y === this.gameBoard.height) {
                     nextDirection = 0;
                 }
-                this.snake.direction = nextDirection;
+                this.snake.changeDirection(nextDirection);
                 return;
             }
         }
