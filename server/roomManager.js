@@ -7,7 +7,15 @@ function RoomManager() {
 }
 
 RoomManager.prototype.addRoom = function(room) {
-    this.rooms.push(room);
+    var find = false;
+    this.rooms.forEach(function(r) {
+       if(r.name === room.name) {
+           find = true;
+       }
+    });
+    if(find === false) {
+        this.rooms.push(room);
+    }
 };
 
 RoomManager.prototype.deleteRoom = function(room) {
