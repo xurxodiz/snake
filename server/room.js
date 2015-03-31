@@ -67,7 +67,7 @@ Room.prototype.toPlayers = function() {
                 var nbIaNeeded = this.nbPlayers - this.players.length;
                 for(var i=0; i<nbIaNeeded; i++) {
                     if(p === player) {
-                        var ia = {id: i + 100000, type: 'IAController', color: '#ff0000'};
+                        var ia = {id: i + 100000, type: 'IAController', color: '#ff0000', pseudo: 'IA'+i};
                         player.manage(ia);
                         gameConfig.controllers.push(ia);
                     } else {

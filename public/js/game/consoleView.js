@@ -4,6 +4,7 @@
 export class ConsoleView {
     constructor(socket) {
         this.htmlElement = document.getElementById('js-console-view');
+        let players = [];
         socket.on('foodEaten', (data) => {
             let {foodId, playerId} = data;
             if(playerId === undefined) {
@@ -17,6 +18,13 @@ export class ConsoleView {
             } else {
                 this.appendText(optAgainstPlayerId + ' kill ' + playerId + ' (+1)');
             }
+        });
+        socket.on('newPlayer', (player) => {
+            players.push(player);
+            this.appendText(player.pseudo + ' join game as player!');
+        });
+        socket.on('newWatcher', (playerConfig) => {
+            this.appendText(playerConfig.pseudo + ' join game as watcher!');
         });
     }
 

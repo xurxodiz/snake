@@ -53,6 +53,7 @@ io.on('connection', function (socket) {
             room.addWatcher(socket);
             socket.trakeWatcherRoom = room;
             socket.emit('roomFull');
+            room.emit('newWatcher', playerConfig);
             return;
         }
 

@@ -13,6 +13,8 @@ export class NetworkRemoteGame {
         let socket = io();
         let myId = -1;
 
+        var jsRoomFullHtmlElement = document.getElementById('js-room-full');
+
         if(localStorage.player === undefined) {
             window.location = 'index.html';
         }
@@ -74,14 +76,6 @@ export class NetworkRemoteGame {
             initGame(gameOptions);
         });
 
-        socket.on('newPlayer', () => {
-            console.log('New player !');
-        });
-
-        socket.on('roomFull', () => {
-            console.warn('The room is full !');
-        });
-
         socket.on('start', () => {
             game.gameBoard.entities.forEach((e) => {
                 if (e.isLocal) {
@@ -93,6 +87,10 @@ export class NetworkRemoteGame {
 
         socket.on('restart', () => {
             game.destroy();
+        });
+
+        socket.on('roomFull', () => {
+            jsRoomFullHtmlElement.style.display = 'inline-block';
         });
 
         socket.on('finish', () => {
