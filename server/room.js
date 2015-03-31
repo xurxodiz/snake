@@ -14,11 +14,13 @@ function Room(properties, socket) {
     this.foods = [];
     this.isStarted = false;
     this.restartInProgress = false;
+    this.currentIdPlayer = 0;
 }
 
 Room.prototype.addPlayer = function(player) {
     player.socket.join(this.name);
-    player.id = this.players.length;
+    player.id = this.currentIdPlayer;
+    this.currentIdPlayer++;
     this.emitAllPlayers(player/*player is also a socket*/, player);
     if(this.isStarted === false) {
         this.players.push(player);
@@ -44,6 +46,7 @@ Room.prototype.emitAllPlayers = function(socket, optNewPlayer) {
 Room.prototype.deletePlayer = function(player) {
     var indexPlayer = this.players.indexOf(player);
     if(indexPlayer > -1) {
+        this.playerDead(player.id);
         this.players.splice(indexPlayer, 1);
     }
 };
@@ -64,9 +67,11 @@ Room.prototype.toPlayers = function() {
                 var nbIaNeeded = this.nbPlayers - this.players.length;
                 for(var i=0; i<nbIaNeeded; i++) {
                     if(p === player) {
-                        gameConfig.controllers.push({id: i + 1000, type: 'IAController', color: '#ff0000'});
+                        var ia = {id: i + 100000, type: 'IAController', color: '#ff0000'};
+                        player.manage(ia);
+                        gameConfig.controllers.push(ia);
                     } else {
-                        gameConfig.controllers.push({id: i + 1000, type: 'RemoteNetworkController', color: '#ff0000'});
+                        gameConfig.controllers.push({id: i + 100000, type: 'RemoteNetworkController', color: '#ff0000'});
                     }
                 }
             }
@@ -88,7 +93,7 @@ Room.prototype.toWatcher = function(watcher) {
     }.bind(this));
     var nbIaNeeded = this.nbPlayers - this.players.length;
     for(var i=0; i<nbIaNeeded; i++) {
-        gameConfig.controllers.push({id: i+1000, type: 'RemoteNetworkController', color: '#ff0000'});
+        gameConfig.controllers.push({id: i+100000, type: 'RemoteNetworkController', color: '#ff0000'});
     }
     watcher.emit('roomGame', gameConfig);
     if(this.isStarted === false) {
@@ -143,7 +148,6 @@ Room.prototype.foodEaten = function(foodId, playerId) {
             this.foods.splice(index, 1);
             this.emit('foodEaten', {foodId: foodId, playerId: playerId});//IA eaten food
             this.addFood();
-            return;//break for
         }
     }.bind(this));
 };
@@ -157,7 +161,7 @@ Room.prototype.addFood = function() {
 Room.prototype.playerDead = function(playerId, optAgainstPlayerId) {
     this.players.forEach(function(player) {
         if(player.id === playerId) {
-            player.score -= 1;
+            player.dead(this);
             this.emit('scoreOf', player.toDistant());
         } else if(optAgainstPlayerId !== undefined && player.id === optAgainstPlayerId) {
             player.score += 1;
@@ -167,8 +171,8 @@ Room.prototype.playerDead = function(playerId, optAgainstPlayerId) {
     this.emit('dead', playerId, optAgainstPlayerId);
 };
 
-Room.prototype.finish = function(data) {
-    this.emit('finish', data);
+Room.prototype.finish = function() {
+    this.emit('finish');
     this.isStarted = false;
     this.restart();
 };

@@ -74,8 +74,8 @@ io.on('connection', function (socket) {
             room.playerDead(playerId, optAgainstPlayerId);
         });
 
-        socket.on('finish', function(data) {
-            room.finish(data);
+        socket.on('finish', function() {
+            room.finish();
         });
 
         socket.on('foodEaten', function(foodId, playerId) {

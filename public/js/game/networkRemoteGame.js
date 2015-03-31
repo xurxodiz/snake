@@ -55,7 +55,6 @@ export class NetworkRemoteGame {
                 if(game.isFinish) {
                     clearInterval(intervalId);
                     socket.emit('finish');
-                } else {
                 }
             }, 30);
 

@@ -7,11 +7,23 @@ function Player(properties, socket) {
     this.pseudo = properties.pseudo || 'IA';
     this.color = properties.color || '#ff0000';
     this.score = 0;
+    this.entitiesManaged = [];
     this.socket = socket;
 }
 
-Player.prototype.emit = function(event, data) {
-    this.socket.emit(event, data);
+Player.prototype.manage = function(ia) {
+    this.entitiesManaged.push(ia);
+};
+
+Player.prototype.dead = function(room) {
+    this.score -= 1;
+    this.entitiesManaged.forEach(function(ia) {
+        room.emit('dead', ia.id);
+    });
+};
+
+Player.prototype.emit = function(/*event, ...args*/) {
+    this.socket.emit.apply(this.socket, arguments);
 };
 
 Player.prototype.toDistant = function() {
