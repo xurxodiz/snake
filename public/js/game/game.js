@@ -11,6 +11,7 @@ export class Game {
         let snakeInitSize = options.snakeInitSize;
         let isInfiniteWallSize = options.infiniteWallSize;
         let callbacks = options.callbacks;
+        this.gameFinishCallback = callbacks.gameFinishCallback;
 
         this.isStarted = false;
         this.isFinish = false;
@@ -49,6 +50,7 @@ export class Game {
                 this.isStarted = false;
             }
             this.isFinish = true;
+            this.gameFinishCallback();
         }
     }
 

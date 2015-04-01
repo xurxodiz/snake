@@ -61,18 +61,14 @@ export class NetworkRemoteGame {
                 },
                 snakeChangeDirectionCallback: (e) => {
                     socket.emit('changeDirection', {id: e.id, direction: e.direction, x: e.x, y: e.y});
+                },
+                gameFinishCallback: () => {
+                    socket.emit('finish');
                 }
             };
 
             game = new Game(gameOptions);
             game.draw();
-
-            var intervalId = setInterval(() => {
-                if(game.isFinish) {
-                    clearInterval(intervalId);
-                    socket.emit('finish');
-                }
-            }, 30);
 
             game.gameBoard.entities.forEach((e) => {
                 if (e.isLocal) {
