@@ -8,8 +8,8 @@ import {IAController} from '../controllers/iAController';
 import {RemoteNetworkController} from '../controllers/remoteNetworkController';
 
 export class ControllerFactory {
-    build(game, type, id, snakeInitSize, initPosition, color, isInfiniteWallSize, gameBoard, snakeChangeDirectionCallback) {
-        let snake = new Snake({id, snakeInitSize, initPosition, color, isInfiniteWallSize, snakeChangeDirectionCallback}, gameBoard);
+    build(game, type, id, pseudo, snakeInitSize, initPosition, color, isInfiniteWallSize, gameBoard, snakeChangeDirectionCallback) {
+        let snake = new Snake({id, pseudo, snakeInitSize, initPosition, color, isInfiniteWallSize, snakeChangeDirectionCallback}, gameBoard);
         gameBoard.addEntity(snake);
         if (type === 'KeyboardController') {
             snake.isLocal = true;

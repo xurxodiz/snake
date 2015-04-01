@@ -20,7 +20,13 @@ export class NetworkRemoteGame {
         }
 
         new ScoreView(socket);
-        new ConsoleView(socket);
+        new ConsoleView(socket, (playerId) => {
+            for(let entity of game.gameBoard.entities) {
+                if(entity.id === playerId) {
+                    return entity;
+                }
+            }
+        });
 
         socket.on('connect', () => {
             socket.emit('joinRoom', roomName, JSON.parse(localStorage.player));

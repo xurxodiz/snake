@@ -9,9 +9,10 @@ export class Snake {
 
     constructor(options, gameBoard) {
         this.type = ENTITIES.SNAKE;
-        var {id, snakeInitSize, initPosition, color, isInfiniteWallSize, snakeChangeDirectionCallback} = options;
+        var {id, pseudo, snakeInitSize, initPosition, color, isInfiniteWallSize, snakeChangeDirectionCallback} = options;
 
         this.id = id;
+        this.pseudo = pseudo;
         this.dx = CONFIG.SNAKE.dx;
         this.dy = CONFIG.SNAKE.dy;
         this.direction = 0;

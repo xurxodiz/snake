@@ -23,8 +23,8 @@ export class Game {
         this.gameBoard = new GameBoard(callbacks);
 
         let factory = new ControllerFactory();
-        for(let {type, color, id, initPosition} of controllers) {
-            this.controllers.push(factory.build(this, type, id, snakeInitSize, initPosition, color, isInfiniteWallSize, this.gameBoard, callbacks.snakeChangeDirectionCallback));
+        for(let {type, color, id, initPosition, pseudo} of controllers) {
+            this.controllers.push(factory.build(this, type, id, pseudo, snakeInitSize, initPosition, color, isInfiniteWallSize, this.gameBoard, callbacks.snakeChangeDirectionCallback));
         }
 
         for(let i=0; i<nbFood; i++) {
