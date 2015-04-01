@@ -78,8 +78,6 @@ form{
 	margin 0 0 20px
 	padding 20px
 	text-align center
- 	display flex
- 	align-items center
 }
 #js-player-pseudo
 	border none
@@ -98,6 +96,8 @@ form{
 .roomList
 	margin-bottom 20px
 	background-color rgba(mainColorDark,0.2)
+	li
+		position relative
 	li + li
 		border-top 1px solid #000
 	a
@@ -107,9 +107,9 @@ form{
 		&:hover
 			box-shadow 0 0 50px rgba(mainColor, 0.3) inset, 0 0 0 1px mainColor inset
 		
+	
 .room-name
 	color mainColor
-	
 	
 .room-playerNb
 	font-family loaded
@@ -121,6 +121,21 @@ form{
 	&::before
 		content '/'
 
+.room-watch
+	position absolute
+	top 0
+	left 80%
+	opacity 0
+	transition all 200ms
+	color mainColor
+.room-watch::before
+	margin-right 5px
+	
+.roomList li:hover .room-watch
+	opacity 1
+	left 100%
+	
+		
 .noroom
 	padding 20px
 	text-align center
