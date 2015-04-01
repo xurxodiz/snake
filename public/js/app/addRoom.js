@@ -13,7 +13,7 @@ export class AddRoom {
         let form = document.getElementById('js-addroomform-form');
 
         btnaddformbtn.addEventListener('click', (event) => {
-            sectionaddform.style.height = '80px';
+            sectionaddform.style.height = '90px';
             btnaddform.style.padding = '0px';
             btnaddform.style.height = '0px';
         });
