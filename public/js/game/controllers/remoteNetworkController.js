@@ -11,9 +11,11 @@ export class RemoteNetworkController {
         this.snake = snake;
         this.game = game;
         this.socket = io();
-        this.socket.on('changedDirection', this.handleChangedDirection.bind(this));
-        this.socket.on('dead', this.handleDead.bind(this));
-        this.socket.on('foodEaten', this.handleFoodEaten.bind(this));
+        this.handlers = [];
+        this.handlers.push({evt: 'changedDirection', fn: this.handleChangedDirection.bind(this)});
+        this.handlers.push({evt: 'dead', fn: this.handleDead.bind(this)});
+        this.handlers.push({evt: 'foodEaten', fn: this.handleFoodEaten.bind(this)});
+        this.handlers.forEach((h) => this.socket.on(h.evt, h.fn));
     }
 
     handleChangedDirection(data) {
@@ -47,9 +49,8 @@ export class RemoteNetworkController {
     }
 
     destroy() {
-        this.socket.removeListener('changedDirection');
-        this.socket.removeListener('dead');
-        this.socket.removeListener('foodEaten');
+        this.handlers.forEach((h) => this.socket.removeListener(h.evt, h.fn));
+        this.handlers = [];
         this.socket = undefined;
         this.snake = undefined;
         this.game = undefined;
