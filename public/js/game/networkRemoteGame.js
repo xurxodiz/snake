@@ -8,7 +8,7 @@ import {ConsoleView} from './consoleView';
 import {connect as io} from 'socket.io-client';
 
 export class NetworkRemoteGame {
-    constructor(roomName) {
+    constructor(roomName, watchRoom) {
         let game;
         let socket = io();
         let myId = -1;
@@ -29,7 +29,11 @@ export class NetworkRemoteGame {
         });
 
         socket.on('connect', () => {
-            socket.emit('joinRoom', roomName, JSON.parse(localStorage.player));
+            if(watchRoom === false) {
+                socket.emit('joinRoom', roomName, JSON.parse(localStorage.player));
+            } else {
+                socket.emit('watchRoom', roomName, JSON.parse(localStorage.player));
+            }
         });
 
         socket.on('roomNotFound', () => {

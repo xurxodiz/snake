@@ -30,6 +30,12 @@ export class Rooms {
                     roomPlayerNb.appendChild(roomPlayerTotal);
                     linkRoom.appendChild(roomPlayerNb);
                     li.appendChild(linkRoom);
+
+                    let linkWatcherRoom = document.createElement('a');
+                    linkWatcherRoom.innerHTML = 'Watch';
+                    linkWatcherRoom.setAttribute('href', '/game.html?w#' + room.name);
+                    li.appendChild(linkWatcherRoom);
+
                     htmlContainer.appendChild(li);
                 });
             } else {

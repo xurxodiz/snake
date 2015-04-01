@@ -9,6 +9,7 @@ import {NetworkRemoteGame} from './networkRemoteGame';
 window.onload = function() {
     new Dj();
     let roomName = window.location.hash.substring(1);
+    let watchRoom = window.location.search.substring(1) === 'w';
     if(roomName === '') {
         var game = new Game({
             nbFood: 1,
@@ -35,6 +36,6 @@ window.onload = function() {
             game.run();
         }, 3000);
     } else {
-        new NetworkRemoteGame(roomName);
+        new NetworkRemoteGame(roomName, watchRoom);
     }
 };

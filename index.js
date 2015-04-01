@@ -84,6 +84,17 @@ io.on('connection', function (socket) {
         });
     });
 
+    socket.on('watchRoom', function(roomName, playerConfig) {
+        var room = roomManager.findRoomByName(roomName);
+        if(!room) {
+            socket.emit('roomNotFound');
+            return;
+        }
+        room.addWatcher(socket);
+        socket.trakeWatcherRoom = room;
+        room.emit('newWatcher', playerConfig);
+    });
+
     socket.on('disconnect', function () {
         if(socket.trakeRoom && socket.trakePlayer) {
             socket.leave(socket.trakeRoom.name);
