@@ -4,6 +4,7 @@
 export class Dj {
     constructor() {
         var music = document.getElementById('musicplease');
+        music.loop = true;
         var musicSwitch = document.getElementById('musicSwitch');
         if(!localStorage.muteMusic) {
             music.play();
