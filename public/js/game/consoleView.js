@@ -11,6 +11,7 @@ export class ConsoleView {
         });
         socket.on('dead', (playerId, optAgainstPlayerId) => {
             let player = getPlayerById(playerId) || {pseudo: playerId, color: undefined};
+            console.log(playerId, player, optAgainstPlayerId);
             if(optAgainstPlayerId === undefined || optAgainstPlayerId === null) {
                 this.appendText(player.pseudo + ' dead (-1)', player.color);
             } else if(playerId === optAgainstPlayerId) {

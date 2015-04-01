@@ -22,3 +22,8 @@ module.exports.CONFIG = {
         radius: 5
     }
 };
+
+module.exports.IA = {
+    color: '#FF0000',
+    pseudo: 'I@'
+};

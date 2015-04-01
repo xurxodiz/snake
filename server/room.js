@@ -3,6 +3,7 @@
  */
 
 var foodUtil = require('../shared/gameUtil').foodUtil;
+var iaConfig = require('../shared/entityCst').IA;
 
 function Room(properties, socket) {
     this.name = properties.name;
@@ -47,6 +48,7 @@ Room.prototype.deletePlayer = function(player) {
     var indexPlayer = this.players.indexOf(player);
     if(indexPlayer > -1) {
         this.playerDead(player.id);
+        this.players[indexPlayer].killIa(this);
         this.players.splice(indexPlayer, 1);
     }
 };
@@ -67,11 +69,11 @@ Room.prototype.toPlayers = function() {
                 var nbIaNeeded = this.nbPlayers - this.players.length;
                 for(var i=0; i<nbIaNeeded; i++) {
                     if(p === player) {
-                        var ia = {id: i + 100000, type: 'IAController', color: '#ff0000', pseudo: 'IA'+i};
+                        var ia = {id: i + 100000, type: 'IAController', color: iaConfig.color, pseudo: iaConfig.pseudo+i};
                         player.manage(ia);
                         gameConfig.controllers.push(ia);
                     } else {
-                        gameConfig.controllers.push({id: i + 100000, type: 'RemoteNetworkController', color: '#ff0000'});
+                        gameConfig.controllers.push({id: i + 100000, type: 'RemoteNetworkController', color: iaConfig.color, pseudo: iaConfig.pseudo+i});
                     }
                 }
             }
@@ -93,7 +95,7 @@ Room.prototype.toWatcher = function(watcher) {
     }.bind(this));
     var nbIaNeeded = this.nbPlayers - this.players.length;
     for(var i=0; i<nbIaNeeded; i++) {
-        gameConfig.controllers.push({id: i+100000, type: 'RemoteNetworkController', color: '#ff0000'});
+        gameConfig.controllers.push({id: i+100000, type: 'RemoteNetworkController', color: iaConfig.color, pseudo: iaConfig.pseudo+i});
     }
     watcher.emit('roomGame', gameConfig);
     if(this.isStarted === false) {
@@ -146,7 +148,7 @@ Room.prototype.foodEaten = function(foodId, playerId) {
     this.foods.forEach(function(food, index) {
         if (food.id === foodId) {
             this.foods.splice(index, 1);
-            this.emit('foodEaten', {foodId: foodId, playerId: playerId});//IA eaten food
+            this.emit('foodEaten', {foodId: foodId, playerId: playerId});
             this.addFood();
         }
     }.bind(this));
@@ -161,7 +163,7 @@ Room.prototype.addFood = function() {
 Room.prototype.playerDead = function(playerId, optAgainstPlayerId) {
     this.players.forEach(function(player) {
         if(player.id === playerId) {
-            player.dead(this);
+            player.dead();
             this.emit('scoreOf', player.toDistant());
         } else if(optAgainstPlayerId !== undefined && player.id === optAgainstPlayerId) {
             player.score += 1;

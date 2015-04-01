@@ -15,9 +15,12 @@ Player.prototype.manage = function(ia) {
     this.entitiesManaged.push(ia);
 };
 
-Player.prototype.dead = function(room) {
+Player.prototype.dead = function() {
     this.score -= 1;
-    this.entitiesManaged.forEach(function(ia) {
+};
+
+Player.prototype.killIa = function(room) {
+    this.entitiesManaged.forEach(function (ia) {
         room.emit('dead', ia.id);
     });
 };

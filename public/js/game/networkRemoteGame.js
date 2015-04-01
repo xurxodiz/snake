@@ -14,6 +14,9 @@ export class NetworkRemoteGame {
         let myId = -1;
 
         var jsRoomFullHtmlElement = document.getElementById('js-room-full');
+        var showWatcherSpan = function() {
+            jsRoomFullHtmlElement.style.display = 'inline-block';
+        };
 
         if(localStorage.player === undefined) {
             window.location = 'index.html';
@@ -33,6 +36,7 @@ export class NetworkRemoteGame {
                 socket.emit('joinRoom', roomName, JSON.parse(localStorage.player));
             } else {
                 socket.emit('watchRoom', roomName, JSON.parse(localStorage.player));
+                showWatcherSpan();
             }
         });
 
@@ -100,7 +104,7 @@ export class NetworkRemoteGame {
         });
 
         socket.on('roomFull', () => {
-            jsRoomFullHtmlElement.style.display = 'inline-block';
+            showWatcherSpan();
         });
 
         socket.on('finish', () => {

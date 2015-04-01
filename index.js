@@ -101,9 +101,10 @@ io.on('connection', function (socket) {
             socket.trakeRoom.deletePlayer(socket.trakePlayer);
             if(socket.trakeRoom.players.length === 0) {
                 roomManager.deleteRoom(socket.trakeRoom);
-            } else {
-                socket.trakeRoom.emit('userDisconnected', {id: socket.trakePlayer.id});
+            } else if(socket.trakeRoom.players.length === 1) {
+                socket.trakeRoom.finish();
             }
+            socket.trakeRoom.emit('userDisconnected', {id: socket.trakePlayer.id});
             io.emit('rooms', roomManager.toDistant());
         }
         if(socket.trakeWatcherRoom) {
