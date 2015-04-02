@@ -33,10 +33,7 @@ export class ConsoleView {
         let li = document.createElement('li');
         li.style.color = optColor;
         li.innerHTML = text;
-        if(this.htmlElement.innerHTML !== '') {
-            this.htmlElement.insertBefore(li, this.htmlElement.children[0]);
-        } else {
-            this.htmlElement.appendChild(li);
-        }
+        this.htmlElement.appendChild(li);
+        this.htmlElement.scrollTop = li.offsetTop;
     }
 }
