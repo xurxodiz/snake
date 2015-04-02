@@ -41,7 +41,7 @@ export class NetworkRemoteGame {
         });
 
         socket.on('roomNotFound', () => {
-            window.alert('Room not exist !');
+            window.location = 'index.html';
         });
 
         var initGame = function(gameOptions) {
