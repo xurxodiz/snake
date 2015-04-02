@@ -2,8 +2,7 @@
  * Created by manland on 26/03/15.
  */
 
-var foodUtil = require('../shared/gameUtil').foodUtil;
-var objectConfig = require('../shared/entityCst').CONFIG.OBJECT;
+var objectUtil = require('../shared/gameUtil').objectUtil;
 var iaConfig = require('../shared/entityCst').IA;
 
 function Room(properties, socket) {
@@ -134,6 +133,7 @@ Room.prototype.start = function() {
         setTimeout(function () {
             this.addObject('FOOD');//TODO : rework me
             this.addObject('BOMB');//TODO : rework me
+            this.addObject('ICE');//TODO : rework me
         }.bind(this), 200);
     }.bind(this), 3000);
 };
@@ -163,7 +163,7 @@ Room.prototype.objectEaten = function(objectId, playerId) {
 };
 
 Room.prototype.addObject = function(type) {
-    var object = {id: this.currentIdObject, type: type, position: foodUtil.randomPosition()};
+    var object = {id: this.currentIdObject, type: type, position: objectUtil.randomPosition()};
     this.currentIdObject++;
     this.objects.push(object);
     this.emit('addObject', object);

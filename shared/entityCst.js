@@ -36,6 +36,18 @@ module.exports.CONFIG = {
             collision: function(snake) {
                 snake.dead();
             }
+        },
+        ICE: {
+            type: 'ICE',
+            dx: 30,
+            dy: 30,
+            radius: 15,
+            color: '#0000FF',
+            collision: function(snake) {
+                snake.x += 10;
+                snake.y += 10;
+                snake.direction += 1;
+            }
         }
     }
 };

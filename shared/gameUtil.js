@@ -4,7 +4,7 @@
 
 var CONFIG = require('./entityCst').CONFIG;
 
-var randomFoodPosition = function() {
+var randomPosition = function() {
     var width = CONFIG.GAME_BOARD.width;
     var height = CONFIG.GAME_BOARD.height;
     var dx = CONFIG.OBJECT.FOOD.dx;
@@ -19,8 +19,8 @@ var randomFoodPosition = function() {
     return {x: randomX * dx, y: randomY * dy};
 };
 
-module.exports.foodUtil = {
-    randomPosition: randomFoodPosition
+module.exports.objectUtil = {
+    randomPosition: randomPosition
 };
 
 var randomSnakePosition = function() {
