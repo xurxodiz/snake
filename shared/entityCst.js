@@ -41,6 +41,6 @@ module.exports.CONFIG = {
 };
 
 module.exports.IA = {
-    color: '#FF0000',
+    color: '#f85500',
     pseudo: 'I@'
 };

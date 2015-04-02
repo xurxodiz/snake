@@ -5,7 +5,7 @@
 function Player(properties, socket) {
     this.id = -1;
     this.pseudo = properties.pseudo || 'IA';
-    this.color = properties.color || '#ff0000';
+    this.color = properties.color || '#f85500';
     this.score = 0;
     this.entitiesManaged = [];
     this.socket = socket;
