@@ -33,7 +33,7 @@ export class Rooms {
 
                     let linkWatcherRoom = document.createElement('a');
                     linkWatcherRoom.setAttribute('class', 'room-watch icon-eye');
-                    linkWatcherRoom.innerHTML = 'Watch';
+                    linkWatcherRoom.innerHTML = 'Spectator';
                     linkWatcherRoom.setAttribute('href', '/game.html?w#' + room.name);
                     li.appendChild(linkWatcherRoom);
 

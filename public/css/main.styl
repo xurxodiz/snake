@@ -5,9 +5,6 @@ mainColor = #9bdcd8
 mainColorDark = #4d6e6c
 
 @import font
-@import index
-@import colorpicker
-
 
 body
 	background-color #000
@@ -18,46 +15,11 @@ body
 	width 90%
 	max-width 600px
 	margin 0 auto
+	box-sizing border-box
 
 .header
 	padding 20px 0 10px
-	
-.logo
-	font-family loaded
-	color mainColor
-	text-align left
-	font-size 1.4em
-	display inline-block
-	text-decoration none
-	opacity 0.5
-	transition all 200ms
-	&:hover
-		opacity 1
-		text-shadow 0 0 20px mainColor
-.menu
-	float right
-	display inline-block
 
-.menuItem
-	display inline-block
-	color mainColor
-	text-decoration none
-	font-size 1.4em
-	opacity 0.5
-	transition all 200ms
-	cursor pointer
-	&:hover
-		opacity 1
-		text-shadow 0 0 20px mainColor
-		
-.grid
-	border 1px solid rgba(mainColor,0.5)
-	margin 0 auto
-	display block
-
-.rules
-	text-align justify
-	padding 10px 0 0
-	font-size 0.8em
-	line-height 1.5em
-	opacity 0.8
+@import index
+@import game
+@import colorpicker

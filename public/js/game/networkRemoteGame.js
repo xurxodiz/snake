@@ -15,7 +15,7 @@ export class NetworkRemoteGame {
 
         var jsRoomFullHtmlElement = document.getElementById('js-room-full');
         var showWatcherSpan = function() {
-            jsRoomFullHtmlElement.style.display = 'inline-block';
+            jsRoomFullHtmlElement.style.display = 'block';
         };
 
         if(localStorage.player === undefined) {

@@ -1,0 +1,92 @@
+
+	
+.logo
+	font-family loaded
+	color mainColor
+	text-align left
+	font-size 1.4em
+	display inline-block
+	text-decoration none
+	opacity 0.5
+	transition all 200ms
+	&:hover
+		opacity 1
+		text-shadow 0 0 20px mainColor
+.menu
+	float right
+	display inline-block
+
+.menuItem
+	display inline-block
+	color mainColor
+	text-decoration none
+	font-size 1.4em
+	opacity 0.5
+	transition all 200ms
+	cursor pointer
+	&:hover
+		opacity 1
+		text-shadow 0 0 20px mainColor
+
+.room-full
+	display:none;
+	padding 20px
+	font-size 0.8em
+	margin-bottom 20px
+	margin-top 10px
+	color mainColor
+	background-color rgba(mainColorDark,0.2)
+	text-align center
+	&:before
+		margin-right 10px
+
+.grid
+	border 1px solid rgba(mainColor,0.5)
+	margin 0 auto
+	display inline-block
+	vertical-align top
+	box-sizing border-box
+
+.grid-side
+	display inline-block
+	vertical-align top
+	box-sizing border-box
+	height 400px
+	width calc(100% - 402px)
+	padding 0 0 0 10px
+	
+.score-view
+	box-sizing border-box
+	height 40%
+	font-size 0.8em
+	line-height 1.5em
+	padding 10px
+	overflow hidden
+	border 1px solid rgba(mainColorDark,0.2)
+	
+.console-view
+	height 60%
+	padding 0 10px 10px
+	position relative
+	overflow hidden
+	box-sizing border-box
+	font-size 0.8em
+	line-height 1.5em
+	background-color rgba(mainColorDark,0.2)
+	&:before
+		content ""
+		position absolute
+		top 0
+		left 0
+		width 100%
+		height 20px
+		background #000
+		background linear-gradient(to bottom,  #000 0%,transparent 100%)
+		box-shadow: 0 32px 20px -20px #000 inset;
+	
+.rules
+	text-align justify
+	padding 10px 0 0
+	font-size 0.8em
+	line-height 1.5em
+	opacity 0.8
