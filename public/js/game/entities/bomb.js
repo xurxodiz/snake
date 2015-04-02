@@ -4,19 +4,19 @@
 
 import {CONFIG, ENTITIES} from '../../../../shared/entityCst';
 
-export class Food {
+export class Bomb {
     constructor(game, optProperties) {
         this.type = ENTITIES.OBJECT;
 
-        this.dx = CONFIG.OBJECT.FOOD.dx;
-        this.dy = CONFIG.OBJECT.FOOD.dy;
-        this.radius = CONFIG.OBJECT.FOOD.radius;
+        this.dx = CONFIG.OBJECT.BOMB.dx;
+        this.dy = CONFIG.OBJECT.BOMB.dy;
+        this.radius = CONFIG.OBJECT.BOMB.radius;
 
         this.isMovable = false;
         this.game = game;
 
         this.id = optProperties.id;
-        this.subtype = CONFIG.OBJECT.FOOD.type;
+        this.subtype = CONFIG.OBJECT.BOMB.type;
         this.x = optProperties.position.x;
         this.y = optProperties.position.y;
 
@@ -35,7 +35,9 @@ export class Food {
     }
 
     draw(drawableUtil) {
-        drawableUtil.circle(CONFIG.OBJECT.FOOD.color, this.x+this.radius, this.y+this.radius, this.radius);
+        drawableUtil.circle(CONFIG.OBJECT.BOMB.color, this.x+this.radius, this.y+this.radius, this.radius);
     }
 
-}
+}/**
+ * Created by manland on 02/04/15.
+ */

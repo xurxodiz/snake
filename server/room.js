@@ -3,6 +3,7 @@
  */
 
 var foodUtil = require('../shared/gameUtil').foodUtil;
+var objectConfig = require('../shared/entityCst').CONFIG.OBJECT;
 var iaConfig = require('../shared/entityCst').IA;
 
 function Room(properties, socket) {
@@ -12,10 +13,11 @@ function Room(properties, socket) {
     this.socket = socket;
     this.players = [];
     this.watchers = [];
-    this.foods = [];
+    this.objects = [];
     this.isStarted = false;
     this.restartInProgress = false;
     this.currentIdPlayer = 0;
+    this.currentIdObject = 0;
 }
 
 Room.prototype.addPlayer = function(player) {
@@ -55,6 +57,7 @@ Room.prototype.deletePlayer = function(player) {
 
 Room.prototype.toPlayers = function() {
     this.players.forEach(function(player) {
+        //TODO : nb food at start required ?
         var gameConfig = {nbFood: 0, snakeInitSize: 10, infiniteWallSize: this.infiniteWallSize, controllers: []};
         this.players.forEach(function(p, index) {
             var distantPlayer = p.toDistant();
@@ -87,6 +90,7 @@ Room.prototype.toWatchers = function() {
 };
 
 Room.prototype.toWatcher = function(watcher) {
+    //TODO : nb food at start required ?
     var gameConfig = {nbFood: 0, snakeInitSize: 10, infiniteWallSize: this.infiniteWallSize, controllers: []};
     this.players.forEach(function(p) {
         var distantPlayer = p.toDistant();
@@ -128,7 +132,8 @@ Room.prototype.start = function() {
     setTimeout(function () {
         this.emit('start');
         setTimeout(function () {
-            this.addFood();
+            this.addObject('FOOD');//TODO : rework me
+            this.addObject('BOMB');//TODO : rework me
         }.bind(this), 200);
     }.bind(this), 3000);
 };
@@ -144,20 +149,24 @@ Room.prototype.restart = function() {
     }
 };
 
-Room.prototype.foodEaten = function(foodId, playerId) {
-    this.foods.forEach(function(food, index) {
-        if (food.id === foodId) {
-            this.foods.splice(index, 1);
-            this.emit('foodEaten', {foodId: foodId, playerId: playerId});
-            this.addFood();
+Room.prototype.objectEaten = function(objectId, playerId) {
+    for(var i=0; i<this.objects.length; i++) {
+        if (this.objects[i].id === objectId) {
+            var type = this.objects[i].type;
+            this.objects.splice(i, 1);
+            this.emit('objectEaten', {objectId: objectId, type: type, playerId: playerId});
+            //TODO : need to add same object ?
+            this.addObject(type);
+            return;
         }
-    }.bind(this));
+    }
 };
 
-Room.prototype.addFood = function() {
-    var food = {id: this.foods.length, position: foodUtil.randomPosition()};
-    this.foods.push(food);
-    this.emit('addFood', food);
+Room.prototype.addObject = function(type) {
+    var object = {id: this.currentIdObject, type: type, position: foodUtil.randomPosition()};
+    this.currentIdObject++;
+    this.objects.push(object);
+    this.emit('addObject', object);
 };
 
 Room.prototype.playerDead = function(playerId, optAgainstPlayerId) {

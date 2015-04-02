@@ -7,7 +7,7 @@ import {CONFIG, ENTITIES} from '../../../../shared/entityCst';
 export class GameBoard {
     constructor(callbacks) {
         this.type = ENTITIES.GAME_BOARD;
-        this.foodEatenCallback = callbacks.foodEatenCallback;
+        this.objectEatenCallback = callbacks.objectEatenCallback;
         this.snakeDeadCallback = callbacks.snakeDeadCallback;
 
         this.x = this.y = 0;
@@ -45,15 +45,15 @@ export class GameBoard {
                         e.dead();
                         this.snakeDeadCallback(e, e2);
                         atLeastOneDead = true;
-                    } else if (collision && e.type === ENTITIES.SNAKE && e2.type === ENTITIES.FOOD) {//collision between snake and food
-                        e.growth();
-                        this.foodEatenCallback(e2, e);
+                    } else if (collision && e.type === ENTITIES.SNAKE && e2.type === ENTITIES.OBJECT) {//collision between snake and food
+                        CONFIG.OBJECT[e2.subtype].collision(e);
+                        this.objectEatenCallback(e2, e);
                         toDelete.push(e2);
 
-                    } else if (collision && e.type === ENTITIES.FOOD && e2.type === ENTITIES.SNAKE) {//collision between food and snake
-                        this.foodEatenCallback(e, e2);
+                    } else if (collision && e.type === ENTITIES.OBJECT && e2.type === ENTITIES.SNAKE) {//collision between food and snake
+                        CONFIG.OBJECT[e.subtype].collision(e2);
+                        this.objectEatenCallback(e, e2);
                         toDelete.push(e);
-                        e2.growth();
                     }
                 }
             }

@@ -53,8 +53,8 @@ export class NetworkRemoteGame {
                 }
             });
             gameOptions.callbacks = {
-                foodEatenCallback: (food, snake) => {
-                    socket.emit('foodEaten', food.id, snake.id);
+                objectEatenCallback: (food, snake) => {
+                    socket.emit('objectEaten', food.id, snake.id);
                 },
                 snakeDeadCallback: (snake, optAgainstSnake) => {
                     socket.emit('dead', snake.id, optAgainstSnake !== undefined ? optAgainstSnake.id : undefined);
@@ -107,8 +107,8 @@ export class NetworkRemoteGame {
             game.isFinish = true;
         });
 
-        socket.on('addFood', (food) => {
-            game.addFood(food);
+        socket.on('addObject', (object) => {
+            game.addObject(object);
         });
     }
 }

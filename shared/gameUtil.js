@@ -7,8 +7,8 @@ var CONFIG = require('./entityCst').CONFIG;
 var randomFoodPosition = function() {
     var width = CONFIG.GAME_BOARD.width;
     var height = CONFIG.GAME_BOARD.height;
-    var dx = CONFIG.FOOD.dx;
-    var dy = CONFIG.FOOD.dy;
+    var dx = CONFIG.OBJECT.FOOD.dx;
+    var dy = CONFIG.OBJECT.FOOD.dy;
 
     var wCells = width / dx;
     var hCells = height / dy;

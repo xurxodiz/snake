@@ -14,7 +14,7 @@ export class RemoteNetworkController {
         this.handlers = [];
         this.handlers.push({evt: 'changedDirection', fn: this.handleChangedDirection.bind(this)});
         this.handlers.push({evt: 'dead', fn: this.handleDead.bind(this)});
-        this.handlers.push({evt: 'foodEaten', fn: this.handleFoodEaten.bind(this)});
+        this.handlers.push({evt: 'objectEaten', fn: this.handleObjectEaten.bind(this)});
         this.handlers.forEach((h) => this.socket.on(h.evt, h.fn));
     }
 
@@ -36,13 +36,13 @@ export class RemoteNetworkController {
         }
     }
 
-    handleFoodEaten(data) {
-        let {foodId, playerId} = data;
+    handleObjectEaten(data) {
+        let {objectId, type, playerId} = data;
         if (playerId === this.snake.id) {
-            this.snake.growth();
+            ENTITIES.CONFIG.OBJECT[type].collision(this.snake);
         }
         this.game.gameBoard.entities.forEach((e) => {
-            if(e.id === foodId && e.type === ENTITIES.FOOD) {
+            if(e.id === objectId && e.type === type) {
                 e.destroy();
             }
         });

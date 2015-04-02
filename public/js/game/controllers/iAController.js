@@ -2,7 +2,7 @@
  * Created by manland on 21/03/15.
  */
 
-import {ENTITIES} from '../../../../shared/entityCst';
+import {CONFIG, ENTITIES} from '../../../../shared/entityCst';
 
 export class IAController {
     constructor(snake, gameBoard) {
@@ -13,7 +13,7 @@ export class IAController {
 
     move() {
         for(var e of this.gameBoard.entities) {
-            if(e.type === ENTITIES.FOOD) {
+            if(e.type === ENTITIES.OBJECT && e.subtype === CONFIG.OBJECT.FOOD.type) {
                 var nextDirection = this.snake.direction;
                 if(e.x > this.snake.x && this.checkDirection(2)) {
                     nextDirection = 2;

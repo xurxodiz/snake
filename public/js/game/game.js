@@ -3,6 +3,7 @@ import {GameBoard} from './entities/gameBoard';
 import {Food} from './entities/food';
 import {CONFIG} from '../../../shared/entityCst';
 import {ControllerFactory} from './controllers/controllerFactory';
+import {ObjectFactory} from './entities/objectFactory';
 
 export class Game {
     constructor(options) {
@@ -22,6 +23,7 @@ export class Game {
         canvas.setAttribute('height', CONFIG.GAME_BOARD.height);
         this.drawableUtil = new DrawableUtil(canvas.getContext("2d"));
         this.gameBoard = new GameBoard(callbacks);
+        this.objectFactory = new ObjectFactory(this.gameBoard);
 
         let factory = new ControllerFactory();
         for(let {type, color, id, initPosition, pseudo} of controllers) {
@@ -42,8 +44,8 @@ export class Game {
 
     step() {
         this.gameBoard.move();
-        let atLeastOneDead = this.gameBoard.checkCollision();
-        if (this.isFinish || (atLeastOneDead && this.gameBoard.nbMovableEntitiesInGame() <= 1)) {
+        this.gameBoard.checkCollision();
+        if (this.isFinish || this.gameBoard.nbMovableEntitiesInGame() <= 1) {
             if (this.intervalId) {
                 clearInterval(this.intervalId);
                 this.intervalId = undefined;
@@ -66,8 +68,8 @@ export class Game {
         loop();
     }
 
-    addFood(optProperties) {
-        this.gameBoard.addEntity(new Food(this.gameBoard, optProperties));
+    addObject(properties) {
+        this.gameBoard.addEntity(this.objectFactory.build(properties));
     }
 
     destroy() {

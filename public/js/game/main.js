@@ -11,30 +11,7 @@ window.onload = function() {
     let roomName = window.location.hash.substring(1);
     let watchRoom = window.location.search.substring(1) === 'w';
     if(roomName === '') {
-        var game = new Game({
-            nbFood: 1,
-            snakeInitSize: 20,
-            controllers: [
-                {type: 'KeyboardController', color: '#9bdcd8', id: 1},
-                {type: 'IAController', color: '#fc780b', id: 2},
-                {type: 'IAController', color: '#fc780b', id: 3}
-                //{type: 'IAController', color: '#fc780b', id: 4},
-                //{type: 'IAController', color: '#fc780b', id: 5}
-            ],
-            callbacks: {
-                foodEatenCallback: function () {
-                    game.gameBoard.addEntity(new Food(game.gameBoard));
-                },
-                snakeDeadCallback: function() {
-                    //TODO : what to do ?
-                }
-            }
-        });
-        game.draw();
-
-        setTimeout(function () {
-            game.run();
-        }, 3000);
+        window.location = 'index.html';
     } else {
         new NetworkRemoteGame(roomName, watchRoom);
     }

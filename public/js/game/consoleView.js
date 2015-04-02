@@ -5,9 +5,9 @@ export class ConsoleView {
     constructor(socket, getPlayerById) {
         this.htmlElement = document.getElementById('js-console-view');
 
-        socket.on('foodEaten', (data) => {
+        socket.on('objectEaten', (data) => {
             let player = getPlayerById(data.playerId) || {pseudo: data.playerId, color: undefined};
-            this.appendText(player.pseudo + ' eat a food', player.color);
+            this.appendText(player.pseudo + ' eat a ' + data.type, player.color);
         });
         socket.on('dead', (playerId, optAgainstPlayerId) => {
             let player = getPlayerById(playerId) || {pseudo: playerId, color: undefined};
