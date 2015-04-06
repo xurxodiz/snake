@@ -39,7 +39,7 @@ export class RemoteNetworkController {
     handleObjectEaten(data) {
         let {objectId, type, playerId} = data;
         this.game.gameBoard.entities.forEach((e) => {
-            if(e.id === objectId && e.type === type) {
+            if(e.id === objectId && e.subtype === type) {
                 if (playerId === this.snake.id) {
                     e.collision(this.snake);
                 }
