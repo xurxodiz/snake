@@ -79,11 +79,6 @@ io.on('connection', function (socket) {
             room.finish();
         });
 
-        //TODO : delete me
-        socket.on('foodEaten', function(foodId, playerId) {
-            room.foodEaten(foodId, playerId);
-        });
-
         socket.on('objectEaten', function(objectId, playerId) {
             room.objectEaten(objectId, playerId);
         });

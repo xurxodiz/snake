@@ -7,7 +7,6 @@ import {ObjectFactory} from './entities/objectFactory';
 
 export class Game {
     constructor(options) {
-        let nbFood = options.nbFood;
         let controllers = options.controllers;
         let snakeInitSize = options.snakeInitSize;
         let isInfiniteWallSize = options.infiniteWallSize;
@@ -26,10 +25,6 @@ export class Game {
 
         for(let {type, color, id, initPosition, pseudo} of controllers) {
             this.controllers.push(ControllerFactory.build(this, type, id, pseudo, snakeInitSize, initPosition, color, isInfiniteWallSize, this.gameBoard, callbacks.snakeChangeDirectionCallback));
-        }
-
-        for(let i=0; i<nbFood; i++) {
-            this.gameBoard.addEntity(new Food(this.gameBoard));
         }
     }
 
