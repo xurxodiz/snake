@@ -30,6 +30,8 @@ export class DrawableUtil {
         this.gridImg.src = '../images/trake_gridbg.png';
         this.bikeImg = new Image();
         this.bikeImg.src = '../images/trake_bike.png';
+        this.iceImg = new Image();
+        this.iceImg.src = '../images/trake_ice_30x30.png';
     }
 
     rect(color, x, y, width, height) {
@@ -117,6 +119,13 @@ export class DrawableUtil {
         this.ctx.arc(x, y, radius, 0, Math.PI*2, true);
         this.ctx.closePath();
         this.ctx.fill();
+    }
+
+    ice(x, y) {
+        this.ctx.save();
+        this.ctx.translate(x, y);
+        this.ctx.drawImage(this.iceImg, -15, -15, 30, 30);
+        this.ctx.restore();
     }
 
     bike(color, x, y, angle) {
