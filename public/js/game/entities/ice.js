@@ -3,7 +3,7 @@
  */
 
 import {CONFIG, ENTITIES} from '../../../../shared/entityCst';
-import {MathUtil} from '../mathUtil';
+import {MathUtil} from '../../../../shared/mathUtil';
 
 export class Ice {
     constructor(game, optProperties) {

@@ -2,8 +2,8 @@
  * Created by manland on 26/03/15.
  */
 
-var objectUtil = require('../shared/gameUtil').objectUtil;
 var iaConfig = require('../shared/entityCst').IA;
+var ObjectManager = require('./objectManager');
 
 function Room(properties, socket) {
     this.name = properties.name;
@@ -12,11 +12,10 @@ function Room(properties, socket) {
     this.socket = socket;
     this.players = [];
     this.watchers = [];
-    this.objects = [];
+    this.objectManager = new ObjectManager(this);
     this.isStarted = false;
     this.restartInProgress = false;
     this.currentIdPlayer = 0;
-    this.currentIdObject = 0;
 }
 
 Room.prototype.addPlayer = function(player) {
@@ -136,12 +135,8 @@ Room.prototype.launchTick = function(nb) {
             this.launchTick(nb-1);
         }.bind(this), 1000);
     } else {
+        this.objectManager.start();
         this.emit('start');
-        setTimeout(function () {
-            this.addObject('FOOD');//TODO : rework me
-            this.addObject('BOMB');//TODO : rework me
-            this.addObject('ICE');//TODO : rework me
-        }.bind(this), 200);
     }
 };
 
@@ -157,23 +152,7 @@ Room.prototype.restart = function() {
 };
 
 Room.prototype.objectEaten = function(objectId, playerId) {
-    for(var i=0; i<this.objects.length; i++) {
-        if (this.objects[i].id === objectId) {
-            var type = this.objects[i].type;
-            this.objects.splice(i, 1);
-            this.emit('objectEaten', {objectId: objectId, type: type, playerId: playerId});
-            //TODO : need to add same object ?
-            this.addObject(type);
-            return;
-        }
-    }
-};
-
-Room.prototype.addObject = function(type) {
-    var object = {id: this.currentIdObject, type: type, position: objectUtil.randomPosition()};
-    this.currentIdObject++;
-    this.objects.push(object);
-    this.emit('addObject', object);
+    this.objectManager.objectEaten(objectId, playerId);
 };
 
 Room.prototype.playerDead = function(playerId, optAgainstPlayerId) {
@@ -191,6 +170,7 @@ Room.prototype.playerDead = function(playerId, optAgainstPlayerId) {
 
 Room.prototype.finish = function() {
     this.emit('finish');
+    this.objectManager.finish();
     this.isStarted = false;
     this.restart();
 };
