@@ -1,6 +1,3 @@
-/**
- * Created by manland on 21/03/15.
- */
 export class KeyboardController {
     constructor(snake) {
         this.snake = snake;

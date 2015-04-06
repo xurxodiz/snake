@@ -5,6 +5,7 @@ import {Dj} from './dj';
 import {Game} from './game';
 import {Food} from './entities/food';
 import {NetworkRemoteGame} from './networkRemoteGame';
+import {DomUtil} from './domUtil';
 
 window.onload = function() {
     new Dj();
@@ -14,5 +15,14 @@ window.onload = function() {
         window.location = 'index.html';
     } else {
         new NetworkRemoteGame(roomName, watchRoom);
+        if(watchRoom === false) {
+            DomUtil.onTabVisibilityChange((evt) => {
+                console.log(evt);
+                if(evt.visible === false) {
+                    //when user change tab, we put it in watcher
+                    window.location = 'game.html?w#'+roomName;
+                }
+            });
+        }
     }
 };
