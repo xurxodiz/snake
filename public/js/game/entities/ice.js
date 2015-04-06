@@ -35,7 +35,7 @@ export class Ice {
     }
 
     draw(drawableUtil) {
-        drawableUtil.circle(CONFIG.OBJECT.ICE.color, this.x+this.radius, this.y+this.radius, this.radius);
+        drawableUtil.circle(CONFIG.OBJECT.ICE.color, this.x+(this.radius/2), this.y+(this.radius/2), this.radius);
     }
 
 }

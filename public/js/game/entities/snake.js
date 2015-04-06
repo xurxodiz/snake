@@ -111,8 +111,6 @@ export class Snake {
                 }
             }
         } else {
-            x = x + 1;
-            y = y + 1;
             let inside = false;
             if(options.strict === false) {
                 inside = x >= otherEntity.x && x <= otherEntity.x + otherEntity.width &&
