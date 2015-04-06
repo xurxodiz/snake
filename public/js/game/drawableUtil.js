@@ -26,6 +26,10 @@ var angleToDegrees = function(angle) {
 export class DrawableUtil {
     constructor(ctx) {
         this.ctx = ctx;
+        this.gridImg = new Image();
+        this.gridImg.src = '../images/trake_gridbg.png';
+        this.bikeImg = new Image();
+        this.bikeImg.src = '../images/trake_bike.png';
     }
 
     rect(color, x, y, width, height) {
@@ -36,11 +40,7 @@ export class DrawableUtil {
         this.ctx.fill();
     }
     grid(x, y, width, height) {
-
-        let pattern = new Image();
-        pattern.src = '../images/trake_gridbg.png';
-
-        this.ctx.fillStyle = this.ctx.createPattern(pattern, "repeat");
+        this.ctx.fillStyle = this.ctx.createPattern(this.gridImg, "repeat");
         this.ctx.fillRect(0, 0, 300, 300);
 
         //this.ctx.fillStyle = color;
@@ -120,15 +120,13 @@ export class DrawableUtil {
     }
 
     bike(color, x, y, angle) {
-        let img = new Image();
-        img.src = '../images/trake_bike.png';
         this.ctx.save();
         this.ctx.translate(x, y);
         this.ctx.translate(5, 5);
         this.ctx.fillStyle = color;
         this.ctx.rotate(angleToDegrees(angle) * Math.PI/180);
         this.ctx.fillRect(-5, -28, 10, 33);
-        this.ctx.drawImage(img, -5, -28, 10, 33);
+        this.ctx.drawImage(this.bikeImg, -5, -28, 10, 33);
         this.ctx.restore();
     }
 }
