@@ -122,20 +122,13 @@ export class DrawableUtil {
     bike(color, x, y, angle) {
         let img = new Image();
         img.src = '../images/trake_bike.png';
-
         this.ctx.save();
-
         this.ctx.translate(x, y);
         this.ctx.translate(5, 5);
-
         this.ctx.fillStyle = color;
-
         this.ctx.rotate(angleToDegrees(angle) * Math.PI/180);
-
         this.ctx.fillRect(-5, -28, 10, 33);
-
         this.ctx.drawImage(img, -5, -28, 10, 33);
-
         this.ctx.restore();
     }
 }

@@ -8,17 +8,13 @@ import {Bomb} from './bomb';
 import {Ice} from './ice';
 
 export class ObjectFactory {
-    constructor(gameBoard) {
-        this.gameBoard = gameBoard;
-    }
-
-    build(properties) {
+    static build(gameBoard, properties) {
         if(properties.type === CONFIG.OBJECT.FOOD.type) {
-            return new Food(this.gameBoard, properties);
+            return new Food(gameBoard, properties);
         } else if(properties.type === CONFIG.OBJECT.BOMB.type) {
-            return new Bomb(this.gameBoard, properties);
+            return new Bomb(gameBoard, properties);
         }  else if(properties.type === CONFIG.OBJECT.ICE.type) {
-            return new Ice(this.gameBoard, properties);
+            return new Ice(gameBoard, properties);
         } else {
             throw new Error('Unknown object type ' + properties.type);
         }

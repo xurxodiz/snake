@@ -23,11 +23,9 @@ export class Game {
         canvas.setAttribute('height', CONFIG.GAME_BOARD.height);
         this.drawableUtil = new DrawableUtil(canvas.getContext("2d"));
         this.gameBoard = new GameBoard(callbacks);
-        this.objectFactory = new ObjectFactory(this.gameBoard);
 
-        let factory = new ControllerFactory();
         for(let {type, color, id, initPosition, pseudo} of controllers) {
-            this.controllers.push(factory.build(this, type, id, pseudo, snakeInitSize, initPosition, color, isInfiniteWallSize, this.gameBoard, callbacks.snakeChangeDirectionCallback));
+            this.controllers.push(ControllerFactory.build(this, type, id, pseudo, snakeInitSize, initPosition, color, isInfiniteWallSize, this.gameBoard, callbacks.snakeChangeDirectionCallback));
         }
 
         for(let i=0; i<nbFood; i++) {
@@ -69,7 +67,7 @@ export class Game {
     }
 
     addObject(properties) {
-        this.gameBoard.addEntity(this.objectFactory.build(properties));
+        this.gameBoard.addEntity(ObjectFactory.build(this.gameBoard, properties));
     }
 
     destroy() {
