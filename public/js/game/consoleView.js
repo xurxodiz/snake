@@ -4,6 +4,17 @@
 export class ConsoleView {
     constructor(socket, getPlayerById) {
         this.htmlElement = document.getElementById('js-console-view');
+        this.inputHtmlElement = document.getElementById('js-console-input');
+        this.inputHtmlElement.addEventListener('keypress', (evt) => {
+            var key = evt.which || evt.keyCode;
+            if (key == 13) { // 13 == enter
+                this.sendText(socket);
+            }
+        });
+        let submitInputHtmlElement = document.getElementById('js-console-submit-input');
+        submitInputHtmlElement.addEventListener('click', () => {
+            this.sendText(socket);
+        });
 
         socket.on('objectEaten', (data) => {
             let player = getPlayerById(data.playerId) || {pseudo: data.playerId, color: undefined};
@@ -26,6 +37,19 @@ export class ConsoleView {
         socket.on('newWatcher', (playerConfig) => {
             this.appendText(playerConfig.pseudo + ' join game as watcher!', playerConfig.color);
         });
+        socket.on('message', (message) => {
+            let {playerId, text} = message;
+            let player = getPlayerById(playerId) || {pseudo: playerId, color: undefined};
+            this.appendText(player.pseudo + ' : ' + text, player.color);
+        });
+    }
+
+    sendText(socket) {
+        let text = this.inputHtmlElement.value;
+        if(text !== undefined && text !== '') {
+            socket.emit('message', text);
+            this.inputHtmlElement.value = '';
+        }
     }
 
     appendText(text, optColor) {

@@ -6,12 +6,14 @@ export class KeyboardController {
     }
 
     onKeyDown (evt) {
-        var newdir = evt.keyCode - 37;
+        if(evt.target === document.body) {
+            var newdir = evt.keyCode - 37;
 
-        // only lateral turns are allowed
-        // (that is, no u-turns)
-        if (newdir != this.snake.direction && newdir != this.snake.direction + 2 && newdir != this.snake.direction - 2) {
-            this.snake.changeDirection(newdir);
+            // only lateral turns are allowed
+            // (that is, no u-turns)
+            if (newdir != this.snake.direction && newdir != this.snake.direction + 2 && newdir != this.snake.direction - 2) {
+                this.snake.changeDirection(newdir);
+            }
         }
     };
 

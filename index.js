@@ -82,6 +82,10 @@ io.on('connection', function (socket) {
         socket.on('objectEaten', function(objectId, playerId) {
             room.objectEaten(objectId, playerId);
         });
+
+        socket.on('message', function(message) {
+            room.emit('message', {playerId: player.id, text: message});
+        });
     });
 
     socket.on('watchRoom', function(roomName, playerConfig) {
