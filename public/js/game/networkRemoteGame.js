@@ -22,6 +22,9 @@ export class NetworkRemoteGame {
             window.location = 'index.html';
         }
 
+        let startInSecondsHtmlElement = document.getElementById('js-start-in-seconds');
+        let startInSecondsInnerHtmlElement = document.getElementById('js-start-in-seconds-inner');
+
         new ScoreView(socket);
         new ConsoleView(socket, (playerId) => {
             for(let entity of game.gameBoard.entities) {
@@ -86,7 +89,13 @@ export class NetworkRemoteGame {
             initGame(gameOptions);
         });
 
+        socket.on('startIn', (nbSeconds) => {
+            startInSecondsHtmlElement.style.display = '';
+            startInSecondsInnerHtmlElement.innerHTML = nbSeconds;
+        });
+
         socket.on('start', () => {
+            startInSecondsHtmlElement.style.display = 'none';
             game.gameBoard.entities.forEach((e) => {
                 if (e.isLocal) {
                     socket.emit('changeDirection', {id: e.id, direction: e.direction, x: e.x, y: e.y});

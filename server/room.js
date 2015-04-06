@@ -126,14 +126,23 @@ Room.prototype.start = function() {
     this.isStarted = true;
     this.toPlayers();
     this.toWatchers();
-    setTimeout(function () {
+    this.launchTick(3);
+};
+
+Room.prototype.launchTick = function(nb) {
+    if(nb > 0) {
+        this.emit('startIn', nb);
+        setTimeout(function () {
+            this.launchTick(nb-1);
+        }.bind(this), 1000);
+    } else {
         this.emit('start');
         setTimeout(function () {
             this.addObject('FOOD');//TODO : rework me
             this.addObject('BOMB');//TODO : rework me
             this.addObject('ICE');//TODO : rework me
         }.bind(this), 200);
-    }.bind(this), 3000);
+    }
 };
 
 Room.prototype.restart = function() {
