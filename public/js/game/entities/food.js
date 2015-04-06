@@ -30,8 +30,13 @@ export class Food {
         }
     }
 
+    //collision is check by snake
     checkCollision() {
         return false;
+    }
+
+    collision(snake) {
+        snake.growth();
     }
 
     draw(drawableUtil) {

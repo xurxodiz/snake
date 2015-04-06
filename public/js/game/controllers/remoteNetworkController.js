@@ -38,11 +38,11 @@ export class RemoteNetworkController {
 
     handleObjectEaten(data) {
         let {objectId, type, playerId} = data;
-        if (playerId === this.snake.id) {
-            ENTITIES.CONFIG.OBJECT[type].collision(this.snake);
-        }
         this.game.gameBoard.entities.forEach((e) => {
             if(e.id === objectId && e.type === type) {
+                if (playerId === this.snake.id) {
+                    e.collision(this.snake);
+                }
                 e.destroy();
             }
         });

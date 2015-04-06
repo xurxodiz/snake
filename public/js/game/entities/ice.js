@@ -3,6 +3,7 @@
  */
 
 import {CONFIG, ENTITIES} from '../../../../shared/entityCst';
+import {MathUtil} from '../mathUtil';
 
 export class Ice {
     constructor(game, optProperties) {
@@ -30,8 +31,15 @@ export class Ice {
         }
     }
 
+    //collision is check by snake
     checkCollision() {
         return false;
+    }
+
+    collision(snake) {
+        snake.x += MathUtil.randomInt(1, 10);
+        snake.y += MathUtil.randomInt(1, 10);
+        snake.direction = MathUtil.randomInt(0, 3);
     }
 
     draw(drawableUtil) {

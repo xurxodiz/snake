@@ -1,7 +1,3 @@
-/**
- * Created by manland on 21/03/15.
- */
-
 import {CONFIG, ENTITIES} from '../../../../shared/entityCst';
 
 export class Bomb {
@@ -30,14 +26,17 @@ export class Bomb {
         }
     }
 
+    //collision is check by snake
     checkCollision() {
         return false;
+    }
+
+    collision(snake) {
+        snake.dead();
     }
 
     draw(drawableUtil) {
         drawableUtil.circle(CONFIG.OBJECT.BOMB.color, this.x+this.radius, this.y+this.radius, this.radius);
     }
 
-}/**
- * Created by manland on 02/04/15.
- */
+}

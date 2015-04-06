@@ -46,12 +46,12 @@ export class GameBoard {
                         this.snakeDeadCallback(e, e2);
                         atLeastOneDead = true;
                     } else if (collision && e.type === ENTITIES.SNAKE && e2.type === ENTITIES.OBJECT) {//collision between snake and food
-                        CONFIG.OBJECT[e2.subtype].collision(e);
+                        e2.collision(e);
                         this.objectEatenCallback(e2, e);
                         toDelete.push(e2);
 
                     } else if (collision && e.type === ENTITIES.OBJECT && e2.type === ENTITIES.SNAKE) {//collision between food and snake
-                        CONFIG.OBJECT[e.subtype].collision(e2);
+                        e.collision(e2);
                         this.objectEatenCallback(e, e2);
                         toDelete.push(e);
                     }

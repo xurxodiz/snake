@@ -22,32 +22,21 @@ module.exports.CONFIG = {
             dx: 10,
             dy: 10,
             radius: 5,
-            color: '#FF0000',
-            collision: function(snake) {
-                snake.growth();
-            }
+            color: '#FF0000'
         },
         BOMB: {
             type: 'BOMB',
             dx: 10,
             dy: 10,
             radius: 5,
-            color: '#FFFF00',
-            collision: function(snake) {
-                snake.dead();
-            }
+            color: '#FFFF00'
         },
         ICE: {
             type: 'ICE',
             dx: 30,
             dy: 30,
             radius: 15,
-            color: '#0000FF',
-            collision: function(snake) {
-                snake.x += 10;
-                snake.y += 10;
-                snake.direction += 1;
-            }
+            color: '#0000FF'
         }
     }
 };
