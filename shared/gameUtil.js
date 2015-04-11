@@ -1,14 +1,10 @@
-/**
- * Created by manland on 29/03/15.
- */
-
-var CONFIG = require('./entityCst').CONFIG;
+var entityCst = require('./entityCst');
 
 var randomPosition = function() {
-    var width = CONFIG.GAME_BOARD.width;
-    var height = CONFIG.GAME_BOARD.height;
-    var dx = CONFIG.OBJECT.FOOD.dx;
-    var dy = CONFIG.OBJECT.FOOD.dy;
+    var width = entityCst.CONFIG.GAME_BOARD.width;
+    var height = entityCst.CONFIG.GAME_BOARD.height;
+    var dx = entityCst.CONFIG.OBJECT.FOOD.dx;
+    var dy = entityCst.CONFIG.OBJECT.FOOD.dy;
 
     var wCells = width / dx;
     var hCells = height / dy;
@@ -24,8 +20,8 @@ module.exports.objectUtil = {
 };
 
 var randomSnakePosition = function() {
-    var width = CONFIG.GAME_BOARD.width;
-    var height = CONFIG.GAME_BOARD.height;
+    var width = entityCst.CONFIG.GAME_BOARD.width;
+    var height = entityCst.CONFIG.GAME_BOARD.height;
 
     var x = Math.floor(Math.random() * width);
     x = Math.floor((x + 5) / 10) * 10;//round to decade

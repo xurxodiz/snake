@@ -2,7 +2,6 @@
  * Created by manland on 06/04/15.
  */
 
-var objectUtil = require('../shared/gameUtil').objectUtil;
 var objectConfig = require('../shared/entityCst').CONFIG.OBJECT;
 var MathUtil = require('../shared/mathUtil').MathUtil;
 
@@ -45,7 +44,7 @@ ObjectManager.prototype.objectEaten = function(objectId, playerId) {
 };
 
 ObjectManager.prototype.addObject = function(type) {
-    var object = {id: this.currentIdObject, type: type, position: objectUtil.randomPosition()};
+    var object = objectConfig[type].build(this.currentIdObject);
     this.currentIdObject++;
     this.objects.push(object);
     this.room.emit('addObject', object);
@@ -56,7 +55,7 @@ ObjectManager.prototype.addRandom = function() {
         var toAdd = this.types[MathUtil.randomInt(0, this.types.length)];
         this.addObject(toAdd);
         this.addRandom();
-    }.bind(this), MathUtil.randomInt(1000, 10000)));
+    }.bind(this), MathUtil.randomInt(5000, 10000)));
 };
 
 module.exports = ObjectManager;

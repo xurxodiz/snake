@@ -1,6 +1,5 @@
-/**
- * Created by manland on 21/03/15.
- */
+var gameUtil = require('./gameUtil');
+
 module.exports.ENTITIES = {
     GAME_BOARD: 'gameBoard',
     SNAKE: 'snake',
@@ -22,21 +21,40 @@ module.exports.CONFIG = {
             dx: 10,
             dy: 10,
             radius: 5,
-            color: '#FF0000'
+            color: '#FF0000',
+            build: function(id) {
+                return {id: id, type: 'FOOD', position: gameUtil.objectUtil.randomPosition()};
+            }
         },
         BOMB: {
             type: 'BOMB',
             dx: 10,
             dy: 10,
             radius: 5,
-            color: '#FFFF00'
+            color: '#FFFF00',
+            build: function(id) {
+                return {id: id, type: 'BOMB', position: gameUtil.objectUtil.randomPosition()};
+            }
         },
         ICE: {
             type: 'ICE',
             dx: 30,
             dy: 30,
             radius: 15,
-            color: '#0000FF'
+            color: '#0000FF',
+            build: function(id) {
+                return {id: id, type: 'ICE', position: gameUtil.objectUtil.randomPosition()};
+            }
+        },
+        PORTAL: {
+            type: 'PORTAL',
+            dx: 30,
+            dy: 30,
+            radius: 15,
+            color: '#FF00FF',
+            build: function(id) {
+                return {id: id, type: 'PORTAL', position: gameUtil.objectUtil.randomPosition(), position2: gameUtil.objectUtil.randomPosition()};
+            }
         }
     }
 };

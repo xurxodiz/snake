@@ -62,7 +62,10 @@ export class Game {
     }
 
     addObject(properties) {
-        this.gameBoard.addEntity(ObjectFactory.build(this.gameBoard, properties));
+        let entities = ObjectFactory.build(this.gameBoard, properties);
+        entities.forEach((e) => {
+            this.gameBoard.addEntity(e);
+        });
     }
 
     destroy() {
