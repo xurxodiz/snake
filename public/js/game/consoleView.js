@@ -1,6 +1,5 @@
-/**
- * Created by manland on 30/03/15.
- */
+import {CONFIG as objectConfig} from '../../../shared/entityCst';
+
 export class ConsoleView {
     constructor(socket, getPlayerById) {
         this.htmlElement = document.getElementById('js-console-view');
@@ -19,11 +18,13 @@ export class ConsoleView {
         socket.on('objectEaten', (data) => {
             let player = getPlayerById(data.playerId) || {pseudo: data.playerId, color: undefined};
             //this.appendText(player.pseudo + ' eat a ' + data.type, player.color);
-            if (data.type === 'ICE') {
+            if (data.type === objectConfig.OBJECT.ICE.type) {
                 this.appendText(player.pseudo + ' slipped on ' + data.type, player.color);
-            }else if (data.type === 'BOMB'){
+            } else if (data.type === objectConfig.OBJECT.BOMB.type) {
                 this.appendText(player.pseudo + ' walked on a ' + data.type, player.color);   
-            }else{
+            } else if (data.type === objectConfig.OBJECT.PORTAL.type) {
+                this.appendText(player.pseudo + ' go through a ' + data.type, player.color);
+            } else {
                 this.appendText(player.pseudo + ' ate a ' + data.type, player.color);   
             }
         });

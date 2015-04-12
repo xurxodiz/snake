@@ -1,62 +1,64 @@
 <!doctype html>
 <html lang="fr">
 	<head>
-                <meta charset="utf-8">
-                <title>Trake - The Grid</title>
-                <script type="text/javascript" src="build/game.js" async></script>
-                <noscript>Your browser does not support JavaScript.</noscript>
-                <link rel="stylesheet" type="text/css" href="build/bundle.css" />
+        <meta charset="utf-8">
+        <title>Trake - The Grid</title>
+        <script type="text/javascript" src="build/game.js" async></script>
+        <noscript>Your browser does not support JavaScript.</noscript>
+        <link rel="stylesheet" type="text/css" href="build/bundle.css" />
 
-                <link rel="apple-touch-icon" sizes="57x57" href="../images/favicons/apple-touch-icon-57x57.png">
-                <link rel="apple-touch-icon" sizes="60x60" href="../images/favicons/apple-touch-icon-60x60.png">
-                <link rel="apple-touch-icon" sizes="72x72" href="../images/favicons/apple-touch-icon-72x72.png">
-                <link rel="apple-touch-icon" sizes="76x76" href="../images/favicons/apple-touch-icon-76x76.png">
-                <link rel="apple-touch-icon" sizes="114x114" href="../images/favicons/apple-touch-icon-114x114.png">
-                <link rel="apple-touch-icon" sizes="120x120" href="../images/favicons/apple-touch-icon-120x120.png">
-                <link rel="apple-touch-icon" sizes="144x144" href="../images/favicons/apple-touch-icon-144x144.png">
-                <link rel="apple-touch-icon" sizes="152x152" href="../images/favicons/apple-touch-icon-152x152.png">
-                <link rel="apple-touch-icon" sizes="180x180" href="../images/favicons/apple-touch-icon-180x180.png">
-                <link rel="icon" type="image/png" href="../images/favicons/favicon-32x32.png" sizes="32x32">
-                <link rel="icon" type="image/png" href="../images/favicons/favicon-194x194.png" sizes="194x194">
-                <link rel="icon" type="image/png" href="../images/favicons/favicon-96x96.png" sizes="96x96">
-                <link rel="icon" type="image/png" href="../images/favicons/android-chrome-192x192.png" sizes="192x192">
-                <link rel="icon" type="image/png" href="../images/favicons/favicon-16x16.png" sizes="16x16">
-                <link rel="manifest" href="../images/favicons/manifest.json">
-                <meta name="msapplication-TileColor" content="#000000">
-                <meta name="msapplication-TileImage" content="../images/favicons/mstile-144x144.png">
-                <meta name="theme-color" content="#000000">
+        <link rel="apple-touch-icon" sizes="57x57" href="../images/favicons/apple-touch-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="../images/favicons/apple-touch-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="../images/favicons/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="../images/favicons/apple-touch-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="../images/favicons/apple-touch-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="../images/favicons/apple-touch-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="../images/favicons/apple-touch-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="../images/favicons/apple-touch-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="../images/favicons/apple-touch-icon-180x180.png">
+        <link rel="icon" type="image/png" href="../images/favicons/favicon-32x32.png" sizes="32x32">
+        <link rel="icon" type="image/png" href="../images/favicons/favicon-194x194.png" sizes="194x194">
+        <link rel="icon" type="image/png" href="../images/favicons/favicon-96x96.png" sizes="96x96">
+        <link rel="icon" type="image/png" href="../images/favicons/android-chrome-192x192.png" sizes="192x192">
+        <link rel="icon" type="image/png" href="../images/favicons/favicon-16x16.png" sizes="16x16">
+        <link rel="manifest" href="../images/favicons/manifest.json">
+        <meta name="msapplication-TileColor" content="#000000">
+        <meta name="msapplication-TileImage" content="../images/favicons/mstile-144x144.png">
+        <meta name="theme-color" content="#000000">
 	</head>
 	<body>
-                <header class="maxWidth header">
-                        <a href="index.html" class="logo">TRAKE</a>
-                        <ul class="menu">
-                                <li id="musicSwitch" class="menuItem icon-volume"></li>
-                        </ul>
-                </header>
-                <div id="js-room-full" class="maxWidth room-full icon-eye">YOU ARE IN SPECTATOR MODE</div>
-                <audio id="musicplease" src="../audio/derezzed_8bit.mp3" preload="auto"></audio>
-                <div class="maxWidth">
-                        <canvas id="canvas" class="grid">Your navigator don't support canvas ! WTF ?</canvas><!--
-                        --><div class="grid-side">
-                                <ul id="js-score-view" class="score-view"></ul>
-                                <div class="console-view-wrapper">
-                                        <ul id="js-console-view" class="console-view"></ul>
-                                </div>
-                                <input type="text" id="js-console-input">
-                                <div id="js-console-submit-input" class="btn">Send</div>
-                        </div>
+        <header class="maxWidth header">
+            <a href="index.html" class="logo">TRAKE</a>
+            <ul class="menu">
+                <li id="js-help-switch" class="menuItem icon-help"></li>
+                <li id="musicSwitch" class="menuItem icon-volume"></li>
+            </ul>
+        </header>
+        <div id="js-room-full" class="maxWidth room-full icon-eye">YOU ARE IN SPECTATOR MODE</div>
+        <audio id="musicplease" src="../audio/derezzed_8bit.mp3" preload="auto"></audio>
+        <div class="maxWidth">
+            <canvas id="canvas" class="grid">Your navigator don't support canvas ! WTF ?</canvas><!--
+            --><div class="grid-side">
+                <ul id="js-score-view" class="score-view"></ul>
+                <div class="console-view-wrapper">
+                        <ul id="js-console-view" class="console-view"></ul>
                 </div>
-                <div class="maxWidth rules">
-                        The game begin after 3 sec. Use arrow keys to move.Try to eat as many food pellets as possible without hitting the square walls or yourself.
+                <input type="text" id="js-console-input">
+                <div id="js-console-submit-input" class="btn">Send</div>
+            </div>
+        </div>
+        <div id="js-help-container" class="maxWidth rules">
+            <img src="../images/help/help.png">
+            <div class="maxWidth rules">Use icon-arrow-left key to move your bike. Kill other players to win the game!</div>
+        </div>
+        <div id="js-start-in-seconds">
+            <div class="start-in-seconds-loader start-in-seconds-loader-first_circle"></div>
+            <div class="start-in-seconds-loader start-in-seconds-loader-first_div">
+                <div class="start-in-seconds-loader-second_div">
+                    <div id="js-start-in-seconds-inner" class="start-in-seconds-loader-last_div"></div>
                 </div>
-                <div id="js-start-in-seconds">
-                    <div class="start-in-seconds-loader start-in-seconds-loader-first_circle"></div>
-                    <div class="start-in-seconds-loader start-in-seconds-loader-first_div">
-                        <div class="start-in-seconds-loader-second_div">
-                            <div id="js-start-in-seconds-inner" class="start-in-seconds-loader-last_div"></div>
-                        </div>
-                    </div>
-                </div>
-                <footer class="footer">Made with ♥ by <a href="http://froggies.github.io/">Froggies</a> // Fork me on <a href="https://github.com/Froggies/trake">Froggies/trake</a></footer>
+            </div>
+        </div>
+        <footer class="footer">Made with ♥ by <a href="http://froggies.github.io/">Froggies</a> // Fork me on <a href="https://github.com/Froggies/trake">Froggies/trake</a></footer>
 	</body>
 </html>
