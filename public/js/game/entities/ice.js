@@ -39,7 +39,12 @@ export class Ice {
     collision(snake) {
         snake.x += MathUtil.randomInt(1, 10);
         snake.y += MathUtil.randomInt(1, 10);
-        snake.direction = MathUtil.randomInt(0, 3);
+        let newdir = MathUtil.randomInt(0, 3);
+        // only lateral turns are allowed
+        // (that is, no u-turns)
+        if (newdir != snake.direction && newdir != snake.direction + 2 && newdir != snake.direction - 2) {
+            snake.changeDirection(newdir);
+        }
     }
 
     draw(drawableUtil) {
