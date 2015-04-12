@@ -19,13 +19,13 @@ export class ConsoleView {
             let player = getPlayerById(data.playerId) || {pseudo: data.playerId, color: undefined};
             //this.appendText(player.pseudo + ' eat a ' + data.type, player.color);
             if (data.type === objectConfig.OBJECT.ICE.type) {
-                this.appendText(player.pseudo + ' slipped on ' + data.type, player.color);
+                this.appendText(player.pseudo + ' slipped on Ice', player.color);
             } else if (data.type === objectConfig.OBJECT.BOMB.type) {
-                this.appendText(player.pseudo + ' walked on a ' + data.type, player.color);   
+                this.appendText(player.pseudo + ' walked on a Mine (-1)', player.color);   
             } else if (data.type === objectConfig.OBJECT.PORTAL.type) {
-                this.appendText(player.pseudo + ' go through a ' + data.type, player.color);
+                this.appendText(player.pseudo + ' went through a Portal', player.color);
             } else {
-                this.appendText(player.pseudo + ' ate a ' + data.type, player.color);   
+                this.appendText(player.pseudo + ' got some Energy (+1)', player.color);   
             }
         });
         socket.on('dead', (playerId, optAgainstPlayerId) => {
