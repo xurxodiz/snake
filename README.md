@@ -1,8 +1,12 @@
-From the most simple snake game, to the most complicated we can do in 3 weeks. Try it on http://ns3361665.ip-91-121-202.eu:5000
+From the most simple snake game, to the most complicated we can do in 3 weeks.
+Try it on http://ns3361665.ip-91-121-202.eu:5000
+
+This game was specially made for the [GitHub's Game Off 2015 : The Game Has Changed](https://github.com/blog/1972-the-game-has-changed)
+![GitHub's Game Off](https://cloud.githubusercontent.com/assets/121322/6641792/41f367b0-c95d-11e4-8f32-985f41d40579.jpeg)
 
 # Fork of
 
-> https://github.com/jrgdiz/snake : A simple clone of the snake game, developed as my first attempt at using canvas and Javascript.
+> As prescribed in the Game Off rules, this game is a fork of an other galme found in github https://github.com/jrgdiz/snake : A simple clone of the snake game, developed as my first attempt at using canvas and Javascript.
 
 # Installation
 
@@ -18,6 +22,10 @@ From the most simple snake game, to the most complicated we can do in 3 weeks. T
 > npm start
 > open webbrowser on http://127.0.0.1:3000
 ```
+
+# Helps
+
+![Trake helps](https://github.com/Froggies/trake/blob/master/public/images/help/help.png)
 
 # Features
 
