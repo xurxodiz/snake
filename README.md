@@ -2,7 +2,7 @@ From the most simple snake game, to the most complicated we can do in 3 weeks. T
 
 # Fork of
 
->> https://github.com/jrgdiz/snake : A simple clone of the snake game, developed as my first attempt at using canvas and Javascript.
+> https://github.com/jrgdiz/snake : A simple clone of the snake game, developed as my first attempt at using canvas and Javascript.
 
 # Installation
 
@@ -45,3 +45,10 @@ From the most simple snake game, to the most complicated we can do in 3 weeks. T
 * server/ : all js files for the server 
 * index.js : entry point of the server
 * constants.js : constants to configure the server
+
+# Team
+
+From [@Froggies](https://github.com/Froggies) :
+
+* [@undless](https://github.com/undless)
+* [@manland](https://github.com/manland)
