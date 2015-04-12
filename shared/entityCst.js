@@ -21,7 +21,7 @@ module.exports.CONFIG = {
             dx: 10,
             dy: 10,
             radius: 5,
-            color: '#FF0000',
+            color: '#9bdcd8',
             build: function(id) {
                 return {id: id, type: 'FOOD', position: gameUtil.objectUtil.randomPosition()};
             }
@@ -51,7 +51,8 @@ module.exports.CONFIG = {
             dx: 30,
             dy: 30,
             radius: 15,
-            color: '#FF00FF',
+            color: '#009de0',
+            color2: '#ef9100',
             build: function(id) {
                 return {id: id, type: 'PORTAL', position: gameUtil.objectUtil.randomPosition(), position2: gameUtil.objectUtil.randomPosition()};
             }

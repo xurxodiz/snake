@@ -36,7 +36,7 @@ export class Bomb {
     }
 
     draw(drawableUtil) {
-        drawableUtil.circle(CONFIG.OBJECT.BOMB.color, this.x+this.radius, this.y+this.radius, this.radius);
+        drawableUtil.bomb(this.x + this.radius, this.y + this.radius);
     }
 
 }

@@ -32,6 +32,10 @@ export class DrawableUtil {
         this.bikeImg.src = '../images/trake_bike.png';
         this.iceImg = new Image();
         this.iceImg.src = '../images/trake_ice_30x30.png';
+        this.landmine = new Image();
+        this.landmine.src = '../images/landmine.png';
+        this.battery = new Image();
+        this.battery.src = '../images/battery.png';
     }
 
     rect(color, x, y, width, height) {
@@ -121,10 +125,34 @@ export class DrawableUtil {
         this.ctx.fill();
     }
 
+    portal(color, x, y, radius) {
+        this.ctx.strokeStyle = color;
+        this.ctx.fillStyle = "#000";
+        this.ctx.beginPath();
+        this.ctx.arc(x, y, radius, 0, Math.PI*2, true);
+        this.ctx.closePath();
+        this.ctx.fill();
+        this.ctx.stroke();
+    }
+
     ice(x, y) {
         this.ctx.save();
         this.ctx.translate(x, y);
         this.ctx.drawImage(this.iceImg, -15, -15, 30, 30);
+        this.ctx.restore();
+    }
+
+    bomb(x, y) {
+        this.ctx.save();
+        this.ctx.translate(x, y);
+        this.ctx.drawImage(this.landmine, -5, -5, 10, 10);
+        this.ctx.restore();
+    }
+
+    energy(x, y) {
+        this.ctx.save();
+        this.ctx.translate(x, y);
+        this.ctx.drawImage(this.battery, -6, -4, 13, 7);
         this.ctx.restore();
     }
 

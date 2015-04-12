@@ -40,7 +40,7 @@ export class Food {
     }
 
     draw(drawableUtil) {
-        drawableUtil.circle(CONFIG.OBJECT.FOOD.color, this.x+this.radius, this.y+this.radius, this.radius);
+        drawableUtil.energy(this.x+this.radius, this.y+this.radius);
     }
 
 }

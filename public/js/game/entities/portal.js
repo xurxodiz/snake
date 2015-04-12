@@ -43,7 +43,7 @@ export class Portal {
     }
 
     draw(drawableUtil) {
-        drawableUtil.circle(CONFIG.OBJECT.PORTAL.color, this.x+this.radius, this.y+this.radius, this.radius);
+        drawableUtil.portal(CONFIG.OBJECT.PORTAL.color, this.x+this.radius, this.y+this.radius, this.radius);
     }
 
 }
