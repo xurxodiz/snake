@@ -20,6 +20,7 @@
 	display inline-block
 	color mainColor
 	text-decoration none
+	margin 0 0 0 10px
 	font-size 1.4em
 	opacity 0.5
 	transition all 200ms
@@ -27,6 +28,19 @@
 	&:hover
 		opacity 1
 		text-shadow 0 0 20px mainColor
+
+
+.helps
+	position fixed
+	margin auto
+	top 52px
+	left 0
+	right 0
+	display none
+
+.help-switch:hover .helps
+	display block
+	
 
 .room-full
 	display:none;
@@ -70,7 +84,8 @@
 	
 .console-view-wrapper
 	box-sizing border-box
-	height 50%
+	height calc(60% - 40px)
+	margin-bottom 5px
 	position relative
 	overflow hidden
 	background-color rgba(mainColorDark,0.2)
@@ -111,23 +126,8 @@
 	}
 }
 
-.chat-input-wrapper
-	box-sizing border-box
-	padding-top 4px
 
-	input
-		width 62% //TODO : magic number power
-		height 18px  //TODO : magic number power
-
-.rules
-	position absolute
-	top 0
-	left calc(50% - 307px)
-	text-align justify
-	padding 10px 0 0
-	font-size 0.8em
-	line-height 1.5em
-	display none
-
-.rules:hover
-	display block
+.console-input
+	width: 115px;
+	position: relative;
+	top: 1px;

@@ -30,7 +30,9 @@
         <header class="maxWidth header">
             <a href="index.html" class="logo">TRAKE</a>
             <ul class="menu">
-                <li id="js-help-switch" class="menuItem icon-help"></li>
+                <li id="js-help-switch" class="menuItem icon-help help-switch">
+                    <img src="../images/help/help.png" class="helps" />
+                </li>
                 <li id="musicSwitch" class="menuItem icon-volume"></li>
             </ul>
         </header>
@@ -44,16 +46,13 @@
                 <div class="console-view-wrapper">
                         <ul id="js-console-view" class="console-view"></ul>
                 </div>
-                <div class="chat-input-wrapper">
-                    <input type="text" id="js-console-input">
-                    <div id="js-console-submit-input" class="btn">Send</div>
-                </div>
+                <input type="text" id="js-console-input" class="console-input">
+                <div id="js-console-submit-input" class="btn console-btn">Send</div>
             </div>
         </div>
-        <div id="js-help-container" class="maxWidth rules">
-            <img src="../images/help/help.png">
+        <!-- <div id="js-help-container" class="maxWidth rules">
             <div class="maxWidth rules">Use icon-arrow-left key to move your bike. Kill other players to win the game!</div>
-        </div>
+        </div> -->
         <div id="js-start-in-seconds">
             <div class="start-in-seconds-loader start-in-seconds-loader-first_circle"></div>
             <div class="start-in-seconds-loader start-in-seconds-loader-first_div">

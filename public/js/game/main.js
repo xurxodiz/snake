@@ -5,7 +5,6 @@ import {Dj} from './dj';
 import {NetworkRemoteGame} from './networkRemoteGame';
 import {DomUtil} from './domUtil';
 import {HelpRoom} from './helpRoom';
-import {HelpView} from './helpView';
 
 window.onload = function() {
     new Dj();
@@ -15,7 +14,6 @@ window.onload = function() {
     } else if(roomName === 'h' && window.location.search.substring(1) === 'h') {
         HelpRoom.build();
     } else {
-        new HelpView();
         let watchRoom = window.location.search.substring(1) === 'w';
         new NetworkRemoteGame(roomName, watchRoom);
         if(watchRoom === false) {
