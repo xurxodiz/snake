@@ -7,8 +7,8 @@ export class KeyboardController {
         document.onkeydown = this.onKeyDown.bind(this);
         this.htmlToRemove = [];
         if('ontouchstart' in window || navigator.msMaxTouchPoints) {
-            this.htmlToRemove.push(DomUtil.buildTouchButton('leftRightButton', document.body, this.onLeftRight.bind(this)));
-            this.htmlToRemove.push(DomUtil.buildTouchButton('TopBottomButton', document.body, this.onTopBottom.bind(this)));
+            this.htmlToRemove.push(DomUtil.buildTouchButton('leftRightButton', ['icon-arrow-left', 'icon-arrow-right'], document.body, this.onLeftRight.bind(this)));
+            this.htmlToRemove.push(DomUtil.buildTouchButton('topBottomButton', ['icon-arrow-up', 'icon-arrow-down'], document.body, this.onTopBottom.bind(this)));
         }
     }
 

@@ -63,10 +63,15 @@ export class DomUtil {
         onTabVisibilityChangeCallbacks.push(callback);
     }
 
-    static buildTouchButton(className, container, onTouch) {
-        var div = document.createElement('div');
+    static buildTouchButton(className, childrenClassName, container, onTouch) {
+        let div = document.createElement('div');
         div.classList.add(className);
-        var _handleStart = function(e) {
+        childrenClassName.forEach((ccn) => {
+            let subDiv = document.createElement('div');
+            subDiv.classList.add(ccn);
+            div.appendChild(subDiv);
+        });
+        let _handleStart = function(e) {
             if(e.target === div) {
                 onTouch(buildBound(e));
             }
