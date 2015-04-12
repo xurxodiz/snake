@@ -12,6 +12,7 @@
 	
 	div
 		line-height 30px
+		pointer-events none
 		
 	div.icon-arrow-left
 		float left
@@ -35,3 +36,9 @@
 	width 30px
 	height 150px
 	text-align center
+
+@media (max-width: 800px) {
+	.chat-input-wrapper {
+		display none
+	}
+}

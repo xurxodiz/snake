@@ -1,12 +1,36 @@
 import {DomUtil} from '../domUtil';
 
+var isMobile = {
+    Android: function() {
+        return navigator.userAgent.match(/Android/i);
+    },
+    BlackBerry: function() {
+        return navigator.userAgent.match(/BlackBerry/i);
+    },
+    iOS: function() {
+        return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+    },
+    Opera: function() {
+        return navigator.userAgent.match(/Opera Mini/i);
+    },
+    Windows: function() {
+        return navigator.userAgent.match(/IEMobile/i);
+    },
+    FirefoxOs: function() {
+        return (!!(navigator.mozApps) && navigator.userAgent.search('Mobile') !== -1);
+    },
+    any: function() {
+        return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows() || isMobile.FirefoxOs());
+    }
+};
+
 export class KeyboardController {
     constructor(snake) {
         this.snake = snake;
         document.onkeypress = this.onKeyDown.bind(this);
         document.onkeydown = this.onKeyDown.bind(this);
         this.htmlToRemove = [];
-        if('ontouchstart' in window || navigator.msMaxTouchPoints) {
+        if(isMobile.any() && ('ontouchstart' in window || navigator.msMaxTouchPoints)) {
             this.htmlToRemove.push(DomUtil.buildTouchButton('leftRightButton', ['icon-arrow-left', 'icon-arrow-right'], document.body, this.onLeftRight.bind(this)));
             this.htmlToRemove.push(DomUtil.buildTouchButton('topBottomButton', ['icon-arrow-up', 'icon-arrow-down'], document.body, this.onTopBottom.bind(this)));
         }
