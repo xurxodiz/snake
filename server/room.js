@@ -176,7 +176,7 @@ Room.prototype.finish = function() {
 };
 
 Room.prototype.emit = function(/*event, ...args*/) {
-    this.socket.emit.apply(this.socket, arguments);
+    this.socket.to(this.name).emit.apply(this.socket.to(this.name), arguments);
 };
 
 Room.prototype.toDistant = function() {

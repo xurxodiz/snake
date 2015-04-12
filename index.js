@@ -37,8 +37,7 @@ io.on('connection', function (socket) {
     });
 
     socket.on('addRoom', function (data) {
-        roomManager.addRoom(new Room(data, io.to(data.name)));
-        io.emit();//what the fuck ?? Need it, else io doesn't flush next request !?
+        roomManager.addRoom(new Room(data, io));
         io.emit('rooms', roomManager.toDistant());
     });
 
