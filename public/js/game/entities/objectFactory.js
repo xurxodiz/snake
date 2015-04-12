@@ -17,8 +17,8 @@ export class ObjectFactory {
         }  else if(properties.type === CONFIG.OBJECT.ICE.type) {
             return [new Ice(gameBoard, properties)];
         }  else if(properties.type === CONFIG.OBJECT.PORTAL.type) {
-            let portal1 = new Portal(gameBoard, properties, 'position');
-            let portal2 = new Portal(gameBoard, properties, 'position2');
+            let portal1 = new Portal(gameBoard, properties, 'position', 'color');
+            let portal2 = new Portal(gameBoard, properties, 'position2', 'color2');
             portal1.toPortal = portal2;
             portal2.toPortal = portal1;
             return [portal1, portal2];

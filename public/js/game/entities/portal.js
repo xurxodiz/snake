@@ -5,7 +5,7 @@
 import {CONFIG, ENTITIES} from '../../../../shared/entityCst';
 
 export class Portal {
-    constructor(game, optProperties, positionPropName) {
+    constructor(game, optProperties, positionPropName, colorPropName) {
         //this.toPortal setted by factory
 
         this.type = ENTITIES.OBJECT;
@@ -13,6 +13,7 @@ export class Portal {
         this.dx = CONFIG.OBJECT.PORTAL.dx;
         this.dy = CONFIG.OBJECT.PORTAL.dy;
         this.radius = CONFIG.OBJECT.PORTAL.radius;
+        this.color = CONFIG.OBJECT.PORTAL[colorPropName];
 
         this.isMovable = false;
         this.game = game;
@@ -43,7 +44,7 @@ export class Portal {
     }
 
     draw(drawableUtil) {
-        drawableUtil.portal(CONFIG.OBJECT.PORTAL.color, this.x+this.radius, this.y+this.radius, this.radius);
+        drawableUtil.portal(this.color, this.x+this.radius, this.y+this.radius, this.radius);
     }
 
 }
