@@ -2,13 +2,17 @@
 
 Summary
 
-> [About](https://github.com/Froggies/trake#about)
-
-> [How to Play](https://github.com/Froggies/trake#how-to-play)
-
-> [Features](https://github.com/Froggies/trake#features)
-
-> [Team](https://github.com/Froggies/trake#team)
+- [About](https://github.com/Froggies/trake#about)
+ - [Forked from jrgdiz/snake](https://github.com/Froggies/trake#about)
+ - [Technology](https://github.com/Froggies/trake#technology)
+ - [Installation](https://github.com/Froggies/trake#installation)
+ - [Run](https://github.com/Froggies/trake#run)
+ - [Architecture](https://github.com/Froggies/trake#architecture)
+- [How to Play](https://github.com/Froggies/trake#how-to-play)
+ - [Launch screen](https://github.com/Froggies/trake#launch-screen)
+ - [In Game](https://github.com/Froggies/trake#in-game)
+- [Features](https://github.com/Froggies/trake#features)
+- [Team](https://github.com/Froggies/trake#team)
 
 
 ---
@@ -77,7 +81,7 @@ Environment :
    * Number of players
    * Infinite walls behind the bike (or not)
 
-![Trake helps](https://github.com/Froggies/trake/blob/master/public/images/help/help.png)
+![Trake helps](https://github.com/Froggies/trake/blob/master/public/images/help/launch_screen.png)
 
 ## In Game
 
