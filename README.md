@@ -81,8 +81,6 @@ Environment :
    * Number of players
    * Infinite walls behind the bike (or not)
 
-![Trake helps](https://github.com/Froggies/trake/blob/master/public/images/help/launch_screen.png)
-
 ## In Game
 
 * Use keyboard arrows to control your bike (or screen arrows on mobile)
