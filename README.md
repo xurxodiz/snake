@@ -1,3 +1,18 @@
+---
+
+Summary
+
+> [About](https://github.com/Froggies/trake#about)
+
+> [How to Play](https://github.com/Froggies/trake#how-to-play)
+
+> [Features](https://github.com/Froggies/trake#features)
+
+> [Team](https://github.com/Froggies/trake#team)
+
+
+---
+
 
 This game was specially made for the [GitHub's Game Off 2015 : The Game Has Changed](https://github.com/blog/1972-the-game-has-changed)
 ![GitHub's Game Off](https://cloud.githubusercontent.com/assets/121322/6641792/41f367b0-c95d-11e4-8f32-985f41d40579.jpeg)
@@ -75,22 +90,17 @@ Front :
 
 # Features
 
-## Added
-
-* Multiple players (with personalized name and color)
-* Artificial Inteligence players
-* Score-board
-* Spectator mode
-* Objects : batteries, mines, ice and portals
-* Infinite wall behind bike (Tron mode) or not (Snake mode)
-* Chat inside rooms
-* Mobile compatibility
-
-## TODO / Ideas
-
-* Finish the `perfect trace` branch to interpolate correctly trajectory of other players
-* Enhance IA, creates others, encourage community to create one
-* Room types / Game mode : survivor, flag, course...
+* [x] Multiple players (with personalized name and color)
+* [x] Artificial Inteligence players
+* [x] Score-board
+* [x] Spectator mode
+* [x] Objects : batteries, mines, ice and portals
+* [x] Infinite wall behind bike (Tron mode) or not (Snake mode)
+* [x] Chat inside rooms
+* [x] Mobile compatibility
+* [ ] Finish the `perfect trace` branch to interpolate correctly trajectory of other players
+* [ ] Enhance IA, creates others, encourage community to create one
+* [ ] Room types / Game mode : survivor, flag, course...
 
 
 # Team
