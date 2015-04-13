@@ -30,12 +30,15 @@ As prescribed in the Game Off rules, this game is a fork of an other game found 
 ## Technology
 
 Back :
-   * Java ?
+  * Javascript - ES5
 
 Front :
-   * Vanilla Js (100% pure Javascript)
-   * HTML5 with canvas
-   * CSS3 by Stylus (CSS preprocessor https://github.com/stylus/stylus)
+  * Vanilla Js (100% pure Javascript - ES6)
+  * HTML5 with canvas
+  * CSS3 by Stylus (CSS preprocessor https://github.com/stylus/stylus)
+
+Environment :
+  * Npm
 
 ## Installation
 
@@ -57,9 +60,9 @@ Front :
 * public/ : displayed by web browser
     * build/ : generated stuff for browser, don't forget to delete useless files some times !
     * css/ : all stylesheet needs, simple css files (with .css extension) or stylus files (with .styl extension)
-    * js/ : all javascript files in ES6 (thanks to browserify and babelify plugins) format
+    * js/ : all Javascript files in ES6 (thanks to browserify and babelify plugins) format
     * images/ : you know what it is!
-* shared/ : js files can be used in browser and/or in server, must be in es5 format
+* shared/ : js files can be used in browser and/or in server, must be in ES5 format
 * server/ : all js files for the server 
 * index.js : entry point of the server
 * constants.js : constants to configure the server
