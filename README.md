@@ -75,6 +75,8 @@ Environment :
 
 ## Launch screen
 
+![Trake Launch Screen](https://github.com/Froggies/trake/blob/master/public/images/help/trake_print1.png)
+
 * Chose your name and bike color
 * Join a existing room (as player or viewer) or create a new one with your own rules :
    * Room name
@@ -82,6 +84,8 @@ Environment :
    * Infinite walls behind the bike (or not)
 
 ## In Game
+
+![Trake In Game Screen](https://github.com/Froggies/trake/blob/master/public/images/help/trake_print2.png)
 
 * Use keyboard arrows to control your bike (or screen arrows on mobile)
 * Try to crush you opponent in your trail and try to stay alive !
@@ -91,7 +95,7 @@ Environment :
    * The ice make you slip
    * The portal teleport you to the other portal
 
-![Trake helps](https://github.com/Froggies/trake/blob/master/public/images/help/help.png)
+![Trake In Game Helps](https://github.com/Froggies/trake/blob/master/public/images/help/help.png)
 
 # Features
 
