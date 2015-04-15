@@ -1,3 +1,6 @@
+
+![Trake](https://github.com/Froggies/trake/blob/master/public/images/help/trake_readmelogo.png)
+
 ---
 
 Summary
