@@ -3,8 +3,6 @@
 
 ---
 
-Summary
-
 - [About](https://github.com/Froggies/trake#about)
  - [Forked from jrgdiz/snake](https://github.com/Froggies/trake#about)
  - [Technology](https://github.com/Froggies/trake#technology)
