@@ -1,0 +1,170 @@
+.maxWidth.maxWidth-home
+	max-width 350px
+	min-height 450px
+	
+.headerHome
+	padding 20px 0 20px
+	text-align center
+	
+.logohome
+	font-family loaded
+	color mainColor
+	text-align left
+	font-size 6em
+	display inline-block
+	text-decoration none
+	opacity 0.5
+	transition all 200ms
+	&:hover
+		opacity 1
+		text-shadow 0 0 20px mainColor
+		
+.section-title
+	font-family loaded
+	padding 5px 0
+	color mainColorDark
+	
+.section-title-right
+	font-family loaded
+	padding 5px 0
+	color mainColorDark
+	float right
+
+/*///////////////////////////*/
+	
+form{
+ 	display flex;
+	text-align left;
+	width 100%
+	}
+		
+	input
+		padding 10px
+		border-radius 2px
+		border 1px solid #000
+		outline none
+		&:focus
+			border-color mainColor
+			box-shadow 0 0 10px mainColor
+		+ input
+			margin 0 0 0 5px
+	label
+		cursor pointer
+
+.btn
+	display inline-block
+	font-weight bold
+	padding 10px
+	font-size 0.8em
+	background-color mainColorDark
+	color #000
+	cursor pointer
+	border-radius 2px
+	border 0
+	transition all 200ms
+	&:hover,
+	&:focus
+		background-color mainColor
+		box-shadow 0 0 10px mainColor
+	&::before
+		margin-right 5px
+
+	
+/*///////////////////////////*/
+
+.section-me{
+	border 1px solid mainColor
+	box-shadow 0 0 100px rgba(mainColor, 0.3)
+	margin 0 0 20px
+	padding 20px
+	border-radius 2px;
+	text-align center
+}
+#js-player-pseudo
+	border none
+	background-color #000
+	font-family loaded
+	color mainColor
+	font-size 1.2em
+	margin-right 20px
+	flex 1
+	&:focus
+		box-shadow none
+
+
+/*///////////////////////////*/
+
+.roomList
+	margin-bottom 20px
+	background-color rgba(mainColorDark,0.2)
+	li
+		position relative
+	li + li
+		border-top 1px solid #000
+	a
+		display block
+		padding 10px
+		text-decoration none
+		&:hover
+			box-shadow 0 0 50px rgba(mainColor, 0.3) inset, 0 0 0 1px mainColor inset
+		
+	
+.room-name
+	color mainColor
+	
+.room-playerNb
+	font-family loaded
+	color mainColor
+	float right
+		
+.room-playerTotal
+	color mainColorDark
+	&::before
+		content '/'
+
+.room-watch
+	position absolute
+	top 0
+	left 80%
+	opacity 0
+	transition all 200ms
+	color mainColor
+.room-watch::before
+	margin-right 5px
+	
+.roomList li:hover .room-watch
+	opacity 1
+	left 100%
+	
+		
+.noroom
+	padding 20px
+	text-align center
+	color mainColorDark
+
+
+/*///////////////////////////*/
+.section-addroom
+	padding 0 0 20px
+	text-align right
+	overflow hidden
+	transition all 200ms
+
+.addroomform
+	height 0
+	transition height 400ms
+	overflow hidden
+	
+.section-addroomform
+	padding 10px
+	background-color rgba(mainColorDark,0.2)
+	
+.addroomform-form
+	.addroomform-name
+		width 100px
+	.addroomform-players
+		width 50px
+	label
+		font-size 0.8em
+		flex 1
+		padding 10px 0

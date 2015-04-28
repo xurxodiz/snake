@@ -1,0 +1,21 @@
+
+.player-colorbike
+	position relative
+	width 10px
+	height 33px
+	background-color mainColor
+	background-image url("../images/trake_bike.png")
+	cursor pointer
+	
+.player-colorpicker
+	position absolute
+	top calc(100% + 20px)
+	background #00ff00
+	background linear-gradient(to right,  #ff0000 0px,#ff00ff 50px,#0000ff 100px,#00ffff 150px,#00ff00 200px,#ffff00 250px,#ff0000 300px)
+	box-shadow 0 0 0 1px mainColor
+	right 0px
+	height 20px
+	width 300px
+	display none
+	&.player-colorpicker-visible
+		display block

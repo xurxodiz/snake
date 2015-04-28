@@ -1,0 +1,47 @@
+@import 'nib'
+global-reset()
+
+mainColor = #9bdcd8
+mainColorDark = #4d6e6c
+
+@import font
+
+html
+body
+	height 100%
+	position relative
+
+body
+	background-color #000
+	color #fff
+	font-family sans-serif
+	height 100%
+	min-height 500px
+
+.maxWidth
+	width 90%
+	max-width 600px
+	margin 0 auto
+	box-sizing border-box
+
+.header
+	position relative
+	padding 20px 0 10px
+
+.footer
+	position absolute
+	bottom 10px
+	text-align center
+	width 100%
+	font-size 0.7em
+	color #4d6e6c
+	a
+		color inherit
+		&:hover
+			color mainColor
+
+@import index
+@import game
+@import colorpicker
+@import loader
+@import mobile

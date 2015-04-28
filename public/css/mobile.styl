@@ -1,0 +1,44 @@
+.leftRightButton, .topBottomButton
+	position fixed
+	bottom 10px
+	right 10px
+	background-color rgba(255, 255, 255, 0.6)
+	width 150px
+	height 30px
+	color #4d6e6c
+	padding 5px
+	border-radius 3px
+	border: 1px solid #ffffff
+	
+	div
+		line-height 30px
+		pointer-events none
+		
+	div.icon-arrow-left
+		float left
+
+	div.icon-arrow-right
+		float right
+
+	div.icon-arrow-up
+		position absolute
+		top 5px
+		transform translateX(50%)
+
+	div.icon-arrow-down
+		position absolute
+		bottom 5px
+		transform translateX(50%)
+
+.topBottomButton
+	bottom 10px
+	left 10px
+	width 30px
+	height 150px
+	text-align center
+
+@media (max-width: 800px) {
+	.chat-input-wrapper {
+		display none
+	}
+}

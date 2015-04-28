@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>Trake</title>
+        <script type="text/javascript" src="build/app.js" async></script>
+        <link rel="stylesheet" type="text/css" href="build/bundle.css" />
+
+        <link rel="apple-touch-icon" sizes="57x57" href="../images/favicons/apple-touch-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="../images/favicons/apple-touch-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="../images/favicons/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="../images/favicons/apple-touch-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="../images/favicons/apple-touch-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="../images/favicons/apple-touch-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="../images/favicons/apple-touch-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="../images/favicons/apple-touch-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="../images/favicons/apple-touch-icon-180x180.png">
+        <link rel="icon" type="image/png" href="../images/favicons/favicon-32x32.png" sizes="32x32">
+        <link rel="icon" type="image/png" href="../images/favicons/favicon-194x194.png" sizes="194x194">
+        <link rel="icon" type="image/png" href="../images/favicons/favicon-96x96.png" sizes="96x96">
+        <link rel="icon" type="image/png" href="../images/favicons/android-chrome-192x192.png" sizes="192x192">
+        <link rel="icon" type="image/png" href="../images/favicons/favicon-16x16.png" sizes="16x16">
+        <link rel="manifest" href="../images/favicons/manifest.json">
+        <meta name="msapplication-TileColor" content="#000000">
+        <meta name="msapplication-TileImage" content="../images/favicons/mstile-144x144.png">
+        <meta name="theme-color" content="#000000">
+        <meta name="viewport" content="width=device-width, user-scalable=no">
+    </head>
+    <body>
+        <div class="maxWidth maxWidth-home">
+            <header class="headerHome">
+                <a href="index.html" class="logohome">TRAKE</a>
+            </header>
+            <noscript>Your browser does not support JavaScript.</noscript>
+            <section class="section section-me">
+                <form id="js-player-form" class="">
+                    <input id="js-player-pseudo" type="text" placeholder="Pseudo" value="Me" required />
+                    <div id="js-player-colorbike" class="player-colorbike">
+                        <div id="js-player-colorpicker" class="player-colorpicker"></div>
+                    </div>
+                </form>
+            </section>
+            <section class="section">
+                <div class="section-title-right">Players</div>
+                <div class="section-title">Rooms</div>
+                <ul id="js-rooms-container" class="roomList"></ul>
+            </section>
+            <section id="js-addroom" class="section section-addroom">
+                <div id="js-addroom-btn" class="btn icon-plus" ng-click="showme=true">Create a room</div>
+            </section>
+            <section id="js-addroomform" class="addroomform">
+                <div class="section-title">New Room</div>
+                <div class="section-addroomform">
+                    <form id="js-addroomform-form" class="addroomform-form">
+                        <input id="js-addroomform-name" class="addroomform-name" type="text" placeholder="New Room" required />
+                        <input id="js-addroomform-nb-players" class="addroomform-players" type="number" min="2" max="10" value="2" />
+                        <label for="js-addroomform-infinite-wall">
+                            <input id="js-addroomform-infinite-wall" class="" type="checkbox" checked />Inf wall
+                        </label>
+                        <input class="btn" type="submit" value="Add" />
+                    </form>
+                </div>
+            </section>
+        </div>
+        <footer class="footer">Made with ♥ by <a href="http://froggies.github.io/">Froggies</a> // Fork me on <a href="https://github.com/Froggies/trake">Froggies/trake</a></footer>
+    </body>
+</html>

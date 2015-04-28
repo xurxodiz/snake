@@ -1,0 +1,136 @@
+
+	
+.logo
+	font-family loaded
+	color mainColor
+	text-align left
+	font-size 1.4em
+	display inline-block
+	text-decoration none
+	opacity 0.5
+	transition all 200ms
+	&:hover
+		opacity 1
+		text-shadow 0 0 20px mainColor
+.menu
+	position absolute
+	display inline-block
+	right 0
+	top 15px
+
+.menuItem
+	display inline-block
+	color mainColor
+	text-decoration none
+	margin 0 0 0 10px
+	font-size 1.4em
+	opacity 0.5
+	transition all 200ms
+	cursor pointer
+	&:hover
+		opacity 1
+		text-shadow 0 0 20px mainColor
+
+
+.helps
+	position fixed
+	margin auto
+	top 52px
+	left 0
+	right 0
+	display none
+	z-index 50
+
+.help-switch:hover .helps
+	display block
+	
+
+.room-full
+	display:none;
+	padding 20px
+	font-size 0.8em
+	margin-bottom 20px
+	margin-top 10px
+	color mainColor
+	background-color rgba(mainColorDark,0.2)
+	text-align center
+	&:before
+		margin-right 10px
+
+.gameContainer
+	text-align center
+
+.grid
+	border 1px solid rgba(mainColor,0.5)
+	margin 0 auto
+	display inline-block
+	vertical-align top
+	box-sizing border-box
+
+.grid-side
+	display inline-block
+	text-align left
+	vertical-align top
+	box-sizing border-box
+	height 400px
+	width calc(100% - 402px)
+	padding 0 0 0 10px
+	font-size 0.8em
+	line-height 1.5em
+	
+.score-view
+	box-sizing border-box
+	height 40%
+	padding 10px
+	overflow hidden
+	border 1px solid rgba(mainColorDark,0.2)
+	
+.console-view-wrapper
+	box-sizing border-box
+	height calc(60% - 40px)
+	margin-bottom 5px
+	position relative
+	overflow hidden
+	background-color rgba(mainColorDark,0.2)
+	&:before
+		content ""
+		position absolute
+		z-index 10
+		top 0
+		left 0
+		width 100%
+		height 20px
+		background #000
+		background linear-gradient(to bottom,  #000 0%,transparent 100%)
+		box-shadow 0 32px 20px -20px #000 inset
+
+
+.console-view
+	bottom 0
+	position absolute
+	box-sizing border-box
+	left 0
+	width 100%
+	padding 0 5px 5px
+	
+.console-view li{
+	padding 2px
+ 	animation pop 1s 1 ease-out
+}
+
+@keyframes pop {
+	0% {
+		background-color: mainColorDark
+		box-shadow 0 0 10px mainColorDark
+	}
+	100% {
+		background-color: transparent
+		box-shadow 0 0 20px transparent
+	}
+}
+
+
+.console-input
+	width: 115px;
+	position: relative;
+	top: 1px;
