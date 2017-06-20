@@ -34,6 +34,9 @@ function init() {
 }
 
 function onKeyDown(evt) {
+  if (evt.keyCode == 32) {
+    return;
+  }
   newdir = evt.keyCode - 37;
 
   // only lateral turns are allowed
@@ -140,6 +143,7 @@ function die() {
   if (id) {
     clearInterval(id);
   }
+  gameStarted = false;
 }
 
 function circle(x,y,r) {
